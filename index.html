@@ -11,6 +11,13 @@
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+        <style>
+            .serif { font-family: Georgia, "Times New Roman", Times, serif;}
+            body {font-size: 16px; font-family:"Open Sans",Helvetica,Arial,sans-serif}
+            .intro {font-size: 1.2em;}
+            .container {max-width: 920px;}
+        </style>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -61,28 +68,32 @@
         <div id="content" class="bs-docs-header">
             <div class="container">
                 
-	<h1>Overview</h1>
-	<p>The Minno online experimentation system</p>
+                <h1 class="serif">Minno</h1>
+                <p>An online experimentation system</p>
 
             </div>
 		</div>
 
-		<div class="container bs-docs-container">
-            <p> The Minno online experimentation system is a system for running questionnaires and cognitive tasks on-line. It is composed of several sub components that share several common principles. The basics section of the documentation is devoted to explaining the common principles that underlie all of our tasks.  </p>
+		<div class="container minno-container">
+            
+            <div class="row intro jumbotron">
+                <p>Minno.js is an open source JavaScript player for creating web studies in behavioral science (e.g., Psychology). It is free software for creating sophisticated questionnaires and reaction time tasks. The documentation describes the main components that researchers use when they create Minno.js studies.</p> 
+                <p>These components are miManager, miTime, miQuest, and miMessage. In a typical experiment, researchers use miManager to define a sequence of miTime, miQuest, and miMessage tasks. For instance, in a study that examines whether general knowledge predicts performance in a Stroop task, the researcher would use miTime for the Stroop task, miQuest for the general knowledge questionnaire, miMessage for the consent form and the debriefing page, and miManager for setting the sequence of these tasks.</p> 
+            </div>
             <div class="row">
                 <div class="col-md-4">
                     <h3>minno-manager</h3>
-                    <p> piManager is a player intent on presenting a series of tasks to the users. It uses the same overall API used throught the project implicit tasks.  </p>
-                    <p> The basic unit it PImanager scripts is the task. A task is represented by a single object, the properties of the object define the task to be activated and some settings relevant to it. Tasks are organized and presented using the task sequence. The sequence is an ordered list of tasks.  </p>
+                    <p>miManager presents a sequence of tasks (mostly, questionnaires, reaction-time tasks, and instruction pages). It supports various mechanisms for randomization, and for selecting tasks based on previous user response and on experimental conditions. Read more.</p>
+                    <h3>minno-message</h3>
+                    <p>miMessage is dedicated for creating pages with text (e.g., instructions). Although it is easy to show instructions in miQuest and miTime tasks, miMessage is often better for presenting independent web pages, such as the consent form and the study debriefing. Like all the other components, miMessage supports dynamic construction of the presented text, based on previous user response and the experimental condition.</p>
                 </div>
                 <div class="col-md-4">
                     <h3>minno-time</h3>
-                    <p>PI Player builds and runs experiments with time-sensitive tasks over the Internet. It is written in JavaScript and is built to be extremely versatile and customizable. Researchers can program their own studies by writing scripts in a language that PIP can understand.</p>
+                    <p>miTime builds and runs tasks typical for cognitive psychology (reaction-time tasks). miTime runs a sequence of trials, and supports various mechanisms for randomization of trials and stimuli. Each trial describes a sequence of events (mostly, stimulus presentation and keyboard and mouse responses). Because Minno.js is JavaScript-based and does not require any installation on the participant's computer, time-precision is often inferior to the precision typically achieved with common tools for lab studies. From our experience, experiments with Minno-Time obtain results similar to those obtained with lab experiments. However, it is nearly impossible to guarantee that timing was 100% accurate for all participants in all trials. For example, assuring subliminal presentation of stimuli is unlikely. MiTime accepts mouse and keyboard input, supports presentation of images and text, and is compatible with all major browsers. Read more.</p>
                 </div>
                 <div class="col-md-4">
                     <h3>minno-quest</h3>
-                    <p> piQuest is a framework for administering dynamic on-line questionnaires.</p>
-                    <p>The player treats each questionnaire a sequence of pages. Each page may have one or more questions.  The pages are set into a sequence and presented sequentially.</p>
+                    <p>miQuest builds and runs questionnaires. It runs a sequence of pages, each with a sequence of questions. miQuest supports open-ended questions, multiple-choice questions, grids, sliders (visual analog scale), and ranking. It supports various mechanisms for question randomization, and for selecting questions based on previous user response and experimental conditions.</p> 
                 </div>
             </div>
 
@@ -90,7 +101,7 @@
                 <div class="col-md-12">
                     <h3>How to cite</h3>
                     <blockquote>
-                        Zlotnick, Elad M., MA, and Yoav Bar Anan, Dr. MinnoJS. Computer software. MinnoJS. Vers. 0.1. Project Implicit, 22 Dec. 2016. Web. 22 Dec. 2016.
+                        Zlotnick, E., Dzikiewicz, A., Bar-Anan, Y. (2015). Minno.js (Version 0.3) [Computer software].
                     </blockquote>
                 </div>
             </div>
