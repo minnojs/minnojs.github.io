@@ -1,0 +1,22 @@
+{
+    "name": "minnojs.github.io",
+    "version": "1.0.0",
+    "description": "An online experimentation framework",
+    "main": "index.js",
+    "scripts": {
+		"gendocs": "node docs/generate"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/minnojs/minnojs.github.io.git"
+    },
+    "author": "",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/minnojs/minnojs.github.io/issues"
+    },
+    "homepage": "https://github.com/minnojs/minnojs.github.io#readme",
+    "dependencies": {
+        "marked": "^0.3.6"
+    }
+}
