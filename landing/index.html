@@ -147,12 +147,12 @@
 		<script>
 		    var win, hasError = false;
             var quest = setup('quest', document.getElementById('quest'));
-            var time = setup('time', document.getElementById('time'));
+            var time = setup('pip', document.getElementById('time'));
             var manager = setup('manager', document.getElementById('manager'), function(){
                 return {
                     mgr: manager.getValue(),
-                    quest: quest.getValue(),
-                    time: time.getValue()
+                    'rosenberg.js': quest.getValue(),
+                    'stroop.js': time.getValue()
                 }
             });
 

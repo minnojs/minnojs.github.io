@@ -42,6 +42,8 @@
 	<![endif]-->
 	<script src="../../bower_components/requirejs/require.js"></script>
 	<script type="text/javascript">
+        var pipUrl = '../../../minno-time/0.3/dist/js';
+
 		require.config({
 			baseUrl: 'js'
 		});
@@ -52,7 +54,7 @@
             if (type === 'manager') {
                 element.setAttribute('pi-manager', 'mgr');
             } else {
-                element.setAttribute('pi-manager-task', JSON.stringify({type:type, scriptUrl:'task', baseUrl:type === 'pip' ? '/pip/dist/js': undefined}));
+                element.setAttribute('pi-manager-task', JSON.stringify({type:type, scriptUrl:'task', baseUrl:type === 'pip' ? pipUrl : undefined}));
                 taskMap = {task: taskMap};
             }
 
@@ -78,7 +80,7 @@
 
                     preTask.$inject = ['currentTask'];
                     function preTask(task){
-                        if (task.type === 'pip') task.baseUrl = '/pip/dist/js';
+                        if (task.type === 'pip') task.baseUrl = pipUrl;
                         if (oldPreTask) oldPreTask.apply(this, arguments);
                     }
 				});
