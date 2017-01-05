@@ -1,7 +1,4 @@
----
-title: Overview
-description: The Minno online experimentation system
----
+# Overview
 
 The Minno online experimentation system is a system for running questionnaires and cognitive tasks on-line.
 It is composed of several sub components that share several common principles.

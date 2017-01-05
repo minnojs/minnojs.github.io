@@ -7,9 +7,7 @@ try {fs.mkdirSync("docs/archive/")} catch (e) {}
 try {fs.mkdirSync("docs/archive/" + version)} catch (e) {}
 try {fs.mkdirSync("docs/archive/" + version + "/lib")} catch (e) {}
 try {fs.mkdirSync("docs/archive/" + version + "/lib/prism")} catch (e) {}
-
-var guides = fs.readFileSync("docs/guides.md", "utf-8")
-var methods = fs.readFileSync("docs/methods.md", "utf-8")
+try {fs.mkdirSync("docs/archive/" + version + "/basics")} catch (e) {}
 
 generate("basics")
 

@@ -1,9 +1,4 @@
----
-title: API
-description: Detailed documentation for the common API methods.
----
-
-### Table of contents
+# API
 
 - [Task creation](#task-creation)
     - [setName(name)](#setname-name-)
@@ -21,6 +16,7 @@ description: Detailed documentation for the common API methods.
 
 ### Task creation
 
+## description: Detailed documentation for the common API methods.
 #### setName(name)
 
 Argument    | Type  | Description

@@ -1,7 +1,4 @@
----
-title: Resources
-description: Various resources to make your life easier.
----
+# Resources
 
 ### Education
 

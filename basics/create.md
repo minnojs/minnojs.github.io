@@ -1,7 +1,4 @@
----
-title: Creating a task
-description: All you need to know in order to create your own task.
----
+# Creating a task
 
 This document will walk you through all you need to know in order to create a task. Anything appearing here is relevant to all types of tasks.
 

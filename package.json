@@ -4,7 +4,8 @@
     "description": "An online experimentation framework",
     "main": "index.js",
     "scripts": {
-		"gendocs": "node docs/generateDocs"
+		"gendocs": "node docs/generateDocs",
+		"genlanding": "node landing/genlanding"
     },
     "repository": {
         "type": "git",

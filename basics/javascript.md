@@ -1,7 +1,4 @@
----
-title: Javascript
-description: Getting to know the environment we work with.
----
+# Javascript
 
 Task scripts are written using JavaScript; [JavaScript](http://en.wikipedia.org/wiki/JavaScript) is a programming language used by browsers (like Internet Explorer, Chrome or Safari). Our scripts do not require you to program any JavaScript but you should have a basic grasp of the basic syntax before we go on. If you know some basic JavaScript you can skip this section and go directly to the Hello world tutorial.
 

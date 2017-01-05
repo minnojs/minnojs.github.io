@@ -109,61 +109,7 @@
                     <strong>Oh Snap!</strong> Something went wrong with the questionnaire. Why don't you fix it and try again?
                 </div>
 
-                <div class="editor">define(['questAPI'], function(Quest){
-	var API = new Quest();
-
-	API.addQuestionsSet('basicSelect',
-	{
-		type: 'selectOne',
-		style:'multiButtons',
-		errorMsg: {
-			required: "Please select an answer, or click 'decline to answer'"
-		},
-		answers : ['Strongly Disagree', 'Disagree', 'Agree', 'Strongly Agree']
-	});
-
-	API.addQuestionsSet('item',
-	[
-		{inherit : 'basicSelect', name:'item1',
-		stem : 'On the whole, I am satisfied with myself.'},
-		{inherit : 'basicSelect', name:'item2',
-		stem : 'At times I think I am no good at all.'},
-		{inherit : 'basicSelect', name:'item3',
-		stem : 'I feel that I have a number of good qualities.'},
-		{inherit : 'basicSelect', name:'item4',
-		stem : 'I am able to do things as well as most other people.'},
-		{inherit : 'basicSelect', name:'item5',
-		stem : 'I feel I do not have much to be proud of.'},
-		{inherit : 'basicSelect', name:'item6',
-		stem : 'I certainly feel useless at times.'},
-		{inherit : 'basicSelect', name:'item7',
-		stem : 'I wish I could have more respect for myself.'},
-		{inherit : 'basicSelect', name:'item8',
-		stem : 'All in all, I am inclined to feel that I am a failure.'},
-		{inherit : 'basicSelect', name:'item9',
-		stem : 'I take a positive attitude toward myself.'},
-		{inherit : 'basicSelect', name:'item10',
-		stem : "I feel that I'm a person of worth, at least on an equal plane with others."}
-	]);
-
-	API.addSequence(
-	[
-		{
-			mixer : 'repeat',
-			times : 10,
-			data :
-			[
-			    {
-		            progressBar: '<%= pagesMeta.number %> out of 10',
-		            questions : {inherit:{set:'item', type:'exRandom'}}
-            	}
-			]
-		}
-	]);
-
-	return API.script;
-});
-		</div>
+                <div class="editor">[quest]</div>
             </section>
 
             <section id="time">
@@ -178,114 +124,7 @@
                     <strong>Oh Snap!</strong> Something went wrong with the task. Why don't you fix it and try again?
                 </div>
 
-                <div class="editor">// We've been slowly pulling the stroop task together, now is the time for a few last touches, just to get the feel for how things work.
-define(['pipAPI'], function(APIconstructor) {
-
-	var API = new APIconstructor();
-
-	API.addStimulusSets({
-        red: [
-    		{media:'Red', css:{color:'red'}},
-    		{media:'Blue', css:{color:'red'}}
-    	], 
-        blue: [
-    		{media:'Red', css:{color:'blue'}},
-    		{media:'Blue', css:{color:'blue'}}
-    	],
-    	error: [
-    	    {handle:'error',media:'X', css:{fontSize:'2em',color:'#FF0000'}, location:{bottom:30}}
-    	]
-	});
-
-	API.addTrialSets('base',[{
-		input: [
-			{handle:'red',on:'keypressed',key:'1'},
-			{handle:'blue',on:'keypressed',key:'2'}
-		],
-		layout: [
-			{media:'1',location:{left:2,top:2},css:{background:'red',padding:'2%',fontSize:'1.5em'}},
-			{media:'2',location:{right:2,top:2},css:{background:'blue',padding:'2%',fontSize:'1.5em'}},
-			{media:'Press 1 for red, 2 for blue',location:{bottom:1}}
-		],
-		interactions: [
-			{
-				conditions:[{type:'begin'}],
-				actions: [{type:'showStim', handle: 'target'}]
-			},
-			{
-				conditions: [
-					{type:'inputEqualsTrial',property:'group'}
-				],
-				actions: [
-					{type:'setTrialAttr', setter:{score:1}},
-					{type:'log'},
-					{type:'trigger', handle:'ITI'}
-				]
-			},
-			{
-				conditions: [
-					{type:'inputEqualsTrial',property:'group',negate:true},
-					{type:'inputEquals',value:['red','blue']}
-				],
-				actions: [
-					{type:'setTrialAttr', setter:{score:0}},
-					{type:'log'},
-					{type:'showStim', handle:'error'},
-					{type:'removeInput',handle:['red','blue','green']},
-					{type:'trigger', handle:'ITI', duration:500}
-				]
-			},
-			{
-				conditions: [{type:'inputEquals', value:'ITI'}],
-				actions:[
-					{type:'hideStim',handle:'All'},
-					{type:'removeInput',handle:['red','blue','green']},
-					{type:'trigger', handle:'end',duration:500}
-				]
-			},
-			{
-				conditions: [{type:'inputEquals', value:'end'}],
-				actions:[
-					{type:'endTrial'}
-				]
-			}
-		]
-	}]);
-
-	API.addSequence([
-		{
-			mixer: 'random',
-			data: [
-				{
-					mixer: 'repeat',
-					times: 10,
-					data: [
-						{
-		                    inherit:'base',
-		                    data: {group:'red'},
-		                    stimuli: [
-			                    {inherit:{set:'red',type:'exRandom'}, handle:'target'},
-			                    {inherit:'error'}
-		                    ]
-	                    },
-						{
-		                    inherit:'base',
-		                    data: {group:'blue'},
-		                    stimuli: [
-			                    {inherit:{set:'blue',type:'exRandom'}, handle:'target'},
-			                    {inherit:'error'}
-		                    ]
-	                    }
-					]
-				}
-			]
-		}
-	]);
-
-	// Return script
-	return API.script;
-});
-		</div>
+                <div class="editor">[time]</div>
             </section>
 
             <section id="manager">
@@ -300,30 +139,7 @@ define(['pipAPI'], function(APIconstructor) {
                     <strong>Oh Snap!</strong> Something went wrong with the manager. Why don't you fix it and try again?
                 </div>
 
-                <div class="editor">define(['managerAPI'], function(Manager){
-
-    var API = new Manager();
-	API.addSettings('skin','demo');
-
-    API.addSequence([
-        {
-            type:'message', 
-            template:'<br/><h1>Click space for examples of a self-esteem questionnaire and a Stroop task</h1>', keys: ' '
-        }, 
-        {
-			type: 'quest', name: 'rosenberg', scriptUrl: 'rosenberg.js'
-		},
-        {
-			type: 'pip', name: 'stroop', version: '0.3', scriptUrl: 'stroop.js'
-		},
-		{
-            type:'message', template:'<br/><h1>Click space to finish the study</h1>', keys: ' '
-        }
-    ]);
-
-    return API.script;
-});
-</div>
+                <div class="editor">[manager]</div>
             </section>
         </div>
 
@@ -331,12 +147,12 @@ define(['pipAPI'], function(APIconstructor) {
 		<script>
 		    var win, hasError = false;
             var quest = setup('quest', document.getElementById('quest'));
-            var time = setup('pip', document.getElementById('time'));
+            var time = setup('time', document.getElementById('time'));
             var manager = setup('manager', document.getElementById('manager'), function(){
                 return {
                     mgr: manager.getValue(),
-                    'rosenberg.js': quest.getValue(),
-                    'stroop.js': time.getValue()
+                    quest: quest.getValue(),
+                    time: time.getValue()
                 }
             });
 
