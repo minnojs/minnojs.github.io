@@ -99,7 +99,7 @@
 
             <section id="quest">
                 <h3>A simple questionaire</h3>
-                <p>A short description of the questionnaire and how it works should come here.</p>
+                <p> miQuest builds and runs questionnaires. It runs a sequence of pages, each with a sequence of questions. miQuest supports open-ended questions, multiple-choice questions, grids, sliders (visual analog scale), and ranking. It supports various mechanisms for question randomization, and for selecting questions based on previous user response and experimental conditions.</p>
                 <p> <button class="btn btn-default btn-lg btn-block" type="button">Activate</button> </p>
 
                 <div class="alert alert-success success-message">
@@ -168,7 +168,7 @@
 
             <section id="time">
                 <h3>A simple time sensitive task</h3>
-                <p>A short description of the time sensitive task and how it works should come here.</p>
+                <p>miTime builds and runs tasks typical for cognitive psychology (reaction-time tasks). miTime runs a sequence of trials, and supports various mechanisms for randomization of trials and stimuli. Each trial describes a sequence of events (mostly, stimulus presentation and keyboard and mouse responses). Because Minno.js is JavaScript-based and does not require any installation on the participant's computer, time-precision is often inferior to the precision typically achieved with common tools for lab studies. From our experience, experiments with Minno-Time obtain results similar to those obtained with lab experiments. However, it is nearly impossible to guarantee that timing was 100% accurate for all participants in all trials. For example, assuring subliminal presentation of stimuli is unlikely. MiTime accepts mouse and keyboard input, supports presentation of images and text, and is compatible with all major browsers. Read more.</p>
                 <p> <button class="btn btn-default btn-lg btn-block" type="button">Activate</button> </p>
 
                 <div class="alert alert-success success-message">
@@ -290,7 +290,7 @@ define(['pipAPI'], function(APIconstructor) {
 
             <section id="manager">
                 <h3>A simple manager task</h3>
-                <p>A short description of the manager and how it works should come here.</p>
+                <p>Manager presents a sequence of tasks (mostly, questionnaires, reaction-time tasks, and instruction pages). It supports various mechanisms for randomization, and for selecting tasks based on previous user response and on experimental conditions. Read more.</p>
                 <p> <button class="btn btn-default btn-lg btn-block" type="button">Activate</button> </p>
 
                 <div class="alert alert-success success-message">
@@ -331,12 +331,12 @@ define(['pipAPI'], function(APIconstructor) {
 		<script>
 		    var win, hasError = false;
             var quest = setup('quest', document.getElementById('quest'));
-            var time = setup('pip', document.getElementById('time'));
+            var time = setup('time', document.getElementById('time'));
             var manager = setup('manager', document.getElementById('manager'), function(){
                 return {
                     mgr: manager.getValue(),
-                    'rosenberg.js': quest.getValue(),
-                    'stroop.js': time.getValue()
+                    quest: quest.getValue(),
+                    time: time.getValue()
                 }
             });
 
