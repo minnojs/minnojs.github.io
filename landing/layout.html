@@ -39,7 +39,7 @@
             var time = playgroundSetup(document.getElementById('time'));
             var manager = playgroundSetup(document.getElementById('manager'), function(){
                 return {
-                    mgr: manager.getValue(),
+                    task: manager.getValue(),
                     'rosenberg.js': quest.getValue(),
                     'stroop.js': time.getValue()
                 }

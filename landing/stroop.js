@@ -78,7 +78,7 @@ define(['pipAPI'], function(APIconstructor) {
 			data: [
 				{
 					mixer: 'repeat',
-					times: 10,
+					times: 5,
 					data: [
 						{
 		                    inherit:'base',
