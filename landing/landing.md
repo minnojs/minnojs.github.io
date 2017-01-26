@@ -13,7 +13,7 @@ collect data from thousands of participants every day.
 > Zlotnick, E., Dzikiewicz, A., Bar-Anan, Y. (2015). Minno.js (Version 0.3)
 > [Computer software].
 
-### miQuest: Create questionnaires
+### miQuest: questionnaires
 
 miQuest builds and runs questionnaires. It runs a sequence of pages, each with a
 sequence of questions. miQuest supports open-ended questions, multiple-choice
@@ -29,7 +29,7 @@ Below is a "Minno.js playground" with a simple example for a questionnaire (you 
     <div class="editor">[quest]</div>
 </section>
 
-### miTime: Create reaction time tasks
+### miTime: reaction time tasks
 
 miTime builds and runs tasks typical for cognitive psychology (reaction-time
 tasks). miTime runs a sequence of trials, and supports various mechanisms for
@@ -52,7 +52,7 @@ Below is a "Minno.js playground" with a simple example for a Stroop task  (you c
     <div class="editor">[time]</div>
 </section>
 
-### miManager: Create studies with multiple tasks 
+### miManager: studies with multiple tasks 
 
 Manager presents a sequence of tasks (mostly, questionnaires, reaction-time
 tasks, and instruction pages). It supports various mechanisms for randomization,
