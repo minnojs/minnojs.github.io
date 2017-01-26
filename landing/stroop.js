@@ -1,4 +1,3 @@
-// We've been slowly pulling the stroop task together, now is the time for a few last touches, just to get the feel for how things work.
 define(['pipAPI'], function(APIconstructor) {
 
 	var API = new APIconstructor();

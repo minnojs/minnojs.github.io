@@ -25,7 +25,7 @@
 		</header>
 		<main>
 			<section>
-                <h3><a name="what-is-minno" class="header-link" href="#what-is-minno"><span></span></a>What is minno?</h3><p>Minno is a free tool for creating web studies with sophisticated questionnaires
+                <h3><a name="what-is-minno" class="header-link" href="#what-is-minno"><span></span></a>What is Minno?</h3><p>Minno is a free tool for creating web studies with sophisticated questionnaires
 and reaction time tasks. It supports all major web browsers. Minno scripts are
 easy to write, without previous knowledge in programming. Minno has been
 developed by <a href="http://projectimplicit.net/about.html">Project Implicit</a> for
@@ -36,12 +36,13 @@ collect data from thousands of participants every day.</p>
 <p>Zlotnick, E., Dzikiewicz, A., Bar-Anan, Y. (2015). Minno.js (Version 0.3)
 [Computer software].</p>
 </blockquote>
-<h3><a name="a-simple-questionaire" class="header-link" href="#a-simple-questionaire"><span></span></a>A simple questionaire</h3><p>miQuest builds and runs questionnaires. It runs a sequence of pages, each with a
+<h3><a name="miquest-create-questionnaires" class="header-link" href="#miquest-create-questionnaires"><span></span></a>miQuest: Create questionnaires</h3><p>miQuest builds and runs questionnaires. It runs a sequence of pages, each with a
 sequence of questions. miQuest supports open-ended questions, multiple-choice
 questions, grids, sliders (visual analog scale), and ranking. It supports
 various mechanisms for question randomization, and for selecting questions based
 on previous user response and experimental conditions. <a href="/minno-quest/0.1/quest/overview.html">Read
 more</a>.</p>
+<p>Below is a &quot;Minno.js playground&quot; with a simple example for a questionnaire (you can edit the code and see what changes).</p>
 <section id="quest">
     <div class="buttons"><a class="activate-button">Activate</a></div>
     <div class="editor">define(['questAPI'], function(Quest){
@@ -101,7 +102,7 @@ more</a>.</p>
 		</div>
 </section>
 
-<h3><a name="a-simple-time-sensitive-task" class="header-link" href="#a-simple-time-sensitive-task"><span></span></a>A simple time sensitive task</h3><p>miTime builds and runs tasks typical for cognitive psychology (reaction-time
+<h3><a name="mitime-create-reaction-time-tasks" class="header-link" href="#mitime-create-reaction-time-tasks"><span></span></a>miTime: Create reaction time tasks</h3><p>miTime builds and runs tasks typical for cognitive psychology (reaction-time
 tasks). miTime runs a sequence of trials, and supports various mechanisms for
 randomization of trials and stimuli. Each trial describes a sequence of events
 (mostly, stimulus presentation and keyboard and mouse responses). Because
@@ -114,10 +115,10 @@ accurate for all participants in all trials. For example, assuring subliminal
 presentation of stimuli is unlikely. MiTime accepts mouse and keyboard input,
 supports presentation of images and text, and is compatible with all major
 browsers. <a href="/minno-time/0.3/time/overview.html">Read more</a>.</p>
+<p>Below is a &quot;Minno.js playground&quot; with a simple example for a Stroop task  (you can edit the code and see what changes).</p>
 <section id="time">
     <div class="buttons"><a class="activate-button">Activate</a></div>
-    <div class="editor">// We've been slowly pulling the stroop task together, now is the time for a few last touches, just to get the feel for how things work.
-define(['pipAPI'], function(APIconstructor) {
+    <div class="editor">define(['pipAPI'], function(APIconstructor) {
 
 	var API = new APIconstructor();
 
@@ -196,7 +197,7 @@ define(['pipAPI'], function(APIconstructor) {
 			data: [
 				{
 					mixer: 'repeat',
-					times: 10,
+					times: 5,
 					data: [
 						{
 		                    inherit:'base',
@@ -223,13 +224,15 @@ define(['pipAPI'], function(APIconstructor) {
 	// Return script
 	return API.script;
 });
-		</div>
+		
+</div>
 </section>
 
-<h3><a name="a-simple-manager-task" class="header-link" href="#a-simple-manager-task"><span></span></a>A simple manager task</h3><p>Manager presents a sequence of tasks (mostly, questionnaires, reaction-time
+<h3><a name="mimanager-create-studies-with-multiple-tasks" class="header-link" href="#mimanager-create-studies-with-multiple-tasks"><span></span></a>miManager: Create studies with multiple tasks</h3><p>Manager presents a sequence of tasks (mostly, questionnaires, reaction-time
 tasks, and instruction pages). It supports various mechanisms for randomization,
 and for selecting tasks based on previous user response and on experimental
 conditions. <a href="/minno-time/0.3/time/overview.html">Read more</a>.</p>
+<p>Below is a &quot;Minno.js playground&quot; with a simple example for a miManager study  (you can edit the code and see what changes).</p>
 <section id="manager">
     <div class="buttons"><a class="activate-button">Activate</a></div>
     <div class="editor">define(['managerAPI'], function(Manager){
