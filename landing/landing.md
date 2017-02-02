@@ -10,7 +10,7 @@ collect data from thousands of participants every day.
 
 ### How to cite
 
-> Zlotnick, E., Dzikiewicz, A., Bar-Anan, Y. (2015). Minno.js (Version 0.3)
+> Zlotnick, E., Dzikiewicz, A. J., & Bar-Anan, Y. (2015). Minno.js (Version 0.3)
 > [Computer software].
 
 ### miQuest: questionnaires
