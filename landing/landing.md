@@ -65,3 +65,8 @@ Below is a "Minno.js playground" with a simple example for a miManager study  (y
     <div class="buttons"><a class="activate-button">Activate</a></div>
     <div class="editor">[manager]</div>
 </section>
+
+## Server
+In order to use minnojs you need to have a server to save your data.
+You can of course role a server of your own, but we have a super simple server ready for your use.
+The code and installation instructions can be found [here](https://github.com/minnojs/simple-minno-server).
