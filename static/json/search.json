@@ -1,0 +1,102 @@
+[
+    {
+        "uri": "/content/_index.en",
+        "content": "---\ntitle: \"Documentation for minnoSuite\"\n---\n\nDocumentation for minnoSuite\n",
+        "tags": []
+    },
+    {
+        "uri": "/content/credits.en",
+        "content": "---\ntitle: Credits\ndisableToc: true\n---\n\nContributors\n\nThanks to them i class=\"fas fa-heart\"/i for making Open Source Software a better place !\n\n{{% ghcontributors \"https://api.github.com/repos/matcornic/hugo-theme-learn/contributors?per_page=100\" %}}\n\nAnd a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.\n\n Packages and libraries\nmermaid - generation of diagram and flowchart from text in a similar manner as markdown\nfont awesome - the iconic font and CSS framework\njQuery - The Write Less, Do More, JavaScript Library\nlunr - Lunr enables you to provide a great search experience without the need for external, server-side, search services...\nhorsey - Progressive and customizable autocomplete component\nclipboard.js - copy text to clipboard\nhighlight.js - Javascript syntax highlighter\nmodernizr - A JavaScript toolkit that allows web developers to use new CSS3 and HTML5 features while maintaining a fine level of control over browsers that don't support\n\nTooling\n\nNetlify - Continuous deployement and hosting of this documentation\nHugo\n\n",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoJsStudyDevelopment/_index.en",
+        "content": "---\ntitle: minnoJs Study Development\nweight: 3\nchapter: true\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoJsStudyDevelopment/dataAnalysis/_index.en",
+        "content": "---\ndate: 2016-04-09T16:50:16+02:00\ntitle: Data Analysis\nweight: 5\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoJsStudyDevelopment/documentation/_index.en",
+        "content": "---\ntitle: Documentation\nweight: 1\ndisableToc: true\n---\nunder construction\n",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoJsStudyDevelopment/examples/_index.en",
+        "content": "---\ntitle: Examples\nweight: 10\n---\n\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/_index.en",
+        "content": "---\ntitle: The minnoSuite Dashboard\nweight: 2\nchapter: true\n---\n\nChapter 1\n\n Basics\n\nDiscover what this Hugo theme is all about and the core-concepts behind it.\n",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/AWSInstallation/_index.en",
+        "content": "---\ntitle: AWS Cloud Installation\nweight: 15\nchapter: true\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/basicInstallation/_index.en",
+        "content": "---\ntitle: Easy Installation With Docker\nweight: 10\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/serverInstall/_index.en",
+        "content": "---\ntitle: Server Installation\nweight: 20\ndisableToc: true\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/useage/_index.en",
+        "content": "---\ndate: 2016-04-09T16:50:16+02:00\ntitle: Using the Dashboard\nweight: 1\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/useage/configFile/_index.en",
+        "content": "---\ntitle: The Docker Configuration File\nweight: 10\n---\n\nThe Docker Configuration File\n\nThis page will describe the parts of the docker-compose configuration file that you might want to edit.\n\n    ports:\n      \"8000:8000\" specify ports forwarding\n      \"8443:8443\" #specify ports forwarding \nBy default the server will run on port 8000 for http requests and 8443 for https requests.  If you want to change it then you'd do something like \"80:8000\" to make it run on port 80 for http requests.\n\n SERVER_TYPE: \"http\" \"http\", \"https\", or \"greenlock\"\n \n \"http\" will make it only run with a http service.  \"https\" will make it run on https also using a certificate and key file that you provide.  \"greenlock\" will make it automatically aquire certificates for you using Greenlock.  When using https, update the part of the config file under \"volumes\" with \"./localhost.crt\" and \"/localhost.key\" to point to the file path of the crt and key files for your domain.  It is up to you to aquire them.  When using greenlock, update the OWNER_EMAIL and DOMAINS field with your email and domain, and also make sure that the DNS for your domain points to the machine you are running this on.\n \t  ",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/windowsInstallation/_index.en",
+        "content": "---\ntitle: Windows Installation\nweight: 18\n---\n\nWindows Installation\n\nInstall Docker on your machine, using the guide  here .\n\ncreate a new folder in your file system to hold your minnoSuite server, and download the following docker-compose file into it:\n\nYou can update the configuration for your server with the config file.  Read about the config file here.\n\nOpen the command prompt, and navigate to the folder that you downloaded the docker-compose file to, and type: \ndocker-compose up\n\nYou should see a message about the server being up, and be given a port and URL to use.  Enter that URL in your browser and you will be connected.  The default user is username : admin and password: admin123\n\nTo get HTTPS working, first follow the guide to setting up your domain.  Then open up the docker-compose file and edit the OWNEREMAIL and DOMAINS fields.  Enter your email, and the domain you registered.  Change the SERVERTYPE field to \"greenlock\".  Change the ports to \"8000:8000\" and \"443:8443\".  \"Now when you run docker-compose up it should automatically run with https.  Now connect to the site using the domain you registered and you should have https working.\n",
+        "tags": []
+    },
+    {
+        "uri": "/content/minnoSuiteDashboard/windowsInstallation/domain/_index.en",
+        "content": "---\ntitle: Setting up your domain\nweight: 15\n---\n\nSetting up your domain\nGo to http://www.freenom.com/ \nGo to Services - Register a new domain.\nPick the domain you want and register it (You will register to freenom in the process of obtaining the domain).\nClick \"manage domain\" on the domain you registered\nClick on \"manage freenom DNS\"\nAdd a record for your site.  Set the name as the domain name that you registered, the target as your static IP address, and the type as \"A\" if your IP address is IPv4 (like 123.11.22.33, or \"AAAA\" if your IP address is IPv6 (like 2001:0db8:85a3:0000:0000:8a2e:0370:7334).  Then click \"save changes\".  Note that it may take 1-2 hours for the changes to go live, so you will need to wait at this point. ",
+        "tags": []
+    },
+    {
+        "uri": "/content/overview/_index.en",
+        "content": "---\ntitle: Overview\nweight: 1\nchapter: true\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/overview/aboutPI/_index.en",
+        "content": "---\ndate: 2016-04-09T16:50:16+02:00\ntitle: About Project Implicit\nweight: 4\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/overview/demonstrations/_index.en",
+        "content": "---\ntitle: Demonstrations\nweight: 3\ndisableToc: true\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/overview/minnoSuite/_index.en",
+        "content": "---\ntitle: About minnoSuite\nweight: 1\n---\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/overview/quickstart/_index.en",
+        "content": "---\ndate: 2016-04-09T16:50:16+02:00\ntitle: Quickstart\nweight: 2\n---\n\nunder construction",
+        "tags": []
+    },
+    {
+        "uri": "/content/showcase.en",
+        "content": "---\ntitle: Showcase\ndisableToc: true\n---\n\nTAT by OVH\n\n",
+        "tags": []
+    }
+]

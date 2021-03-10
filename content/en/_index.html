@@ -1,0 +1,169 @@
+---
+title: MinnoJS Suite
+linkTitle: MinnoJS Suite
+credit: <span>Photo by <a href="https://unsplash.com/@nknezevic?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Nikola Knezevic</a> on <a href="https://unsplash.com/s/photos/gate?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous"></script>
+
+{{< blocks/cover title="Welcome to Minno Suite" image_anchor="top" height="full" color="orange" >}}
+<div class="mx-auto">
+	<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs/start" >}}">
+		Gettings started<i class="fas fa-arrow-alt-circle-right ml-2"></i>
+	</a>
+    <a class="btn btn-lg btn-info mr-3 mb-4" href="{{< relref "/docs" >}}">
+		Documentation <i class="fas fa-book ml-2 "></i>
+	</a>
+	<p class="lead mt-5">A platform for online studies!</p>
+	{{< blocks/link-down color="primary" >}}
+</div>
+{{< /blocks/cover >}}
+
+
+{{% blocks/lead color="primary" %}}
+## **Minno**
+**Syndarin**. *Verb*. Enter! (lit. to the inside!)
+
+Welcome!
+Minno Suite is a free platform for running behaviour studies online.
+It was carefuly crafted by social scientists for social scientists with an emphasis on usability and flexibility.
+
+{{% /blocks/lead %}}
+
+{{< blocks/section color="dark" >}}
+{{% blocks/feature icon="fa-stopwatch" title="Time sensitive tasks" url="docs/time" %}}
+MinnoJS excels at running complex time-sensitive tasks.
+{{% /blocks/feature %}}
+
+
+{{% blocks/feature icon="fa-question" title="Questionnaires" url="docs/quest" %}}
+Easily create questionnaires with full control over content randomization and interactivity.
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fa-server" title="Minno server" url="docs/start/server" %}}
+Manage study creation, data logging, multiple users and collaboration and much much more.
+{{% /blocks/feature %}}
+
+{{< /blocks/section >}}
+
+{{< blocks/lead type=justify-content-center >}}
+    <h1 class="text-center">There is no need to install</h1>
+    <h3 class="text-center">Try it out right now</h2>
+{{< /blocks/lead >}}
+
+{{< blocks/section color="white" type=justify-content-center >}}
+    <div class="col-xl-6">
+        <h2>Minno-time</h2>
+        <p> 
+            Minno-time allows you to create rich and flexible time sensitive tasks.
+            It is fast, accurate, and extremely flexible.
+            Following is an implementation of the Race IAT (Nosek, Greenwald, & Banaji, 2005).
+            <a href="{{< ref "docs/time" >}}">Read more</a>
+        </p>
+
+        {{< playground filename=time.js >}}
+define(['timeAPI', 'https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat8.js'], function(APIConstructor, iatExtension){
+    var API = new APIConstructor();
+
+	return iatExtension({
+		category1 : {
+			name : 'Black people', //Will appear in the data.
+			title : {
+				media : {word : 'Black people'}, //Name of the category presented in the task.
+				css : {color:'#31940F','font-size':'2em'}, //Style of the category title.
+				height : 4 //Used to position the "Or" in the combined block.
+			}, 
+			stimulusMedia : [ //Stimuli content as PIP's media objects
+    		    {image : 'black1.jpg'}, 
+    			{image : 'black2.jpg'}, 
+    			{image : 'black3.jpg'}, 
+    			{image : 'black4.jpg'}, 
+    			{image : 'black5.jpg'}, 
+    			{image : 'black6.jpg'}
+			], 
+			//Stimulus css (style)
+			stimulusCss : {color:'#31940F','font-size':'1.8em'}
+		},	
+		category2 :	{
+			name : 'White people', //Will appear in the data.
+			title : {
+				media : {word : 'White people'}, //Name of the category presented in the task.
+				css : {color:'#31940F','font-size':'2em'}, //Style of the category title.
+				height : 4 //Used to position the "Or" in the combined block.
+			}, 
+			stimulusMedia : [ //Stimuli content as PIP's media objects
+    		    {image : 'yf1.jpg'}, 
+    			{image : 'yf4.jpg'}, 
+    			{image : 'yf5.jpg'}, 
+    			{image : 'ym2.jpg'}, 
+    			{image : 'ym3.jpg'}, 
+    			{image : 'ym5.jpg'}			], 
+			//Stimulus css
+			stimulusCss : {color:'#31940F','font-size':'1.8em'}
+		},	
+
+		base_url : {//Where are your images at?
+			image : 'https://baranan.github.io/minno-tasks/images/'
+		} 
+	});
+});
+        {{< /playground >}}
+    </div>
+{{< /blocks/section >}}
+
+{{< blocks/section color="light" type=justify-content-center >}}
+    <div class="col-xl-6">
+        <h2>Minno-quest</h2>
+        <p> 
+            Minno-quest is the questionnaire creator within the minno-suite.
+            It gives you the power to easily compose questionnaires, using a variety of built-in question types,
+            all while keeping the highly dynamic control provided by MinnoJS.
+            Following is simple implementation of the Rosenberg Self-Esteem Scale (Rosenberg, 1965).
+            <a href="{{< ref "docs/quest" >}}">Read more</a>
+        </p>
+        {{< playground filename=quest.js >}}
+define(['questAPI'], function(Quest){
+    var API = new Quest();
+
+    API.addQuestionsSet('basicSelect', {
+        type: 'selectOne',
+        style:'multiButtons',
+        errorMsg: { required: "Please select an answer, or click 'decline to answer'" },
+        answers : ['Strongly Disagree', 'Disagree', 'Agree', 'Strongly Agree']
+    });
+
+    API.addQuestionsSet('item', [
+        {inherit : 'basicSelect', name:'item1', stem : 'On the whole, I am satisfied with myself.'},
+        {inherit : 'basicSelect', name:'item2', stem : 'At times I think I am no good at all.'},
+        {inherit : 'basicSelect', name:'item3', stem : 'I feel that I have a number of good qualities.'},
+        {inherit : 'basicSelect', name:'item4', stem : 'I am able to do things as well as most other people.'},
+        {inherit : 'basicSelect', name:'item5', stem : 'I feel I do not have much to be proud of.'},
+        {inherit : 'basicSelect', name:'item6', stem : 'I certainly feel useless at times.'},
+        {inherit : 'basicSelect', name:'item7', stem : 'I wish I could have more respect for myself.'},
+        {inherit : 'basicSelect', name:'item8', stem : 'All in all, I am inclined to feel that I am a failure.'},
+        {inherit : 'basicSelect', name:'item9', stem : 'I take a positive attitude toward myself.'},
+        {inherit : 'basicSelect', name:'item10', stem : "I feel that I'm a person of worth, at least on an equal plane with others."}
+    ]);
+
+    API.addSequence([
+        {
+            mixer: 'repeat',
+            times: 10,
+            data: [
+                {
+                    progressBar: '<%= pagesMeta.number %> out of 10',
+                    questions : {inherit:{set:'item', type:'exRandom'}}
+                }
+            ]
+        }
+    ]);
+
+    return API.script;
+});
+
+        {{< /playground >}}
+    </div>
+{{< /blocks/section >}}
