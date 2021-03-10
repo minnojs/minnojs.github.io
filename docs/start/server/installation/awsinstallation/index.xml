@@ -1,0 +1,93 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minno Suite – AWS Cloud Installation</title>
+    <link>/docs/start/server/installation/awsinstallation/</link>
+    <description>Recent content in AWS Cloud Installation on Minno Suite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	  <atom:link href="/docs/start/server/installation/awsinstallation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: AWS Update</title>
+      <link>/docs/start/server/installation/awsinstallation/awsupdate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/start/server/installation/awsinstallation/awsupdate/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This guide will cover how to update your dashboard version installed on AWS. Set up your dashboard server first from our guide &lt;a href=&#34;../../awsinstallation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Connect to your EC2 instance &lt;a href=&#34;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html&#34;&gt;using SSH&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the terminal: run the following commands:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker-compose pull&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker-compose up --force-recreate --build -d&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker image prune -f&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: AWS Paid SSL</title>
+      <link>/docs/start/server/installation/awsinstallation/awspayssl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/start/server/installation/awsinstallation/awspayssl/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This guide will cover how to enable SSL on your running AWS server through purchasing a domain and services from Amazon. Set up your dashboard server first from our guide &lt;a href=&#34;../../awsinstallation&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;a href=&#34;https://console.aws.amazon.com/route53/home&#34;&gt;https://console.aws.amazon.com/route53/home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Click the &amp;ldquo;Register Domain&amp;rdquo; button&lt;/li&gt;
+&lt;li&gt;Type in the domain name you want and the suffix you want and click the &amp;ldquo;Check&amp;rdquo; button.  Amazon you will then be able to click &amp;ldquo;add to cart&amp;rdquo; to purchase the domain if it is available, or will be given suggestions for alternatives that are open for purchase if not. Scroll to the bottom of the page and click the &amp;ldquo;continue&amp;rdquo; button once it is in your cart&lt;/li&gt;
+&lt;li&gt;The next page will have a lot of personal info that you will have to fill out.  This is to register you as owner of the domain, and make sure that changes to it have to go through you.  Click the button to continue when you are done&lt;/li&gt;
+&lt;li&gt;Click the checkbox to agree to their Registration Agreement, and then the &amp;ldquo;Complete Purchase&amp;rdquo; button.&lt;/li&gt;
+&lt;li&gt;You will be emailed about the domain at the email you entered.  If you don&amp;rsquo;t click the link in the email within 15 days to verify that you provided a valid email address, the registrar will suspend your domain. A suspended domain is not available on the Internet.&lt;/li&gt;
+&lt;li&gt;After you click the link in the email, in a day or 2 you will get another email saying that your domain was successfully registered with Route 53&lt;/li&gt;
+&lt;li&gt;Go to the Amazon certificate manager at &lt;a href=&#34;https://us-east-2.console.aws.amazon.com/acm&#34;&gt;https://us-east-2.console.aws.amazon.com/acm&lt;/a&gt; and request a certificate.  If this is your first time there then click provisioning a certificates -&amp;gt; get started.&lt;/li&gt;
+&lt;li&gt;request a public certificate and click the request a certificate button&lt;/li&gt;
+&lt;li&gt;type in your domain name in the text box, then click “add another domain to this certificate”, and then &amp;ldquo;www&amp;rdquo; + your domain name in the next box, and click next.  So for example if your domain is test.com, the 2 boxes would have test.com and &lt;a href=&#34;http://www.test.com&#34;&gt;www.test.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Leave it as DNS validation and click Rreview.  Then click “Cconfirm and request” on the next page&lt;/li&gt;
+&lt;li&gt;Click the arrow by the domain to expand the view.&lt;/li&gt;
+&lt;li&gt;Click the &amp;ldquo;create record in route 53&amp;rdquo; button, and then click the “Create” button in the window that pops up.&lt;/li&gt;
+&lt;li&gt;Wait 30 minutes - 2 hours for the change to propagate&lt;/li&gt;
+&lt;li&gt;The certificate manager will list the status as &amp;ldquo;issued&amp;rdquo; once it is ready for you to complete.  If it fails after 24 hours you can try deleting it and resubmitting.&lt;/li&gt;
+&lt;li&gt;Go back to the EC2 dashboard at &lt;a href=&#34;https://us-east-2.console.aws.amazon.com/ec2&#34;&gt;https://us-east-2.console.aws.amazon.com/ec2&lt;/a&gt; and then click on the &amp;ldquo;Load Balancers&amp;rdquo; link&lt;/li&gt;
+&lt;li&gt;Click on the &amp;ldquo;Create Load Balancer&amp;rdquo; button&lt;/li&gt;
+&lt;li&gt;Choose &amp;ldquo;Application Load Balancer&amp;rdquo; by clicking on the &amp;ldquo;Create&amp;rdquo; button for it&lt;/li&gt;
+&lt;li&gt;Type in a name for it&lt;/li&gt;
+&lt;li&gt;Click the &amp;ldquo;add listener&amp;rdquo; button and then select &amp;ldquo;HTTPS&amp;rdquo; from the &amp;ldquo;choose a protocol&amp;rdquo; dropdown&lt;/li&gt;
+&lt;li&gt;Check the boxes for at least 2 subnets under the &amp;ldquo;availability zones&amp;rdquo; area&lt;/li&gt;
+&lt;li&gt;Click the &amp;ldquo;Next: configure security settings&amp;rdquo; button at the bottom right&lt;/li&gt;
+&lt;li&gt;The next page lets you set up a certificate.  It should default to the one that you create and got issued earlier (the name will appear in the Certificate name, and the selected Certificate type would be “Choose a certificate from ACM”).  If yes, you can, just click the “Next: Configure Security Group” button at the bottom right again.  Otherwise choose &amp;ldquo;Choose a certificate from ACM&amp;rdquo; and then from the &amp;ldquo;certificate name&amp;rdquo; dropdown choose the one with your domain name.&lt;/li&gt;
+&lt;li&gt;Choose the security group you made in part 7 of the initial guide (you can see the name of that security group if you go to EC2 Dashboard-&amp;gt;Running Instances, on the far right of the records you have for the relevant instance), and click “Next: Configure Routing”.  Or if you don&amp;rsquo;t see that then choose to create a new security group, and then Click the &amp;ldquo;add rule&amp;rdquo; button twice, and set the 2 new rules to &amp;ldquo;HTTPS&amp;rdquo; and &amp;ldquo;HTTP&amp;rdquo;, so in total you will have those 2 and &amp;ldquo;SSH&amp;rdquo; rules.  You don&amp;rsquo;t have to mess with any of the details of the rules.&lt;/li&gt;
+&lt;li&gt;You should be on the &amp;ldquo;Configure routing&amp;rdquo; page now.  From the &amp;ldquo;target group&amp;rdquo; dropdown, select &amp;ldquo;existing target group&amp;rdquo;, and then select the name from the dropdown that you previously entered. I chose “New target group” entered a name, selected the Instance tha matached the Instance ID on your EC2 page, clicked “Add to registered”, clicked Next:Review, clicked “Create”,&lt;/li&gt;
+&lt;li&gt;Now you are done configuring it, so just keep clicking the next button, and then finally &amp;ldquo;create&amp;rdquo; one you get that button.  You should get a message saying &amp;ldquo;Successfully created load balancer&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Close the dialogue and now you should see a page showing you your load balancers, with the one you just created appearing.&lt;/li&gt;
+&lt;li&gt;Click on the row with your load balancer, and then from the details page write down the DNS name that it gives.&lt;/li&gt;
+&lt;li&gt;Go back to the Route 53 dashboard at &lt;a href=&#34;https://console.aws.amazon.com/route53/home&#34;&gt;https://console.aws.amazon.com/route53/home&lt;/a&gt; , or from Services-&amp;gt;Route53and click on the &amp;ldquo;Hosted zones&amp;rdquo; link&lt;/li&gt;
+&lt;li&gt;Click the radio button for your hosted zone and then click the &amp;ldquo;go to record sets&amp;rdquo; button.&lt;/li&gt;
+&lt;li&gt;You should see 2 rows with type &amp;ldquo;A&amp;rdquo;.  Click on each of them to highlight them, and then from the &amp;ldquo;edit record set&amp;rdquo; box that appears on the right, Click the Alias &amp;ldquo;Yes&amp;rdquo; radio button, then for the alias target type in the DNS name that you saved in step 37, and finally click the &amp;ldquo;save record set&amp;rdquo; button.&lt;/li&gt;
+&lt;li&gt;Now after waiting for up to 5 minutes, you should be able to access the minnoSuite dashboard at your domain + &amp;ldquo;/static&amp;rdquo;, such as &lt;a href=&#34;http://www.implicit.ga/static&#34;&gt;www.implicit.ga/static&lt;/a&gt; .  Https will work also.  This will be the dashboard.  the default admin user is username:admin , pw: admin123&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

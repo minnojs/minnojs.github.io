@@ -1,0 +1,48 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minno Suite – Examples</title>
+    <link>/docs/manager/examples/</link>
+    <description>Recent content in Examples on Minno Suite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	  <atom:link href="/docs/manager/examples/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Show Video</title>
+      <link>/docs/manager/examples/video/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/manager/examples/video/</guid>
+      <description>
+        
+        
+        &lt;p&gt;It is heavily commented so that you can follow everything that goes on.
+After reading the documentation feel free to download the file and modify it according to your needs.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Weight task</title>
+      <link>/docs/manager/examples/weight/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/manager/examples/weight/</guid>
+      <description>
+        
+        
+        &lt;p&gt;It is heavily commented so that you can follow everything that goes on.
+After reading the documentation feel free to download the file and modify it according to your needs.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

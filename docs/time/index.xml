@@ -1,0 +1,131 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minno Suite – Time sensitive tasks</title>
+    <link>/docs/time/</link>
+    <description>Recent content in Time sensitive tasks on Minno Suite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	  <atom:link href="/docs/time/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Data</title>
+      <link>/docs/time/data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/time/data/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The player sends all the data it has gathered to the url defined in the settings &lt;a href=&#34;../api/settings#logger&#34;&gt;logger&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Logs are accumulated in an array (which can be found in &lt;code&gt;current.logs&lt;/code&gt; or &lt;code&gt;API.getLogs&lt;/code&gt;).
+Each log is an object including the following fields:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Field&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;log_serial&lt;/td&gt;
+&lt;td&gt;the serial number for this log row (starts at 1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trial_id&lt;/td&gt;
+&lt;td&gt;a unique identifier for this trial&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;the name of this trial - an alias if one is set, otherwise the set the trial inherited&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;block&lt;/td&gt;
+&lt;td&gt;the block attribute of trial.data (it is up to the user to set this attribute, usually in the trial definitions)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;responseHandle&lt;/td&gt;
+&lt;td&gt;the handle for the input that triggered this log&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;score&lt;/td&gt;
+&lt;td&gt;the score attribute of trial.data (it is up to the user to set this attribute, usually using setTrialAttr)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;latency&lt;/td&gt;
+&lt;td&gt;the latency of the response from the beginning of the trial&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;stimuli&lt;/td&gt;
+&lt;td&gt;a json including the stimuli used in this trial (we use an alias if one is set, otherwise the stimulus set, otherwise the stimulus handle otherwise stim#)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;media&lt;/td&gt;
+&lt;td&gt;a json including the media used in this trial (we use an alias if one is set, otherwise the media set, otherwise media#)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;data&lt;/td&gt;
+&lt;td&gt;a json including the data property of this trial&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;You can control the names that the different elements get by adding an &lt;code&gt;alias&lt;/code&gt; property to the element itslef or to its &lt;code&gt;data&lt;/code&gt;.
+If the &lt;code&gt;alias&lt;/code&gt; isn&amp;rsquo;t set, then the player attempts to choose a meaningful name on its own (using the inherited set, or whatever is appropriate).&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: API</title>
+      <link>/docs/time/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/time/api/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;definitions&#34;&gt;Definitions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Media&lt;/strong&gt; are the objects that we display.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stimuli&lt;/strong&gt; are responsible for how we display the media.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Trials&lt;/strong&gt; are a set of stimuli and the rules governing their display.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Examples</title>
+      <link>/docs/time/examples/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/time/examples/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Tutorials</title>
+      <link>/docs/time/tutorials/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/time/tutorials/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

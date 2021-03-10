@@ -1,0 +1,446 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minno Suite – Variables</title>
+    <link>/docs/sequencer/variables/</link>
+    <description>Recent content in Variables on Minno Suite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	  <atom:link href="/docs/sequencer/variables/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Current</title>
+      <link>/docs/sequencer/variables/current/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/variables/current/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Each MinnoJS task creates an object that holds information regarding that task.
+The object is automatically updated with data from within the tasks (such as question answers or other logs).
+The task object can be changed manually as well.
+You can extend it however you like using &lt;code&gt;API.addCurrent&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addCurrent&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;({&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;variable&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While a task is running, its task object is available as &lt;code&gt;current&lt;/code&gt;.
+Even when the task is not active it is available from within the &lt;a href=&#34;../global&#34;&gt;&lt;code&gt;global&lt;/code&gt;&lt;/a&gt; object, as &lt;code&gt;global.&amp;lt;taskName&amp;gt;&lt;/code&gt;,
+where &lt;code&gt;&amp;lt;taskName&amp;gt;&lt;/code&gt; stands for the &lt;a href=&#34;/docs/manager/api/tasks/&#34;&gt;task name&lt;/a&gt; as defined within the task manager.&lt;/p&gt;
+&lt;p&gt;For your convenience, here is a table describing some of the data available within the different task objects.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Task&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;miTime&lt;/td&gt;
+&lt;td&gt;The task object holds all trial logs: &lt;code&gt;current.logs&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;miQuest&lt;/td&gt;
+&lt;td&gt;The task object holds all questions: &lt;code&gt;current.questions&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Global</title>
+      <link>/docs/sequencer/variables/global/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/variables/global/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The PI tasks expose one central object that serves as the hub of all of you tasks.
+The [task objects][../current] get automatically registered on the &lt;code&gt;global&lt;/code&gt; object, so that you can access them all from here.
+In addition, you can register any data that you want shared between your tasks onto &lt;code&gt;global&lt;/code&gt;.
+This options is useful in various cases of branching, as well as when you want a common theme to appear in multiple tasks.&lt;/p&gt;
+&lt;p&gt;The following snippet sets &lt;code&gt;global.value&lt;/code&gt; to 123, and &lt;code&gt;global.variable&lt;/code&gt; to [1,2,3].&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addGlobal&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;({&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;123&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;variable&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-templateGlobal.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// You can use data set within the global (or for that matter current) object from within templates.
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  // Set a value in global
+  API.addGlobal({foo:&amp;#39;using global in templates&amp;#39;});
+
+  API.addSequence([
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;,
+        template:&amp;#39;foo is equal to  &amp;#34;&amp;lt;%= global.foo %&amp;gt;&amp;#34;.&amp;#39;
+  	}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;templateGlobal.md&#39;);
+&lt;/script&gt;
+
+&lt;p&gt;It may sometimes be handy to access &lt;code&gt;global&lt;/code&gt; directly as &lt;code&gt;window.piGlobal&lt;/code&gt;.
+Note that this allows you to access task objects (&lt;a href=&#34;../current&#34;&gt;current&lt;/a&gt;) as well.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;window&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;piGlobal&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;greeting&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Hello world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;console&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;window&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;piGlobal&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;special-properties&#34;&gt;Special properties&lt;/h2&gt;
+&lt;p&gt;There are several properties within &lt;code&gt;global&lt;/code&gt; that have a special meaning.&lt;/p&gt;
+&lt;h3 id=&#34;meta&#34;&gt;Meta&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;global.$meta&lt;/code&gt; variable has a special meaning within the player.
+Each time the logger triggers within any of the manager tasks, all the data with then &lt;code&gt;global.$meta&lt;/code&gt; object is added to each row of the log.&lt;/p&gt;
+&lt;p&gt;The following definition will cause each log posted to the server to include &lt;code&gt;uid&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;API.addGlobal({
+    $meta: {uid: &#39;12345678&#39;}
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;postonce&#34;&gt;postOnce&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;global.$postOnce&lt;/code&gt; variable is posted to the server immidiately at the start of the task sequence.
+Note that any changes to this variable during the sequence will have no effect.&lt;/p&gt;
+&lt;p&gt;The following definition will cause the &lt;code&gt;condition&lt;/code&gt; to be saved to the server at the begining of the session.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;API.addGlobal({
+    $postOnce: {condition: &#39;long&#39;}
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;url&#34;&gt;Url&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&#34;https://en.wikipedia.org/wiki/Query_string&#34;&gt;query string&lt;/a&gt; is a set of parameters that can be passed within a URL string.
+The global object exposes the url query string in a dedicated object called &lt;code&gt;$url&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So that if you have a url such as &lt;code&gt;example.com?bar=buz&amp;amp;bam=bif&lt;/code&gt; the object takes the following form:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;global&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;$url&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;bar&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;buz&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;bam&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;bif&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Local</title>
+      <link>/docs/sequencer/variables/local/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/variables/local/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The variables that we&amp;rsquo;ve discussed so far are relevant for whole tasks or even whole studies.
+We now approach variables that have a narrower scope: they have to do with specific elements within your task.
+These variables are called &lt;em&gt;Data&lt;/em&gt; and &lt;em&gt;Meta&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;data&#34;&gt;Data&lt;/h2&gt;
+&lt;p&gt;The &lt;em&gt;Data&lt;/em&gt; variables allow you to manually set useful information into each element.
+Their behaviour is described fully within as part of element &lt;a href=&#34;../../inheritance#data&#34;&gt;inheritance&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the following example, the data set in the &amp;lsquo;default&amp;rsquo; task, is used from within a &lt;a href=&#34;../../templates&#34;&gt;template&lt;/a&gt; in the sequence.&lt;/p&gt;
+
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-templateData.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;,
+        data: {condition:&amp;#39;using data in templates&amp;#39;}
+  	}
+  ]);
+
+  API.addSequence([
+    {inherit:&amp;#39;default&amp;#39;,template:&amp;#39;We are in the &amp;#34;&amp;lt;%= tasksData.condition %&amp;gt;&amp;#34; condition.&amp;#39;}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;templateData.md&#39;);
+&lt;/script&gt;
+
+&lt;h2 id=&#34;meta&#34;&gt;Meta&lt;/h2&gt;
+&lt;p&gt;The &lt;em&gt;Meta&lt;/em&gt; variables hold some meta information regarding this element that is auto-generated by the mixer.
+The meta objects have two properties &lt;code&gt;number&lt;/code&gt; and &lt;code&gt;outOf&lt;/code&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Property&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;number&lt;/td&gt;
+&lt;td&gt;The serial number for this element within the sequence (i.e. 3 if this is the third element to be presented).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;outOf&lt;/td&gt;
+&lt;td&gt;An attempt to estimate how many elements are in the sequence overall. This number cannot be fully trusted as the number of elements may be dynamically generated and depend on various variables not yet determined.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+
+
+    
+
+
+
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-templateMeta.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;,
+        template: &amp;#39;Task number &amp;lt;%= tasksMeta.number %&amp;gt; out of &amp;lt;%= tasksMeta.outOf %&amp;gt;.&amp;#39;
+  	}
+  ]);
+
+  API.addSequence([
+    {inherit:&amp;#39;default&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;templateMeta.md&#39;);
+&lt;/script&gt;
+
+&lt;h2 id=&#34;naming-convention&#34;&gt;Naming convention&lt;/h2&gt;
+&lt;p&gt;The naming convention for these variables is &lt;code&gt;&amp;lt;elementName&amp;gt;Data&lt;/code&gt; and &lt;code&gt;&amp;lt;elementName&amp;gt;Meta&lt;/code&gt; respectively.
+For example, for tasks they appear as &lt;code&gt;tasksData&lt;/code&gt; and &lt;code&gt;tasksMeta&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The elementNames for the various tasks are as follows:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Task&lt;/th&gt;
+&lt;th&gt;elementName&lt;/th&gt;
+&lt;th&gt;Object names&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;miManager&lt;/td&gt;
+&lt;td&gt;tasks&lt;/td&gt;
+&lt;td&gt;tasksData, tasksMeta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;miQuest&lt;/td&gt;
+&lt;td&gt;pages&lt;/td&gt;
+&lt;td&gt;pagesData, pagesMeta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;questions&lt;/td&gt;
+&lt;td&gt;questionsData, questionsMeta&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;miTime&lt;/td&gt;
+&lt;td&gt;trial&lt;/td&gt;
+&lt;td&gt;trialData, trialMeta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;stimulus&lt;/td&gt;
+&lt;td&gt;stimulusData, stimulusMeta&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;media&lt;/td&gt;
+&lt;td&gt;mediaData, mediaMeta&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

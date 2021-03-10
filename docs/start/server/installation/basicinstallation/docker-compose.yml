@@ -1,0 +1,65 @@
+version: '2.1'
+
+
+
+# Define the services/containers to be run
+
+services:
+
+  minnoserver:  #name of your service
+
+    image: adzikiewicz/minnoserver # specify the directory of the Dockerfile
+    command: >
+    command: >
+      sh -c "/wait &&
+             node server/setup.js && 
+             nodemon server/index.js --ignore data/"
+    ports:
+      - "80:80" #specify ports forwarding
+      - "443:443" #specify ports forwarding 
+    links:
+
+      - database # link this service to the database service
+    depends_on:
+      - database
+    environment:
+      WAIT_HOSTS: database:27017
+      WAIT_HOSTS_TIMEOUT: 300
+      WAIT_SLEEP_INTERVAL: 10
+      WAIT_HOST_CONNECT_TIMEOUT: 30
+      PORT: 80
+      SSLPORT: 443
+      CERTFILE: /usr/src/minnoserver/localhost.crt' #path to certfile for https server type
+      KEYFILE: '/usr/src/minnoserver/localhost.key'  #path to keyfile for https server type
+      OWNER_EMAIL: 'YOUR_EMAIL'  #needed for creating ssl key in greenlock server type
+      DOMAINS: '["yourdomain.com", "www.yourdomain.com"]'  #domains to register for greenlock type
+      SERVER_TYPE: "http" #"http", "https", or "greenlock"
+      MINNO_BASE_FOLDER: '/usr/src/minnoserver'
+      MINNO_MONGO_URL: 'mongodb://database:27017/minnodb'
+      MINNO_SERVER_URL: 'http://localhost:80'
+      MINNO_DASHBOARD_URL: '//cdn.jsdelivr.net/gh/minnojs/minno-dashboard@1'
+      MINNO_PLAYER_URL : '//cdn.jsdelivr.net/gh/minnojs/minno-quest@0.3/dist/'
+      KEEP_ALIVE_TIMEOUT : 1800000
+    volumes:
+	  - ./user:/usr/src/minnoserver/user
+      - ./data:/usr/src/minnoserver/data
+      - ./tmp:/src/minnoserver/tmp
+      - ./.well-known:/src/minnoserver/.well-known
+      - ./logs:/src/minnoserver/logs	
+      - ./data/localhost.crt:/usr/src/minnoserver/localhost.crt 
+      - ./data/localhost.key:/usr/src/minnoserver/localhost.key 
+    depends_on:
+
+      - database
+
+      
+
+  database: # name of the service
+
+    image: mongo # specify image to build container from
+    container_name: database
+    restart: always
+    volumes:
+         - ./data/db:/data/db
+    ports:
+          - "27018:27017"  # specify ports forwarding

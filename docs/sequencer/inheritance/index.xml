@@ -1,0 +1,879 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minno Suite – Inheritance</title>
+    <link>/docs/sequencer/inheritance/</link>
+    <description>Recent content in Inheritance on Minno Suite</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    
+	  <atom:link href="/docs/sequencer/inheritance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: inheritanceAbstraction</title>
+      <link>/docs/sequencer/inheritance/inheritanceabstraction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritanceabstraction/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceAbstraction.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// One of the main uses for inheritance is simplifying your scripts.
+// Instead of repeating the settings for your tasks, you can abstract them into a set and inherit them each time.
+//
+// Note that you can inherit from within sets as well, so that you can several levels of abstraction.
+
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  // Instead of setting the task type and keys properties, we simply inherit the &amp;#39;default&amp;#39; task set.
+  // (Setting inherit to a String is equivalent to using random. This works for us because there is only one object within the &amp;#39;default&amp;#39; set.)
+  API.addSequence([
+  	{inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+  	{inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+  	{inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceAbstraction.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceByData</title>
+      <link>/docs/sequencer/inheritance/inheritancebydata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritancebydata/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceByData.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// Sometimes you need to handpick a specific object out of a set.
+// `byData` allows you to do that by matching the `data` properties of the inherit object and the objects within the set.
+// Note, that if there are multiple fits to your data object, a random object will be picked from among them.
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;, data:{num:1}},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;, data:{num:2}},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;, data:{num:3}}
+  ]);
+
+  API.addSequence([
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;byData&amp;#39;, data:{num:2}}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;byData&amp;#39;, data:{num:1}}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;byData&amp;#39;, data:{num:3}}}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceByData.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceCustom</title>
+      <link>/docs/sequencer/inheritance/inheritancecustom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritancecustom/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceCustom.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// Custom inheritance is only for advanced users. It allows you to pick objects by any criteria that you like.
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  API.addSequence([
+    {inherit:function(collection){
+        return collection.at(2);
+    }}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceCustom.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceExRandom</title>
+      <link>/docs/sequencer/inheritance/inheritanceexrandom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritanceexrandom/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceExRandom.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// When you want to randomly pick from within a set without repeating any of the elements
+// (When the sequencer runs out of elements in the set, it resets the randomization).
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  API.addSequence([
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;exRandom&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;exRandom&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;exRandom&amp;#39;}}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceExRandom.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceRandom</title>
+      <link>/docs/sequencer/inheritance/inheritancerandom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritancerandom/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceRandom.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// When a set has several objects you may want to inherit a random object out of that set.
+// Note that you are not guaranteed that items will not be repeated when you randomly inherit (if that is what you want, use Exclusive Random: `exRandom`).
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  API.addSequence([
+    {inherit:&amp;#39;tasks&amp;#39;}, // this is a shortcut that is equivalent to the full inherit random object.
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;random&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;random&amp;#39;}}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceRandom.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceRepeat</title>
+      <link>/docs/sequencer/inheritance/inheritancerepeat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritancerepeat/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceRepeat.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// The inheritance systems uses seeds to keep track of consecutive calls to the different types of inheritance.
+// If you want to have paralel groups of inhertiance to the same set, you can use seeds.
+// This examples shows how to reset the `sequential` type, it works for `exRandom` as well...
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+    {
+      type:&amp;#39;message&amp;#39;,
+      keys: &amp;#39; &amp;#39;
+    }
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  API.addTasksSet(&amp;#39;pairs&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Pair 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Pair 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Pair 3&amp;#39;}
+  ]);
+
+
+  API.addSequence([
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;exRandom&amp;#39;, seed: &amp;#39;block1&amp;#39;}},
+    {inherit:{set:&amp;#39;pairs&amp;#39;, type:&amp;#39;exRandom&amp;#39;, seed: &amp;#39;block1&amp;#39;, repeat:true}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;exRandom&amp;#39;, seed: &amp;#39;block1&amp;#39;}},
+    {inherit:{set:&amp;#39;pairs&amp;#39;, type:&amp;#39;exRandom&amp;#39;, seed: &amp;#39;block1&amp;#39;, repeat:true}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;exRandom&amp;#39;, seed: &amp;#39;block1&amp;#39;}},
+    {inherit:{set:&amp;#39;pairs&amp;#39;, type:&amp;#39;exRandom&amp;#39;, seed: &amp;#39;block1&amp;#39;, repeat:true}}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceRepeat.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceSeed</title>
+      <link>/docs/sequencer/inheritance/inheritanceseed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritanceseed/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceSeed.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// The inheritance systems uses seeds to keep track of consecutive calls to the different types of inheritance.
+// If you want to have parallel groups of inheritance to the same set, you can use seeds.
+// This examples shows how to reset the `sequential` type, it works for `exRandom` as well...
+// The options here are pretty endless, you should look into the documentation in order to get a better understanding of how this feature works.
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  API.addSequence([
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;, seed: &amp;#39;block1&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;, seed: &amp;#39;block1&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;, seed: &amp;#39;block2&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;, seed: &amp;#39;block2&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;, seed: &amp;#39;block2&amp;#39;}}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceSeed.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: inheritanceSequential</title>
+      <link>/docs/sequencer/inheritance/inheritancesequential/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/sequencer/inheritance/inheritancesequential/</guid>
+      <description>
+        
+        
+        
+
+
+
+
+    
+
+
+
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
+    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+
+
+&lt;div class=&#34;pg-section&#34; id=&#34;pg-inheritanceSequential.md&#34;&gt;
+    &lt;p&gt;
+    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
+    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+// When you want to go through a set by the order it was created.
+define([&amp;#39;managerAPI&amp;#39;], function(Manager){
+
+  var API = new Manager();
+
+  API.addTasksSet(&amp;#39;default&amp;#39;, [
+  	{
+  		type:&amp;#39;message&amp;#39;,
+  		keys: &amp;#39; &amp;#39;
+  	}
+  ]);
+
+  API.addTasksSet(&amp;#39;tasks&amp;#39;,[
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;},
+    {inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;}
+  ]);
+
+  API.addSequence([
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;}},
+    {inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;sequential&amp;#39;}}
+  ]);
+
+  return API.script;
+});
+&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    (function(filename){
+        var win, section;
+        var section = document.getElementById(&#39;pg-&#39; + filename);
+
+        var el = section.querySelector(&#39;.code-mirror&#39;);
+        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
+
+        cm.setSize(null, 500);
+
+        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
+            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
+
+            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+            else {
+                var elem = window.document.createElement(&#39;a&#39;);
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
+        });
+
+        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
+            var runminnoUrl = &#39;\/runminno.html&#39;;
+            if (win) win.close();
+            win = window.open(runminnoUrl, &#39;Playground&#39;);
+            win.onload = function(){
+                win.addEventListener(&#39;unload&#39;, function() {
+                    window.focus();
+                });
+                win.activate(cm.getValue());
+            };
+        });
+    })(&#39;inheritanceSequential.md&#39;);
+&lt;/script&gt;
+
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
