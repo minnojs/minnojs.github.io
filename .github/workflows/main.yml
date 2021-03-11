@@ -30,9 +30,8 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: echo $PWD
       - run: ls
-      - run: hugo --minify --config config.toml
+      - run: hugo --minify --config cc.toml
 
         #- name: Build site
         # remove --minify tag if you do not need it
