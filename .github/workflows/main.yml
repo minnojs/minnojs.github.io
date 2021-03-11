@@ -31,7 +31,8 @@ jobs:
 
       - run: npm ci
       - run: echo $PWD
-      - run: hugo --minify
+      - run: ls
+      - run: hugo --minify --config config.toml
 
         #- name: Build site
         # remove --minify tag if you do not need it
