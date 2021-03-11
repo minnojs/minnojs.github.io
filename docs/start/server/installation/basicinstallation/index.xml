@@ -1,0 +1,21 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Docker Installation</title><link>/docs/start/server/installation/basicinstallation/</link><description>Recent content in Docker Installation on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/start/server/installation/basicinstallation/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: The Docker Configuration File</title><link>/docs/start/server/installation/basicinstallation/configfile/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/basicinstallation/configfile/</guid><description>
+&lt;h2 id="the-docker-configuration-file">The Docker Configuration File&lt;/h2>
+&lt;p>This page will describe the parts of the docker-compose configuration file that you might want to edit.&lt;/p>
+&lt;hr>
+&lt;pre>&lt;code>ports:
+- &amp;quot;80:80&amp;quot; #specify ports forwarding
+- &amp;quot;443:443&amp;quot; #specify ports forwarding
+- &amp;quot;27018:27017&amp;quot; # specify ports forwarding
+&lt;/code>&lt;/pre>
+&lt;p>By default the server will run on port 80 for http requests and 443 for https requests and 27018 for DB requests. If you want to change it then you&amp;rsquo;d do something like &amp;ldquo;81:80&amp;rdquo; to make it run on port 81 for http requests.&lt;/p>
+&lt;hr>
+&lt;pre>&lt;code>-SERVER_TYPE: &amp;quot;http&amp;quot; &amp;quot;http&amp;quot;, &amp;quot;https&amp;quot;, or &amp;quot;greenlock&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>&amp;ldquo;http&amp;rdquo; will make it only run with a http service. &amp;ldquo;https&amp;rdquo; will make it run on https also using a certificate and key file that you provide. &amp;ldquo;greenlock&amp;rdquo; will make it automatically aquire certificates for you using Greenlock. When using https, update the part of the config file under &amp;ldquo;volumes&amp;rdquo; with &amp;ldquo;./localhost.crt&amp;rdquo; and &amp;ldquo;/localhost.key&amp;rdquo; to point to the file path of the crt and key files for your domain. It is up to you to aquire them. When using greenlock, update the OWNER_EMAIL and DOMAINS field with your email and domain, and also make sure that the DNS for your domain points to the machine you are running this on.&lt;/p>
+&lt;hr>
+&lt;pre>&lt;code> volumes:
+- ./data/user:/usr/src/minnoserver/user
+- ./data/localhost.crt:/usr/src/minnoserver/localhost.crt
+- ./data/localhost.key:/usr/src/minnoserver/localhost.key
+&lt;/code>&lt;/pre>
+&lt;p>This sets the location on your local file system that will be used by the docker container to store dynamic content. So if you want the user files for their studies to be somewhere else, you would change the ./data/user part. The crt and key files are for SSL certificates. If you want to have your dashboard be running SSL from the start, you can supply the crt and key files and set the server type to https.&lt;/p></description></item></channel></rss>

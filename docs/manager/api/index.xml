@@ -1,0 +1,296 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – API</title><link>/docs/manager/api/</link><description>Recent content in API on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/manager/api/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Tasks</title><link>/docs/manager/api/tasks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/manager/api/tasks/</guid><description>
+&lt;p>The basic unit in miManager is the &lt;strong>task&lt;/strong>.
+There are many &lt;a href="../tasks">types of tasks&lt;/a> available,
+and you can also create &lt;a href="../api/custom-tasks">custom tasks&lt;/a> of your own.
+Tasks are defined within the sequence just like any other element,
+and you can use mixers, inheritance, and templates to control their flow.&lt;/p>
+&lt;p>For example, following is a manager sequence with two subsequent tasks - first a questionnaire, then a time-sensitive tasks.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-js" data-lang="js">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSequence&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;quest&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;race-questionnaire&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">scriptUrl&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;race.quest.js&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;time&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;race-iat&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">scriptUrl&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;iat.js&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="task-properties">Task properties&lt;/h4>
+&lt;p>All tasks have some common properties that can be used to customize their behaviour.
+Following is a list of such properties and a description of their behaviour.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>Task name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>type&lt;/td>
+&lt;td>Type of task (quest,message etc.).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pre&lt;/td>
+&lt;td>A function to invoke before the task (may return a promise).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>load&lt;/td>
+&lt;td>A function to invoke as soon as the task is loaded (may return a promise).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>post&lt;/td>
+&lt;td>A function to invoke after the task (may return a promise).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>canvas&lt;/td>
+&lt;td>A canvas object (as defined under &lt;a href="../settings#canvas">settings&lt;/a>) to invoke at the beginning of the task and remove&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>title&lt;/td>
+&lt;td>A string to be used as the page title (the name displayed on the tag). It is reset at the end of the task.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>preText&lt;/td>
+&lt;td>A template to be expanded before the task&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>postText&lt;/td>
+&lt;td>A template to be expanded after the task&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>current&lt;/td>
+&lt;td>An object that will be merged into the task &lt;code>current&lt;/code> object.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: Custom tasks</title><link>/docs/manager/api/custom-tasks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/manager/api/custom-tasks/</guid><description>
+&lt;p>The miManager allows the creation of custom tasks.
+The format is fairly simple though you probably need at least some experience with programing for it.&lt;/p>
+&lt;h4 id="plugging-in">Plugging in&lt;/h4>
+&lt;p>miManager manages the task sequence for you as well as loading the task script (if needed). There are several ways to plug a new task into miManager, the all involve passing the activator function to the manager in various ways.&lt;/p>
+&lt;ol>
+&lt;li>You can pass the activator function as a script.&lt;/li>
+&lt;li>You can pass it as the play property of the script object ().&lt;/li>
+&lt;li>You can set it into the &lt;code>taskActivateProvider&lt;/code> using &lt;code>taskActivateProvider.set(taskName, activatorFunction)&lt;/code> during the configuration stage of the angular flow (This is worth the trouble mainly if you intend to use this task many times).&lt;/li>
+&lt;/ol>
+&lt;h4 id="activator-function">Activator function&lt;/h4>
+&lt;p>The activator function is the function that is responsible for the activation of your task as well as for the communication with miManager.&lt;/p>
+&lt;p>It should:&lt;/p>
+&lt;ul>
+&lt;li>Run your task (just do whatever you like).&lt;/li>
+&lt;li>Return a function that may be used to force the end of the task.&lt;/li>
+&lt;li>Call the &lt;code>done&lt;/code> function whenever it is done.&lt;/li>
+&lt;/ul>
+&lt;p>The activator function is invoked using &lt;a href="https://docs.angularjs.org/guide/di">angular dependency injection&lt;/a>, so you can use any of the angular &lt;a href="https://docs.angularjs.org/guide/di#dependency-annotation">annotation&lt;/a> methods to get dependencies.&lt;/p>
+&lt;p>The following dependencies are supported (as well as all standard angular services):&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Service&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>done&lt;/td>
+&lt;td>A function that lets the manager know that the task has finished.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>props&lt;/td>
+&lt;td>An object with all sorts of useful tools.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$scope&lt;/td>
+&lt;td>The task scope.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>task&lt;/td>
+&lt;td>The miManager element that defined this task.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>script&lt;/td>
+&lt;td>The task script (as defined in task.script or loaded from task.scriptUrl).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$element&lt;/td>
+&lt;td>The tasks DOM Node wrapped in jqLite or jQuery.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>global&lt;/td>
+&lt;td>The global object&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$injector&lt;/td>
+&lt;td>an angularjs injector (it can allow you to $compile or accesses $rootScope)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="custom-task-example">Custom Task Example&lt;/h4>
+&lt;p>The following displays a messages to the user and proceeds to the next task after 5 seconds:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#8f5902;font-style:italic">// the define wrapper
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">define&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">function&lt;/span>&lt;span style="color:#000;font-weight:bold">(){&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// the script object being returned
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// custom script content
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">content&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Hi there, I\&amp;#39;m your custom message&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// the activator function uses three dependencie
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">play&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span> &lt;span style="color:#000">activator&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">done&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">script&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">$element&lt;/span>&lt;span style="color:#000;font-weight:bold">){&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">timeoutId&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">setTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">done&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5000&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;span style="color:#000">$element&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">html&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">script&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">content&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// will be called at the end of the task to clean things up
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// (whether the end is forced or triggered by &amp;#39;done&amp;#39;)
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span> &lt;span style="color:#000">clear&lt;/span>&lt;span style="color:#000;font-weight:bold">(){&lt;/span>
+&lt;span style="color:#000">clearTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">timeoutId&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;span style="color:#000">$element&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">empty&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to use it all you have to do is point the task to the correct url:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">taskElement&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">scriptUrl&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;path/to/script&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Settings</title><link>/docs/manager/api/settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/manager/api/settings/</guid><description>
+&lt;p>Settings allow you to control the generic way that the player works.
+Change the settings using the &lt;code>addSettings&lt;/code> function.
+The first argument to the function is always the name of the setting, the second argument is the setting values.
+In case the setting is an object, subsequent objects will extend each other so that settings may be progressively added.&lt;/p>
+&lt;p>All the functions within settings are invoked using angular.
+This means that you have access to any service you like, as well as some specific assets.
+&lt;a href="https://docs.angularjs.org/api/auto/service/$injector">In order to access the services&lt;/a> simply use arguments with the appropriate name.
+For instance, this is how you would access &lt;code>$rootScope&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">function&lt;/span> &lt;span style="color:#000">onEnd&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$rootScope&lt;/span>&lt;span style="color:#000;font-weight:bold">){&lt;/span>
+&lt;span style="color:#000">$rootScope&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">$emit&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;end!!&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="canvas">canvas&lt;/h2>
+&lt;p>&lt;code>canvas&lt;/code> takes an object that describes the style of the task environment. Each property of the object changes a different style element.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Changes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>background&lt;/td>
+&lt;td>The overall background color.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>canvasBackground&lt;/td>
+&lt;td>Default canvas background color.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fontColor&lt;/td>
+&lt;td>Default font color.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fontSize&lt;/td>
+&lt;td>Default font size.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;canvas&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">fontSize&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;2em&amp;#39;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>In case you need to fine tune the styles even further you can add css rules into the raw HTML. Support for dynamically adding CSS is planned but not yet supported.&lt;/p>
+&lt;h2 id="injectstyle">injectStyle&lt;/h2>
+&lt;p>Injects a string of css into the page.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;injectStyle&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;[pi-quest] label {font-size:1.2em; font-weight:normal;}&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="onpretask">onPreTask&lt;/h2>
+&lt;p>&lt;code>onPreTask&lt;/code> is a function to be called before each task is called.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;onPreTask&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">currentTask&lt;/span>&lt;span style="color:#000;font-weight:bold">){&lt;/span>
+&lt;span style="color:#000">doSomethingWith&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">currentTask&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Asset&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>currentTask&lt;/td>
+&lt;td>The current task object&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>prevTask&lt;/td>
+&lt;td>The previous task object (this may be used as a post task action as well&amp;hellip;)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="onend">onEnd&lt;/h2>
+&lt;p>&lt;code>onEnd&lt;/code> is a function to be called as soon as the task sequence ends.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;onEnd&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span>&lt;span style="color:#000;font-weight:bold">(){&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// Do something: for instance, redirect to &amp;#39;my/url.js&amp;#39;
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">location&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">href&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;my/url.js&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Asset&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>currentTask&lt;/td>
+&lt;td>The current (last) task object&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="title">title&lt;/h2>
+&lt;p>&lt;code>title&lt;/code> is a string to be used as the page title (the name displayed on the tag).&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;title&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;My Manager Title&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="preloadimages">preloadImages&lt;/h2>
+&lt;p>Accepts an array of image urls to preload. The manager will &lt;strong>not&lt;/strong> wait until all images are loaded, but it will make images displayed later in the manager sequence be displayed significantly faster.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;preloadImages&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;my/image/url/imageName.png&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;my/other/url/otherImage.jpg&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="skip">skip&lt;/h2>
+&lt;p>Whether to activate the skip and refresh option. If activated, clicking &lt;code>ctrl r&lt;/code> reloads the current task (this feature may not be supported on older browsers), clicking &lt;code>escape&lt;/code> and then the right or left arrows skips to the next or previous tasks.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;skip&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="skin">skin&lt;/h2>
+&lt;p>Add a skin to your project. Skins change the way that your tasks look. Currently the only skins that we support are &lt;code>simple&lt;/code> and &lt;code>demo&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;skin&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;demo&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="rtl">rtl&lt;/h2>
+&lt;p>Setting rtl to &lt;code>true&lt;/code> will change the layout of the player to right to left in order to ocomodate right to left languages such as arabic and hebrew.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;rtl&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="logger">logger&lt;/h2>
+&lt;p>The logger allows control of logging activities.
+See full details in the &lt;a href="/docs/core/logger">core section&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;logger&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;debug&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="debug">DEBUG&lt;/h2>
+&lt;p>The &lt;code>DEBUG&lt;/code> settings allows you to control the debug messages produced by the player.
+In the development environment (when &lt;code>window.DEBUG&lt;/code> is set to &lt;code>true&lt;/code>) you have access to a development console.
+The console will hold messages describing the process of your studies.&lt;/p>
+&lt;p>At the top of the console window you will see a dropdown that allows you to select the level of logging you would like to see.
+For example, you may want to be alerted only of errors, or of every possible activity of the player.
+In addition you have a button that allows you to close and open the console.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>hideConsole&lt;/td>
+&lt;td>(true or false) hide console activity&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;DEBUG&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000">hideConsole&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Project Implicit Build</title><link>/docs/manager/api/pibuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/manager/api/pibuild/</guid><description>
+&lt;h4 id="mturk">mTurk&lt;/h4>
+&lt;p>The project implicit build has a feature for integration with mTurk.
+All you have to do is add The following code to your project, replacing the &lt;code>&amp;lt;id#&amp;gt;&lt;/code> tags with the appropriate data of course.
+The player will redirect the users back to mTurk immediately after the final task in the manager (as defined by the &lt;code>last&lt;/code> property).
+Setting the &lt;code>isProduction&lt;/code> property allows you to switch between the development and production urls for mTurk.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addGlobal&lt;/span>&lt;span style="color:#000;font-weight:bold">({&lt;/span>
+&lt;span style="color:#000">$mTurk&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">assignmentId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;&amp;lt;id#&amp;gt;&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">hitId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;&amp;lt;id#&amp;gt;&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">workerId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;&amp;lt;id#&amp;gt;&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">isProduction&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
