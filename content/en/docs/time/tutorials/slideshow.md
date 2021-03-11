@@ -28,7 +28,7 @@ This is the trial that we already know from the [*Hello world*](../hello) tutori
 
 We will now duplicate this trial a few times for a simple slide show.
 You should try it out. Try adding another trial. Try changing the media or style of the stimuli.
-Use the [docs]({{< relref "docs/time/api" >}})!
+Use the [docs](/docs/time/api)!
 
 {{< playground filename=slideshow1.js >}}
 define(['timeAPI'], function(APIconstructor) {
@@ -83,7 +83,7 @@ Inheritance allows you to create a prototype of a trial (or stimulus or media ob
 To understand how this works, we need to first learn a bit about sets.
 
 ### Sets
-A [set]({{< relref "docs/sequencer/inheritance#sets" >}}) is a list of one or more miTime objects (trials, stimuli or media objects).
+A [set](/docs/sequencer/inheritance#sets) is a list of one or more miTime objects (trials, stimuli or media objects).
 After defining a set of objects (e.g., trials), we can re-use those objects. 
 Therefore, if we want to create a basic trial and re-use it a few times, we create a one-trial set, and then re-use it in a sequence. 
 We will focus here on trial sets, but everything that applies to the trials sets also applies to stimuli sets or media sets as well.
@@ -109,7 +109,7 @@ We re-use trials (and media and stimulus objects) using inheritance.
 #### **Inheritance**
 Inheritance allows us to re-use trials: new trials can be created by inheriting a trial from a set. If there is only one trial in the set, we simply inherit the whole set.
 
-Trials (and stimuli and media too) have a special property called [inherit]({{< relref "docs/sequencer/inheritance#syntax" >}}) that allows them to specify a specific set to inherit from. 
+Trials (and stimuli and media too) have a special property called [inherit](/docs/sequencer/inheritance#syntax) that allows them to specify a specific set to inherit from. 
 This allows trials to be significantly shorter. 
 The following code activates our slide three times:
 

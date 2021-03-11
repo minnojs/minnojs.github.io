@@ -12,7 +12,7 @@ You can use it to either send data that has been saved in the Global object or d
 This is a good way to keep track of conditions within your tasks.
 
 ### Save from the Global object
-In your code, you can save data to the [Global object]({{< relref "docs/sequencer/variables/global" >}}). For instance, you might randomly select a condition and save the condition to the Global object.
+In your code, you can save data to the [Global object](/docs/sequencer/variables/global). For instance, you might randomly select a condition and save the condition to the Global object.
 
 For example, the following code randomly assigns participants to the experimental or the control group:
 ```javascript
@@ -29,7 +29,7 @@ In your code, you can then use that condition to provide your participants diffe
 ```
 This code saves the variable 'condition' and its content to the server, under the task name 'cond'.
 
-In each task, you can use the [`current` object]({{< relref "docs/sequencer/variables/current" >}}) to save variables. 
+In each task, you can use the [`current` object](/docs/sequencer/variables/current) to save variables. 
 You can access the current variable from the global, using the task's name. 
 For instance, if your study has a task named `iat`, and in that task you saved a variable called `randomization` you will have a variable that can be accessed with `global.iat.randomization`. You will use that to send the `randomization` variable to the server:
 
@@ -67,7 +67,7 @@ You can also define an object to be sent:
     }
 }
 ```
-One example for the usefulness of this feature is when the randomization in your task is done using a mixer (e.g., a [choose mixer]({{< relref "docs/sequencer/mixer#choose" >}})). 
+One example for the usefulness of this feature is when the randomization in your task is done using a mixer (e.g., a [choose mixer](/docs/sequencer/mixer#choose)). 
 Consider this code:
 
 ```javascript
@@ -106,7 +106,7 @@ Consider this code:
 }
 ```
 
-Note that you can use [templates]({{< relref "docs/sequencer/templates" >}}) as strings within the data object.
+Note that you can use [templates](/docs/sequencer/templates) as strings within the data object.
 This way you can pull information from different parts of `global` to the same place.
 
 

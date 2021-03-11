@@ -3,7 +3,7 @@ title: Time
 description: Almost any time-sensitive task you can imagine
 ---
 
-The time task activates a [minno-time]({{< relref "docs/time" >}}) task.
+The time task activates a [minno-time](/docs/time) task.
 These are tasks focused on time-sensitive activities.
 You will probably load the task from a file (use `scriptUrl`).
 Note that it is almost always imperative to use the `name` property, as it is used to refer to
