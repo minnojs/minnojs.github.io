@@ -3,7 +3,7 @@ title: Set Value
 description: Manipulate environmental variables
 ---
 
-The `setValue` task allows setting a value to [environmental variables](/docs/sequencer/variables) (e.g., variables stored in the global object). 
+The `setValue` task allows setting a value to [environmental variables]({{< relref "docs/sequencer/variables" >}}) (e.g., variables stored in the global object). 
 It is useful for implementing experiment conditions.
 
 
@@ -16,7 +16,7 @@ value               | A raw value to be set into `variableName`.
 valueFromVariable   | The name of the variable from which the value is copied. It is within the global object. For accessing variables nested within global, use the following format: `iat.feedback` would assign the value to the variable `feedback` under `global.iat`. 
 fn                  | A function, that should be called, and the result set int `variableName`.
 post                | (true/false) should we log this value.
-settings            | Optional settings that overide the logger settings [as defined](/docs/manager/api/settings#logger) in the manager.
+settings            | Optional settings that overide the logger settings [as defined]({{< relref "docs/manager/api/settings#logger" >}}) in the manager.
 path                | Deprecated verson of `variableName`.
 
 Only one of `value`, `valueFromVariable` and `fn` can be used.

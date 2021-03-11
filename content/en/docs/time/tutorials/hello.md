@@ -28,7 +28,7 @@ The wrapper creates the `API` object for you. The `API` object is the instrument
 
 ### The task structure
 Each task is composed of one or more trials, that are activated sequentially.
-We set trials into the player using a function called [`API.addSequence`](/docs/core/api#add-sequence) that accepts an array of trials as its argument. 
+We set trials into the player using a function called [`API.addSequence`]({{< relref "docs/core/api#add-sequence" >}}) that accepts an array of trials as its argument. 
 
 ```javascript
 define(['timeAPI'], function(APIconstructor) {

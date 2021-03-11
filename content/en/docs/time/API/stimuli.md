@@ -23,7 +23,7 @@ Stimuli are responsible for *how* we present the media.
 Each trial may have multiple stimuli, and they are refered to by `handle`.
 This is how refer to this specific stimulus inside the player (i.e. if we want to hide or show it). 
 If more than one stimulus (per trial) has the same handle, all actions targeted at that handle will affect all stimuli.
-You can set a stimulus handle either by setting the `handle` property, or by setting `handle` into the [data object](/docs/sequencer/variables/local).
+You can set a stimulus handle either by setting the `handle` property, or by setting `handle` into the [data object]({{< relref "docs/sequencer/variables/local" >}}).
 Alternatively, if a stimulus is inherited from a set, the handle is defined by default as the set that the stimulus was inherited from.
 
 ## size

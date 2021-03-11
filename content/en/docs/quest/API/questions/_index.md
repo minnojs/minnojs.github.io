@@ -20,7 +20,7 @@ helpText		| (text) The question help text. (Some questions have default help tex
 lognow 			| (true or false) Whether to log this questions when the page is submitted. This option is useful when you know that the question will not be accessed any more. It allows you to use the `pulse` option from the [logger](../settings#logger) to send questions as they are being answered instead of sending only at the end of the task. (default: false)
 errorMsg		| (Object: {}) This object has a property for each validation type. Setting the appropriate type changes the validation message. For instance setting the `required` property will change the validation message for instances where no response was given.
 
-You may want to debug questions by setting the [debug level in the manager](/docs/manager/api/settings#debug) to `verbose`.
+You may want to debug questions by setting the [debug level in the manager]({{< relref "docs/manager/api/settings#debug" >}}) to `verbose`.
 You will then be warned in the console if a question name is reused 
 (note: sometimes a question is supposed to be reused, if this warning pops up just make sure the use case is correct).
 
