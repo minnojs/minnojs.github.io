@@ -37,7 +37,7 @@ It is also possible to use MinnoJS to create studies that run on Qualtrics or Pa
 AWS, DigitalOcean, Qualtrics, and Pavlovia are not free services. 
 But note that AWS will probably not charge you for the first year, and DigitalOcean and Pavlovia are relatively cheap, and many universities own a license to use Qualtrics.
 
-[Read more about how to run MinnoJS.]({{< relref "docs/start" >}})
+[Read more about how to run MinnoJS.]({{< relref "/docs/start" >}})
 
 ## Project Implicit
 

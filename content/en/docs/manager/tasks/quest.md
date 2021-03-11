@@ -3,7 +3,7 @@ title: Quest
 description: A full fledged questionnaire
 ---
 
-The quest task activates a [minno-quest]({{< relref "docs/quest" >}}) task.
+The quest task activates a [minno-quest]({{< relref "/docs/quest" >}}) task.
 These are tasks allow you to create complex questionnaires for your experiments.
 You will probably load the task from a file (use `scriptUrl`).
 Note that it is almost always imperative to use the `name` property, as it is used to refer to

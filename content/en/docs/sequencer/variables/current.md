@@ -17,7 +17,7 @@ API.addCurrent({
 
 While a task is running, its task object is available as `current`.
 Even when the task is not active it is available from within the [`global`](../global) object, as `global.<taskName>`, 
-where `<taskName>` stands for the [task name]({{< relref "docs/manager/api/tasks.md" >}}) as defined within the task manager.
+where `<taskName>` stands for the [task name]({{< relref "/docs/manager/api/tasks.md" >}}) as defined within the task manager.
 
 For your convenience, here is a table describing some of the data available within the different task objects.
 

@@ -100,7 +100,7 @@ var sequence = [
 ]
 ```
 
-The sequence also supports randomization and branching. Read about it [here]({{< relref "docs/sequencer/mixer" >}}).
+The sequence also supports randomization and branching. Read about it [here]({{< relref "/docs/sequencer/mixer" >}}).
 
 Now that we've created the sequence, let's put it into the player. The first and last two lines are the same for all scripts (they have to do with the way Javascript works), you can simply ignore them. The `API` object assists you in putting your script together, you will [eventually](API.html#API) learn more about its functionality, but for now we only need to know that the `addSequence` function is responsible for adding pages into the sequence. You may call it as many times as you like.
 
