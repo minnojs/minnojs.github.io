@@ -30,6 +30,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
+      - run: echo $PWD
       - run: hugo --minify
 
         #- name: Build site
