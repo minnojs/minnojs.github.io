@@ -50,10 +50,8 @@ API.addSequence([
 ```
 
 ## Setting up Pavlovia
-In order to run studies on Pavlovia, you need to create a 
-
 Once you have [signed-up](https://pavlovia.org/docs/designers/signup) with Pavlovia and [signed-in](https://pavlovia.org/docs/designers/signin) onto Pavlovia's GitLab,
-you can create a new project by clicking on the [New Project] button on the [projects page](https://gitlab.pavlovia.org/dashboard/projects):.
+you can create a new project by clicking on the [New Project] button on the [projects page](https://gitlab.pavlovia.org/dashboard/projects).
 A variety of options are available, such as whether the project is public or private.
 
 You then need to clone the newly created, empty project onto your local machine by following the command line instructions given on the project page 
@@ -71,3 +69,5 @@ Make sure that Pavlovia is set to save data as CSV and **not** to the database.
 All experiment's data are collected in the project's repository on GitLab. 
 You can download them from the experiment's page in your [dashboard](https://pavlovia.org/dashboard) by clicking on [Download Results], 
 or you can pull them from the server onto your local machine using git.
+
+As always, if you have any questions, you can post them on Minno's [Google group](https://groups.google.com/g/minnojs).
