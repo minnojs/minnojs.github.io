@@ -26,9 +26,8 @@ you can use a custom task &lt;code>pavlovia.finish&lt;/code>:&lt;/p>
 &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;debriefing&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;span style="color:#000;font-weight:bold">]);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="setting-up-pavlovia">Setting up Pavlovia&lt;/h2>
-&lt;p>In order to run studies on Pavlovia, you need to create a&lt;/p>
 &lt;p>Once you have &lt;a href="https://pavlovia.org/docs/designers/signup">signed-up&lt;/a> with Pavlovia and &lt;a href="https://pavlovia.org/docs/designers/signin">signed-in&lt;/a> onto Pavlovia&amp;rsquo;s GitLab,
-you can create a new project by clicking on the [New Project] button on the &lt;a href="https://gitlab.pavlovia.org/dashboard/projects">projects page&lt;/a>:.
+you can create a new project by clicking on the [New Project] button on the &lt;a href="https://gitlab.pavlovia.org/dashboard/projects">projects page&lt;/a>.
 A variety of options are available, such as whether the project is public or private.&lt;/p>
 &lt;p>You then need to clone the newly created, empty project onto your local machine by following the command line instructions given on the project page
 under the header &lt;em>Create a new repository&lt;/em>.&lt;/p>
@@ -41,7 +40,8 @@ Make sure that Pavlovia is set to save data as CSV and &lt;strong>not&lt;/strong
 &lt;h2 id="fetching-experiment-data">Fetching experiment data&lt;/h2>
 &lt;p>All experiment&amp;rsquo;s data are collected in the project&amp;rsquo;s repository on GitLab.
 You can download them from the experiment&amp;rsquo;s page in your &lt;a href="https://pavlovia.org/dashboard">dashboard&lt;/a> by clicking on [Download Results],
-or you can pull them from the server onto your local machine using git.&lt;/p></description></item><item><title>Blog: Running the Evaluative Priming Task on Qulatrics</title><link>/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/</link><pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate><guid>/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/</guid><description>
+or you can pull them from the server onto your local machine using git.&lt;/p>
+&lt;p>As always, if you have any questions, you can post them on Minno&amp;rsquo;s &lt;a href="https://groups.google.com/g/minnojs">Google group&lt;/a>.&lt;/p></description></item><item><title>Blog: Running the Evaluative Priming Task on Qulatrics</title><link>/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/</link><pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate><guid>/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/</guid><description>
 &lt;p>In this post, I will explain how to run the Evaluative Priming Task in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an Evaluative Priming Task in Qualtrics. So, it is likely that you know what the Evaluative Priming Task is (pages 9-10 &lt;a href="https://users.ugent.be/~jdhouwer/chapterbertram.pdf">here&lt;/a>) and what &lt;a href="https://www.qualtrics.com/uk/customer-experience/surveys/">Qualtrics&lt;/a> is. &lt;a href="https://minnojs.github.io/">Minno.js&lt;/a> is the software developed by &lt;a href="http://projectimplicit.net/">Project Implicit&lt;/a> to run web studies, including reaction-time tasks.&lt;/p>
 &lt;p>In previous posts, Elad explained &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">how to run a Minno script from Qualtrics&lt;/a>, and &lt;a href="https://www.tau.ac.il/~baranan/index.html">Yoav&lt;/a> explained &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics-iat/">how to run Project Implicit’s IAT&lt;/a> from Qualtrics. This post is very similar to Yoav&amp;rsquo;s but it&amp;rsquo;s about the Evaluative Priming Task.&lt;/p>
 &lt;h3 id="project-implicits-minnojs-evaluative-priming-task-extension">Project Implicit&amp;rsquo;s MinnoJS Evaluative Priming Task extension&lt;/h3>
