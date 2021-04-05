@@ -862,6 +862,7 @@ If you’re using words rather than photos, you need to update the &lt;a href="h
 &lt;h4>Data image&lt;/h4>
 &lt;/figcaption>
 &lt;/figure>
+&lt;p>&lt;strong>Please note:&lt;/strong> &lt;em>The data in the csv will include a D score. This D score is sometimes used in Project Implicit&amp;rsquo;s website, for internal reasons. However, it is not recommended to use it as the score in your own research. It does not use the currently recommended algorithm&lt;/em>&lt;/p>
 &lt;h3 id="using-project-implicits-iats">Using Project Implicit&amp;rsquo;s IATs&lt;/h3>
 &lt;p>We posted &lt;a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/qualtrics/">online&lt;/a>, most of Project Implicit&amp;rsquo;s IATs.&lt;/p>
 &lt;p>You can duplicate them to your own server, or just call them directly from Qualtrics. That is, in the code you enter in Qualtrics, when you define what task to launch using MinnoJS, use the URL to the demo task that you want to use. For instance, for our race IAT:&lt;/p>
