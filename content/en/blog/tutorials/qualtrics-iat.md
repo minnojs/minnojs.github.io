@@ -159,6 +159,8 @@ The steps in an animated gif:
 
 {{< figure src="/blog/tutorials/images/processiat.gif" title="Data image" >}}
 
+**Please note:** *The data in the csv will include a D score. This D score is sometimes used in Project Implicit's website, for internal reasons. However, it is not recommended to use it as the score in your own research. It does not use the currently recommended algorithm*
+
 ### Using Project Implicit's IATs
 
 We posted [online](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/qualtrics/), most of Project Implicit's IATs.
