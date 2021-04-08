@@ -191,6 +191,10 @@ For instance, this is how you would access &lt;code>$rootScope&lt;/code>:&lt;/p>
 &lt;span style="color:#000;font-weight:bold">});&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>In case you need to fine tune the styles even further you can add css rules into the raw HTML. Support for dynamically adding CSS is planned but not yet supported.&lt;/p>
 &lt;h2 id="injectstyle">injectStyle&lt;/h2>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Deprecated&lt;/h4>
+This settings has been deprecated, please use the &lt;a href="/docs/manager/tasks/injectstyle/">injectStyle task&lt;/a> instead.
+&lt;/div>
 &lt;p>Injects a string of css into the page.&lt;/p>
 &lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;injectStyle&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;[pi-quest] label {font-size:1.2em; font-weight:normal;}&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="onpretask">onPreTask&lt;/h2>
