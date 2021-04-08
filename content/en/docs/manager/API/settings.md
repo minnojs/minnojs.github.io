@@ -39,6 +39,10 @@ API.addSettings('canvas', {
 In case you need to fine tune the styles even further you can add css rules into the raw HTML. Support for dynamically adding CSS is planned but not yet supported.
 
 ## injectStyle
+{{% alert title="Deprecated" color="warning" %}}
+This settings has been deprecated, please use the [injectStyle task](/docs/manager/tasks/injectstyle/) instead.
+{{% /alert %}}
+
 Injects a string of css into the page.
 
 ```javascript
