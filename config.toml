@@ -45,7 +45,7 @@ pygmentsStyle = "tango"
 
 [menu]
   [[menu.main]]
-    name = "Comunity"
+    name = "Forum"
     url = "https://groups.google.com/g/minnojs"
     weight = 110
 
