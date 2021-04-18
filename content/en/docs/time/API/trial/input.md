@@ -10,37 +10,60 @@ Each input object must include both a `handle` and an `on` property.
 `handle`: the way we refer to this input element inside the player (e.g., 'rightClick')
 `on`: what triggers this input element. for now we have several types of input:
 
-**keypressed**: Takes a `key` property that may either be a key code, a one letter string, or an array of keys.
+## Input types
+
+### keypressed
+
+Takes a `key` property that may either be a key code, a one letter string, or an array of keys.
 * `{handle: 'enter',on: 'keypressed',key:'a'}`
 * `{handle: 'enter',on: 'keypressed',key:13}`
 * `{handle: 'enter',on: 'keypressed',key:[13,'a']}`
 
-**keyup**: Takes a `key` property that may either be a key code, a one letter string, or an array of keys.
+### keyup
+
+Takes a `key` property that may either be a key code, a one letter string, or an array of keys.
 * `{handle: 'enter',on: 'keypressed',key:'a'}`
 * `{handle: 'enter',on: 'keypressed',key:13}`
 * `{handle: 'enter',on: 'keypressed',key:[13,'a']}`
 
-**click**: Takes either a stimulus handle (`stimHandle`) or an html element (`element`). The input is activated when the user clicks the stimulus or the html element. In case an element is defined it is presented as soon as the input is activated.
-* `{handle:'right',on:'click',element:$('<div>',css:{})}`
+### click
+
+Takes either a stimulus handle (`stimHandle`) or an html element (`element`).
+The input is activated when the user clicks the stimulus or the html element.
+In case an element is defined it is presented as soon as the input is activated.
+
 * `{handle:'right',on:'click',stimHandle:'myStimHandle'}`
+* `{handle:'right',on:'click',element:htmlElement}`
 
-**mouseup**: Takes a stimulus handle (`stimHandle`). Triggers each time the mouse key is released over the space of the target object.
+### mouseup
+
+Takes a stimulus handle (`stimHandle`). Triggers each time the mouse key is released over the space of the target object.
 * `{handle:'right',on:'mouseup',stimHandle:'myStimHandle'}`
 
-**mousedown**: Takes a stimulus handle (`stimHandle`). Triggers each time the mouse key is pressed over the space of the target object.
+### mousedown
+
+Takes a stimulus handle (`stimHandle`). Triggers each time the mouse key is pressed over the space of the target object.
 * `{handle:'right',on:'mousedown',stimHandle:'myStimHandle'}`
 
-**mouseenter**: Takes a stimulus handle (`stimHandle`). Triggers each time the mouse enters the space of the target object. (note that this behaviour is meaningless in touch devices)
+### mouseenter
+
+Takes a stimulus handle (`stimHandle`). Triggers each time the mouse enters the space of the target object. (note that this behaviour is meaningless in touch devices)
 * `{handle:'right',on:'mouseenter',stimHandle:'myStimHandle'}`
 
-**mouseleave**: Takes a stimulus handle (`stimHandle`). Triggers each time the mouse leaves the space of the target object. (note that this behaviour is meaningless in touch devices)
+### mouseleave
+
+Takes a stimulus handle (`stimHandle`). Triggers each time the mouse leaves the space of the target object. (note that this behaviour is meaningless in touch devices)
 * `{handle:'right',on:'mouseleave',stimHandle:'myStimHandle'}`
 
-**timeout**: Takes a `duration` property and fires after the duration passes
+### timeout
+
+Takes a `duration` property and fires after the duration passes
 * `{handle:'time',on:'timeout',duration:300}`
 * `{handle:'time',on:'timeout',duration:[300,600,900]]}`            pick a random value from an array
 * `{handle:'time',on:'timeout',duration:{min:300, max: 900}}}`      randomly pick from within a range
 * `{handle:'time',on:'timeout',duration:function(){return 630}}`    use a custom function to pick duration
+
+## Shortcuts
 
 In addition, we have several shortcuts for commonly used inputs:
 * `{handle: 'enter',on: 'enter'}`
@@ -71,10 +94,3 @@ Protip: In addition to the preset input types you can create custom input:
         }
     }
 ```
-
-The input objects support an additional meta property: `touch`. If touch is undefined then this input will always be used.
-If it is set to `true` then the input will be used only on touch devices.
-If it is set to `false` then the input will be used only on non touch devices.
-* `{handle:'end',on:'bottomTouch',touch:true}`
-* `{handle: 'end',on: 'enter', touch:false}`
-

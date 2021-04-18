@@ -4,8 +4,13 @@ description: input.js
 ---
 
 {{< playground filename=input.js >}}
+define(['timeAPI'], function(APIconstructor) {
 
 	var API = new APIconstructor();
+
+    // create html element for use in click example
+	var htmlElement = document.createElement('div')
+    htmlElement.innerHTML = 'Click Me';
 
 	// ### input
 	// The trial input attribute lists the input types that the player is familiar with.
@@ -65,9 +70,9 @@ description: input.js
 				// **stimHandle** is used to indicate stimuli with the appropriate Handle (in this case "myStimulus").
 				{handle:'end',on:'click',stimHandle:'myStimulus'},
 				// **element** allows you to insert an html (or even jquery) element for this interaction
-				{handle:'end',on:'click',element:'<div>bump</div>'}
+				{handle:'end',on:'click',element:htmlElement}
 			],
-			layout: [{data:{handle:'myStimulus'},media :{word:'Click me too!!'}}],
+			layout: [{data:{handle:'myStimulus'},media :{word:'Click me too!!'}, location:{bottom:30}}],
 			interactions: [
 				{
 					// This is where we tell the player to respond to the input.
