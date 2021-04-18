@@ -276,7 +276,11 @@ win.activate(cm.getValue());
 &lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
 &lt;/p>
 &lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
 var API = new APIconstructor();
+// create html element for use in click example
+var htmlElement = document.createElement(&amp;#39;div&amp;#39;)
+htmlElement.innerHTML = &amp;#39;Click Me&amp;#39;;
 // ### input
 // The trial input attribute lists the input types that the player is familiar with.
 // Each input element must include both a handle and an on propery. &amp;lt;/br&amp;gt;
@@ -333,9 +337,9 @@ input: [
 // **stimHandle** is used to indicate stimuli with the appropriate Handle (in this case &amp;#34;myStimulus&amp;#34;).
 {handle:&amp;#39;end&amp;#39;,on:&amp;#39;click&amp;#39;,stimHandle:&amp;#39;myStimulus&amp;#39;},
 // **element** allows you to insert an html (or even jquery) element for this interaction
-{handle:&amp;#39;end&amp;#39;,on:&amp;#39;click&amp;#39;,element:&amp;#39;&amp;lt;div&amp;gt;bump&amp;lt;/div&amp;gt;&amp;#39;}
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;click&amp;#39;,element:htmlElement}
 ],
-layout: [{data:{handle:&amp;#39;myStimulus&amp;#39;},media :{word:&amp;#39;Click me too!!&amp;#39;}}],
+layout: [{data:{handle:&amp;#39;myStimulus&amp;#39;},media :{word:&amp;#39;Click me too!!&amp;#39;}, location:{bottom:30}}],
 interactions: [
 {
 // This is where we tell the player to respond to the input.

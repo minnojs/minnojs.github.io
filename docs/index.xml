@@ -1081,46 +1081,58 @@ In addition you have a button that allows you to close and open the console.&lt;
 Each input object must include both a &lt;code>handle&lt;/code> and an &lt;code>on&lt;/code> property.&lt;/p>
 &lt;p>&lt;code>handle&lt;/code>: the way we refer to this input element inside the player (e.g., &amp;lsquo;rightClick&amp;rsquo;)
 &lt;code>on&lt;/code>: what triggers this input element. for now we have several types of input:&lt;/p>
-&lt;p>&lt;strong>keypressed&lt;/strong>: Takes a &lt;code>key&lt;/code> property that may either be a key code, a one letter string, or an array of keys.&lt;/p>
+&lt;h2 id="input-types">Input types&lt;/h2>
+&lt;h3 id="keypressed">keypressed&lt;/h3>
+&lt;p>Takes a &lt;code>key&lt;/code> property that may either be a key code, a one letter string, or an array of keys.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle: 'enter',on: 'keypressed',key:'a'}&lt;/code>&lt;/li>
 &lt;li>&lt;code>{handle: 'enter',on: 'keypressed',key:13}&lt;/code>&lt;/li>
 &lt;li>&lt;code>{handle: 'enter',on: 'keypressed',key:[13,'a']}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>keyup&lt;/strong>: Takes a &lt;code>key&lt;/code> property that may either be a key code, a one letter string, or an array of keys.&lt;/p>
+&lt;h3 id="keyup">keyup&lt;/h3>
+&lt;p>Takes a &lt;code>key&lt;/code> property that may either be a key code, a one letter string, or an array of keys.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle: 'enter',on: 'keypressed',key:'a'}&lt;/code>&lt;/li>
 &lt;li>&lt;code>{handle: 'enter',on: 'keypressed',key:13}&lt;/code>&lt;/li>
 &lt;li>&lt;code>{handle: 'enter',on: 'keypressed',key:[13,'a']}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>click&lt;/strong>: Takes either a stimulus handle (&lt;code>stimHandle&lt;/code>) or an html element (&lt;code>element&lt;/code>). The input is activated when the user clicks the stimulus or the html element. In case an element is defined it is presented as soon as the input is activated.&lt;/p>
+&lt;h3 id="click">click&lt;/h3>
+&lt;p>Takes either a stimulus handle (&lt;code>stimHandle&lt;/code>) or an html element (&lt;code>element&lt;/code>).
+The input is activated when the user clicks the stimulus or the html element.
+In case an element is defined it is presented as soon as the input is activated.&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>{handle:'right',on:'click',element:$('&amp;lt;div&amp;gt;',css:{})}&lt;/code>&lt;/li>
 &lt;li>&lt;code>{handle:'right',on:'click',stimHandle:'myStimHandle'}&lt;/code>&lt;/li>
+&lt;li>&lt;code>{handle:'right',on:'click',element:htmlElement}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>mouseup&lt;/strong>: Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse key is released over the space of the target object.&lt;/p>
+&lt;h3 id="mouseup">mouseup&lt;/h3>
+&lt;p>Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse key is released over the space of the target object.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle:'right',on:'mouseup',stimHandle:'myStimHandle'}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>mousedown&lt;/strong>: Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse key is pressed over the space of the target object.&lt;/p>
+&lt;h3 id="mousedown">mousedown&lt;/h3>
+&lt;p>Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse key is pressed over the space of the target object.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle:'right',on:'mousedown',stimHandle:'myStimHandle'}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>mouseenter&lt;/strong>: Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse enters the space of the target object. (note that this behaviour is meaningless in touch devices)&lt;/p>
+&lt;h3 id="mouseenter">mouseenter&lt;/h3>
+&lt;p>Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse enters the space of the target object. (note that this behaviour is meaningless in touch devices)&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle:'right',on:'mouseenter',stimHandle:'myStimHandle'}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>mouseleave&lt;/strong>: Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse leaves the space of the target object. (note that this behaviour is meaningless in touch devices)&lt;/p>
+&lt;h3 id="mouseleave">mouseleave&lt;/h3>
+&lt;p>Takes a stimulus handle (&lt;code>stimHandle&lt;/code>). Triggers each time the mouse leaves the space of the target object. (note that this behaviour is meaningless in touch devices)&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle:'right',on:'mouseleave',stimHandle:'myStimHandle'}&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>timeout&lt;/strong>: Takes a &lt;code>duration&lt;/code> property and fires after the duration passes&lt;/p>
+&lt;h3 id="timeout">timeout&lt;/h3>
+&lt;p>Takes a &lt;code>duration&lt;/code> property and fires after the duration passes&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle:'time',on:'timeout',duration:300}&lt;/code>&lt;/li>
 &lt;li>&lt;code>{handle:'time',on:'timeout',duration:[300,600,900]]}&lt;/code> pick a random value from an array&lt;/li>
 &lt;li>&lt;code>{handle:'time',on:'timeout',duration:{min:300, max: 900}}}&lt;/code> randomly pick from within a range&lt;/li>
 &lt;li>&lt;code>{handle:'time',on:'timeout',duration:function(){return 630}}&lt;/code> use a custom function to pick duration&lt;/li>
 &lt;/ul>
+&lt;h2 id="shortcuts">Shortcuts&lt;/h2>
 &lt;p>In addition, we have several shortcuts for commonly used inputs:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>{handle: 'enter',on: 'enter'}&lt;/code>&lt;/li>
@@ -1145,13 +1157,7 @@ Each input object must include both a &lt;code>handle&lt;/code> and an &lt;code>
 &lt;span style="color:#8f5902;font-style:italic">// remove your listener (if you need to keep state you can encapsulate the whole input object in a module)
 &lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>The input objects support an additional meta property: &lt;code>touch&lt;/code>. If touch is undefined then this input will always be used.
-If it is set to &lt;code>true&lt;/code> then the input will be used only on touch devices.
-If it is set to &lt;code>false&lt;/code> then the input will be used only on non touch devices.&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>{handle:'end',on:'bottomTouch',touch:true}&lt;/code>&lt;/li>
-&lt;li>&lt;code>{handle: 'end',on: 'enter', touch:false}&lt;/code>&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Introduction</title><link>/docs/quest/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/introduction/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Introduction</title><link>/docs/quest/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/introduction/</guid><description>
 &lt;ul>
 &lt;li>&lt;a href="#structure">Structure&lt;/a>&lt;/li>
 &lt;li>&lt;a href="#pages-questions">Pages &amp;amp; Questions&lt;/a>&lt;/li>
