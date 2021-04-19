@@ -1,4 +1,4 @@
-baseURL=""
+baseURL="/"
 
 title = "Minno Suite"
 metaDataFormat = "yaml"
