@@ -31,7 +31,7 @@ jobs:
 
       - run: npm ci
       - run: ls
-      - run: hugo --minify -t docsy
+      - run: hugo -t docsy
 
         #- name: Build site
         # remove --minify tag if you do not need it
