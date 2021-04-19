@@ -1,608 +1,483 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Minno Suite – Tutorials</title>
-    <link>/docs/time/tutorials/</link>
-    <description>Recent content in Tutorials on Minno Suite</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    
-	  <atom:link href="/docs/time/tutorials/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Hello world</title>
-      <link>/docs/time/tutorials/hello/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/time/tutorials/hello/</guid>
-      <description>
-        
-        
-        &lt;p&gt;We will create a simple task that says &amp;ldquo;Hello world&amp;rdquo;. As we go, we will comment on several of the player&amp;rsquo;s features and explain some of the ways you can customize your task.&lt;/p&gt;
-&lt;p&gt;You can follow along and play around with the code right &lt;a href=&#34;#play-ground&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;the-wrapper&#34;&gt;The wrapper&lt;/h3&gt;
-&lt;p&gt;miTime&amp;rsquo;s scripts are usually a single JavaScript file. The script is wrapped within a define function (You don&amp;rsquo;t have to understand what it does, but if you are interested look up &lt;a href=&#34;http://requirejs.org/&#34;&gt;requirejs&lt;/a&gt;).&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/* The script wrapper */&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;define&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;([&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;timeAPI&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;function&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;APIconstructor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;APIconstructor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;();&lt;/span&gt;
-
-	&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/*
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;		Your script comes here...
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;	*/&lt;/span&gt;
-
-	&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;script&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;});&lt;/span&gt;
-&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/* don&amp;#39;t forget to close the wrapper */&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The wrapper creates the &lt;code&gt;API&lt;/code&gt; object for you. The &lt;code&gt;API&lt;/code&gt; object is the instrument that we will use to create and run tasks. The whole task is written by creating a bunch of objects and arrays. The API object has functions that accept those objects and arrays and know how to create a task from them.&lt;/p&gt;
-&lt;h3 id=&#34;the-task-structure&#34;&gt;The task structure&lt;/h3&gt;
-&lt;p&gt;Each task is composed of one or more trials, that are activated sequentially.
-We set trials into the player using a function called &lt;a href=&#34;/docs/core/api/#add-sequence&#34;&gt;&lt;code&gt;API.addSequence&lt;/code&gt;&lt;/a&gt; that accepts an array of trials as its argument.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;define&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;([&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;timeAPI&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;function&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;APIconstructor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-
-	&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;APIconstructor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;();&lt;/span&gt;
-
-	&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addSequence&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;([&lt;/span&gt;
-		&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/*
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;			This is where you input all your trials.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;			We will see below how to write trials.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;		*/&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]);&lt;/span&gt;
-
-	&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;script&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the following section we will see how to populate the trial sequence.
-Later, we will see that &lt;code&gt;API&lt;/code&gt; provides many additional functions that allow us to further customize the player.&lt;/p&gt;
-&lt;h3 id=&#34;a-simple-trial&#34;&gt;A simple trial&lt;/h3&gt;
-&lt;p&gt;Let&amp;rsquo;s populate the sequence with a simple trial.
-The following trial displays the words &amp;ldquo;Hello world&amp;rdquo; at the center of the screen, and ends when you press &lt;code&gt;space&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-		&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// What input to accept from the participant (user)
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-		&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// What to show throughout the trial.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-			&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Hello world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-			&lt;span style=&#34;color:#000&#34;&gt;css&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;fontSize&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;2em&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;#D7685A&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;interactions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-		&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// What to do when different events occur.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-			&lt;span style=&#34;color:#000&#34;&gt;conditions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-				&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inputEquals&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-			&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
-			&lt;span style=&#34;color:#000&#34;&gt;actions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-				&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;endTrial&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-			&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
-		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;What we see above is a definition of a trial. A trial is a JavaScript object. Inside that object, there are three other objects: &lt;code&gt;input&lt;/code&gt;, &lt;code&gt;layout&lt;/code&gt; and &lt;code&gt;interaction&lt;/code&gt;. Each of these objects defines a different aspect in the trial. Let&amp;rsquo;s learn about these three objects, one by one.&lt;/p&gt;
-&lt;h3 id=&#34;input&#34;&gt;Input&lt;/h3&gt;
-&lt;p&gt;The &lt;code&gt;input&lt;/code&gt; object is an array of objects that define the input we expect the participant to use. Each object in the&lt;code&gt;input&lt;/code&gt; array defines one input element (full documentation &lt;a href=&#34;./API.html#input&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//Open the array of input objects.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//An input object that defines what to do when the user hits space.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt; 
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//Close the array
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Each input object must include the properties &lt;code&gt;handle&lt;/code&gt; and &lt;code&gt;on&lt;/code&gt;. The &lt;code&gt;handle&lt;/code&gt; property defines the name of this input. Other parts of the script can then refer to this input using this name (e.g., check whether the input was activated). The &lt;code&gt;on&lt;/code&gt; property defines what type of input this object listens to.&lt;/p&gt;
-&lt;p&gt;In this case, we created an input object that listens to the &amp;ldquo;space keypressed&amp;rdquo; event (&lt;code&gt;on:&#39;space&#39;&lt;/code&gt;), and triggers an event called &amp;ldquo;space&amp;rdquo; (&lt;code&gt;handle:&#39;space&#39;&lt;/code&gt;). We will use the event name in the &lt;code&gt;interactions&lt;/code&gt; section.&lt;/p&gt;
-&lt;p&gt;The player supports &lt;a href=&#34;./API.html#input&#34;&gt;many&lt;/a&gt; types of input. For now, let&amp;rsquo;s learn only about &lt;code&gt;keypressed&lt;/code&gt;. &lt;code&gt;keypressed&lt;/code&gt; creates an input listener for simple keyboard interactions. The following code creates a listener for the event of hitting the &lt;code&gt;&#39;e&#39;&lt;/code&gt; key:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;keypressed&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;e&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that the event type is now &lt;code&gt;keypressed&lt;/code&gt; and we added an additional property to the object, &lt;code&gt;key&lt;/code&gt; which defines what type of keypressed triggers this event.
-Note also that the name that we give the event is absolutely arbitrary, so we can leave the handle as &lt;code&gt;&#39;space&#39;&lt;/code&gt; and it still works. However, it is generally a good practice to use meaningful names (e.g., &lt;code&gt;&#39;key_e&#39;&lt;/code&gt;). You can try replacing the old input object with this one, and see what happens. Then try creating an object that responds to the &lt;code&gt;&#39;i&#39;&lt;/code&gt; key being pressed.&lt;/p&gt;
-&lt;h3 id=&#34;layout&#34;&gt;Layout&lt;/h3&gt;
-&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; object is responsible for stimuli that are presented during the whole trial. All the stimuli that are set into the &lt;code&gt;layout&lt;/code&gt; array will be displayed automatically from the beginning of the trial until its end. (We use a different object, named &lt;code&gt;stimuli&lt;/code&gt; to define stimuli that are displayed only for a part of the trial. We will learn about the &lt;code&gt;stimuli&lt;/code&gt; object in more advanced examples).&lt;/p&gt;
-&lt;p&gt;The layout is an array of objects. Each object represents a stimulus. The &lt;a href=&#34;./API.html#stimuli&#34;&gt;stimulus object&lt;/a&gt; is a complex objects, and we&amp;rsquo;ll learn more about it in more advanced examples. For now, let&amp;rsquo;s start with a simple example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//This opens an array of stimulus objects to show in the layout.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//Each object is a stimulus object.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Hello world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//Media defines what to show
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#000&#34;&gt;css&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;fontSize&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;2em&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;#FF0000&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//css defines its style.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This stimulus displays the words &amp;ldquo;Hello world&amp;rdquo; at the center of the player&amp;rsquo;s canvas.&lt;/p&gt;
-&lt;p&gt;Stimulus objects hold a &lt;a href=&#34;./API.html#media&#34;&gt;&lt;code&gt;media&lt;/code&gt;&lt;/a&gt; object to display, and relevant data regarding how to display it. This particular stimulus sets the style for the media using the &lt;code&gt;css&lt;/code&gt; property. &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/CSS&#34;&gt;CSS&lt;/a&gt; is the language used by browsers to describe styles. Using the stimulus &lt;code&gt;css&lt;/code&gt; property we can control css in any way we want. In this case we use the css object to set the &lt;em&gt;font size&lt;/em&gt; and &lt;em&gt;color&lt;/em&gt; of the stimulus.&lt;/p&gt;
-&lt;p&gt;The font size of this stimulus is set to &lt;code&gt;2em&lt;/code&gt;. &lt;code&gt;em&lt;/code&gt; is a css size unit, &lt;code&gt;1em&lt;/code&gt; is the standard (default) font size, &lt;code&gt;2em&lt;/code&gt; is twice that size and so on (you can use fractions too: e.g., &lt;code&gt;1.3em&lt;/code&gt;). So that the text displayed by this stimulus is double the default text size.&lt;/p&gt;
-&lt;p&gt;The color attribute accepts any valid css color. You can try the following: &lt;code&gt;&#39;#0000FF&#39;&lt;/code&gt;, &lt;code&gt;&#39;#FFFFFF&#39;&lt;/code&gt;, &lt;code&gt;&#39;#00FF00&#39;&lt;/code&gt; or use &lt;a href=&#34;http://html-color-codes.info/&#34;&gt;this&lt;/a&gt; site to find additional colors.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;css&lt;/code&gt; object can do far more than this. If you want to know more you can check out the full API  &lt;a href=&#34;http://api.jquery.com/css/#css2&#34;&gt;&lt;code&gt;here&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;interactions&#34;&gt;Interactions&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;../../api/trial/interactions&#34;&gt;Interactions&lt;/a&gt; are a grouping of &lt;a href=&#34;../../api/trial/condtions&#34;&gt;&lt;code&gt;conditions&lt;/code&gt;&lt;/a&gt; (statements of truth) and &lt;a href=&#34;../../api/trial/actions&#34;&gt;&lt;code&gt;actions&lt;/code&gt;&lt;/a&gt; to perform if (and only if) all conditions are true. We won&amp;rsquo;t really get into interactions here, but these are the basics:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;conditions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-			&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inputEquals&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;],&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;actions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;
-			&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;endTrial&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-		&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Each interaction object has a &lt;code&gt;conditions&lt;/code&gt; property and an &lt;code&gt;actions&lt;/code&gt; property. The &lt;code&gt;conditions&lt;/code&gt; property is an array of condition objects.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Tutorials</title><link>/docs/time/tutorials/</link><description>Recent content in Tutorials on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/time/tutorials/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Hello world</title><link>/docs/time/tutorials/hello/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/tutorials/hello/</guid><description>
+&lt;p>We will create a simple task that says &amp;ldquo;Hello world&amp;rdquo;. As we go, we will comment on several of the player&amp;rsquo;s features and explain some of the ways you can customize your task.&lt;/p>
+&lt;p>You can follow along and play around with the code right &lt;a href="#play-ground">here&lt;/a>.&lt;/p>
+&lt;h3 id="the-wrapper">The wrapper&lt;/h3>
+&lt;p>miTime&amp;rsquo;s scripts are usually a single JavaScript file. The script is wrapped within a define function (You don&amp;rsquo;t have to understand what it does, but if you are interested look up &lt;a href="http://requirejs.org/">requirejs&lt;/a>).&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#8f5902;font-style:italic">/* The script wrapper */&lt;/span>
+&lt;span style="color:#000">define&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;timeAPI&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">APIconstructor&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">API&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">APIconstructor&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">/*
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic"> Your script comes here...
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic"> */&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">script&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">/* don&amp;#39;t forget to close the wrapper */&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>The wrapper creates the &lt;code>API&lt;/code> object for you. The &lt;code>API&lt;/code> object is the instrument that we will use to create and run tasks. The whole task is written by creating a bunch of objects and arrays. The API object has functions that accept those objects and arrays and know how to create a task from them.&lt;/p>
+&lt;h3 id="the-task-structure">The task structure&lt;/h3>
+&lt;p>Each task is composed of one or more trials, that are activated sequentially.
+We set trials into the player using a function called &lt;a href="/docs/core/api/#add-sequence">&lt;code>API.addSequence&lt;/code>&lt;/a> that accepts an array of trials as its argument.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">define&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;timeAPI&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">APIconstructor&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">API&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">APIconstructor&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSequence&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">/*
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic"> This is where you input all your trials.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic"> We will see below how to write trials.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic"> */&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">script&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the following section we will see how to populate the trial sequence.
+Later, we will see that &lt;code>API&lt;/code> provides many additional functions that allow us to further customize the player.&lt;/p>
+&lt;h3 id="a-simple-trial">A simple trial&lt;/h3>
+&lt;p>Let&amp;rsquo;s populate the sequence with a simple trial.
+The following trial displays the words &amp;ldquo;Hello world&amp;rdquo; at the center of the screen, and ends when you press &lt;code>space&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">input&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// What input to accept from the participant (user)
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">handle&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">on&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// What to show throughout the trial.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Hello world&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000">css&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">fontSize&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;2em&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">color&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;#D7685A&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">interactions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// What to do when different events occur.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">conditions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;inputEquals&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">actions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;endTrial&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>What we see above is a definition of a trial. A trial is a JavaScript object. Inside that object, there are three other objects: &lt;code>input&lt;/code>, &lt;code>layout&lt;/code> and &lt;code>interaction&lt;/code>. Each of these objects defines a different aspect in the trial. Let&amp;rsquo;s learn about these three objects, one by one.&lt;/p>
+&lt;h3 id="input">Input&lt;/h3>
+&lt;p>The &lt;code>input&lt;/code> object is an array of objects that define the input we expect the participant to use. Each object in the&lt;code>input&lt;/code> array defines one input element (full documentation &lt;a href="./API.html#input">here&lt;/a>).&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#8f5902;font-style:italic">//Open the array of input objects.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">//An input object that defines what to do when the user hits space.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">handle&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">on&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#8f5902;font-style:italic">//Close the array
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Each input object must include the properties &lt;code>handle&lt;/code> and &lt;code>on&lt;/code>. The &lt;code>handle&lt;/code> property defines the name of this input. Other parts of the script can then refer to this input using this name (e.g., check whether the input was activated). The &lt;code>on&lt;/code> property defines what type of input this object listens to.&lt;/p>
+&lt;p>In this case, we created an input object that listens to the &amp;ldquo;space keypressed&amp;rdquo; event (&lt;code>on:'space'&lt;/code>), and triggers an event called &amp;ldquo;space&amp;rdquo; (&lt;code>handle:'space'&lt;/code>). We will use the event name in the &lt;code>interactions&lt;/code> section.&lt;/p>
+&lt;p>The player supports &lt;a href="./API.html#input">many&lt;/a> types of input. For now, let&amp;rsquo;s learn only about &lt;code>keypressed&lt;/code>. &lt;code>keypressed&lt;/code> creates an input listener for simple keyboard interactions. The following code creates a listener for the event of hitting the &lt;code>'e'&lt;/code> key:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">handle&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">on&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;keypressed&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;e&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that the event type is now &lt;code>keypressed&lt;/code> and we added an additional property to the object, &lt;code>key&lt;/code> which defines what type of keypressed triggers this event.
+Note also that the name that we give the event is absolutely arbitrary, so we can leave the handle as &lt;code>'space'&lt;/code> and it still works. However, it is generally a good practice to use meaningful names (e.g., &lt;code>'key_e'&lt;/code>). You can try replacing the old input object with this one, and see what happens. Then try creating an object that responds to the &lt;code>'i'&lt;/code> key being pressed.&lt;/p>
+&lt;h3 id="layout">Layout&lt;/h3>
+&lt;p>The &lt;code>layout&lt;/code> object is responsible for stimuli that are presented during the whole trial. All the stimuli that are set into the &lt;code>layout&lt;/code> array will be displayed automatically from the beginning of the trial until its end. (We use a different object, named &lt;code>stimuli&lt;/code> to define stimuli that are displayed only for a part of the trial. We will learn about the &lt;code>stimuli&lt;/code> object in more advanced examples).&lt;/p>
+&lt;p>The layout is an array of objects. Each object represents a stimulus. The &lt;a href="./API.html#stimuli">stimulus object&lt;/a> is a complex objects, and we&amp;rsquo;ll learn more about it in more advanced examples. For now, let&amp;rsquo;s start with a simple example:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#8f5902;font-style:italic">//This opens an array of stimulus objects to show in the layout.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#8f5902;font-style:italic">//Each object is a stimulus object.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Hello world&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#8f5902;font-style:italic">//Media defines what to show
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">css&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">fontSize&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;2em&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">color&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;#FF0000&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span> &lt;span style="color:#8f5902;font-style:italic">//css defines its style.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>This stimulus displays the words &amp;ldquo;Hello world&amp;rdquo; at the center of the player&amp;rsquo;s canvas.&lt;/p>
+&lt;p>Stimulus objects hold a &lt;a href="./API.html#media">&lt;code>media&lt;/code>&lt;/a> object to display, and relevant data regarding how to display it. This particular stimulus sets the style for the media using the &lt;code>css&lt;/code> property. &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS&lt;/a> is the language used by browsers to describe styles. Using the stimulus &lt;code>css&lt;/code> property we can control css in any way we want. In this case we use the css object to set the &lt;em>font size&lt;/em> and &lt;em>color&lt;/em> of the stimulus.&lt;/p>
+&lt;p>The font size of this stimulus is set to &lt;code>2em&lt;/code>. &lt;code>em&lt;/code> is a css size unit, &lt;code>1em&lt;/code> is the standard (default) font size, &lt;code>2em&lt;/code> is twice that size and so on (you can use fractions too: e.g., &lt;code>1.3em&lt;/code>). So that the text displayed by this stimulus is double the default text size.&lt;/p>
+&lt;p>The color attribute accepts any valid css color. You can try the following: &lt;code>'#0000FF'&lt;/code>, &lt;code>'#FFFFFF'&lt;/code>, &lt;code>'#00FF00'&lt;/code> or use &lt;a href="http://html-color-codes.info/">this&lt;/a> site to find additional colors.&lt;/p>
+&lt;p>The &lt;code>css&lt;/code> object can do far more than this. If you want to know more you can check out the full API &lt;a href="http://api.jquery.com/css/#css2">&lt;code>here&lt;/code>&lt;/a>&lt;/p>
+&lt;h3 id="interactions">Interactions&lt;/h3>
+&lt;p>&lt;a href="../../api/trial/interactions">Interactions&lt;/a> are a grouping of &lt;a href="../../api/trial/condtions">&lt;code>conditions&lt;/code>&lt;/a> (statements of truth) and &lt;a href="../../api/trial/actions">&lt;code>actions&lt;/code>&lt;/a> to perform if (and only if) all conditions are true. We won&amp;rsquo;t really get into interactions here, but these are the basics:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">conditions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;inputEquals&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">actions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;endTrial&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Each interaction object has a &lt;code>conditions&lt;/code> property and an &lt;code>actions&lt;/code> property. The &lt;code>conditions&lt;/code> property is an array of condition objects.
 Each condition objects defines a condition that can be true of false.
 For instance, the condition in the example above is that the name (i.e., handle) of currently active input is &amp;lsquo;space&amp;rsquo;.
 This condition is true only when the participant hits space (that is what we defined in the input section).
-There are a few other possible conditions that can be defined, and we will learn about them in more advanced examples (to see the full list of conditions, see &lt;a href=&#34;../../api/trial/conditions&#34;&gt;here&lt;/a&gt;).
-If all the condition objects in the conditions array are true, then all the actions in the &lt;code&gt;actions&lt;/code&gt; array are executed.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;actions&lt;/code&gt; array holds an array of actions to perform if all &lt;code&gt;conditions&lt;/code&gt; are evaluated as true. In this case the only action is to end this trial. We will learn about other forms of actions in more advanced examples (to see the full list of conditions, see &lt;a href=&#34;../../api/trial/actions&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
-&lt;h3 id=&#34;play-ground&#34;&gt;Play ground&lt;/h3&gt;
-&lt;p&gt;Here is the whole code again, with comments that explain each and every line.&lt;/p&gt;
-
-
-
-
-
-    
-
-
-
-
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
-    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
-    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
-    
-
-
-&lt;div class=&#34;pg-section&#34; id=&#34;pg-hello.js&#34;&gt;
-    &lt;p&gt;
-    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
-    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
-    &lt;/p&gt;
-
-    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+There are a few other possible conditions that can be defined, and we will learn about them in more advanced examples (to see the full list of conditions, see &lt;a href="../../api/trial/conditions">here&lt;/a>).
+If all the condition objects in the conditions array are true, then all the actions in the &lt;code>actions&lt;/code> array are executed.&lt;/p>
+&lt;p>The &lt;code>actions&lt;/code> array holds an array of actions to perform if all &lt;code>conditions&lt;/code> are evaluated as true. In this case the only action is to end this trial. We will learn about other forms of actions in more advanced examples (to see the full list of conditions, see &lt;a href="../../api/trial/actions">here&lt;/a>).&lt;/p>
+&lt;h3 id="play-ground">Play ground&lt;/h3>
+&lt;p>Here is the whole code again, with comments that explain each and every line.&lt;/p>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-hello.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
 /* The script wrapper */
 define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
-
-	var API = new APIconstructor();
-
-	//The whole script is inside a function. 
-	//The function accepts an API object. 
-	//We use the API object to set the task.
-	//The function addSequence creates a sequence of trials.
-	//That function accepts an array of trials.
-	API.addSequence([ //Open the array of trials
-	//This array has only one object in it. So, the task will run one trial only.
-		{ //This object defines a trial
-
-			//A trial is defined by setting a few properties.
-
-			//The first property in this trial is called input.
-			input: [ //The trial&amp;#39;s &amp;#34;input&amp;#34; property is an array of input objects.
-				//This array has only one object, so it will handle only one input from the users.
-				//The input object has a few different properties to define what kind of user input this trial handles.
-				{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}
-			], //Close the array of inputs, and continue to the trial&amp;#39;s next property.
-
-			//Another property in this is trial is called &amp;#34;layout&amp;#34;.
-			//layout defines what to show throughout the trial.
-			layout: [//The trial&amp;#39;s &amp;#34;layout&amp;#34; property is an array of stimulus objects.
-				//In our example, the layout array has only one item (object).
-				{// This is a stimulus object. It has a few properties.
-					//The media property is an object that defines what to show.
-					media :{word:&amp;#39;Hello world&amp;#39;},
-					//The css property is an object that defines how to show it.
-					css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
-				}
-			],//Close the layout array, and continue to the trial&amp;#39;s next property.
-
-			//Interactions is an array of if-then scenarios. It defines the flow of the trial (what to do when certain conditions are met).
-			interactions: [ //Start the array of interactions.
-				// Our array in this example has only one object in it.
-				{//This is an interaction object. It has two properties: conditions, and actions.
-					//conditions is an array of conditions.
-					conditions: [ //Open the array of conditions.
-						//Our example has only one condition.
-						//The condition: if the input named &amp;#39;space&amp;#39; was activated (tip: go back to the input property: that&amp;#39;s were we defined this event).
-						{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}
-					],
-					//actions is an array of actions: each action defines something that should be done when the interaction&amp;#39;s conditions are true.
-					actions: [ //Open the array of actions.
-						//There is only one action here: end the trial.
-						{type:&amp;#39;endTrial&amp;#39;}
-					] //Close the array of actions
-				} //Close the interaction object.
-			] //Close the array of interactions
-		} //Close the trial object.
-	]); //Close the array of trials and the addSequence function. use ; to execute the function.
-
-	//In summary, in this trial we showed the text &amp;#39;Hello World!&amp;#39; with the layout property.
-	//We then waited for the user to hit space (we used the input object to define that). 
-	//When the user hit space, we ended the trial (this was done with an interaction object).
-
-	// Activate the player. This will play the trial sequence. In our case, it will play a single trial.
-	return API.script;
+var API = new APIconstructor();
+//The whole script is inside a function.
+//The function accepts an API object.
+//We use the API object to set the task.
+//The function addSequence creates a sequence of trials.
+//That function accepts an array of trials.
+API.addSequence([ //Open the array of trials
+//This array has only one object in it. So, the task will run one trial only.
+{ //This object defines a trial
+//A trial is defined by setting a few properties.
+//The first property in this trial is called input.
+input: [ //The trial&amp;#39;s &amp;#34;input&amp;#34; property is an array of input objects.
+//This array has only one object, so it will handle only one input from the users.
+//The input object has a few different properties to define what kind of user input this trial handles.
+{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}
+], //Close the array of inputs, and continue to the trial&amp;#39;s next property.
+//Another property in this is trial is called &amp;#34;layout&amp;#34;.
+//layout defines what to show throughout the trial.
+layout: [//The trial&amp;#39;s &amp;#34;layout&amp;#34; property is an array of stimulus objects.
+//In our example, the layout array has only one item (object).
+{// This is a stimulus object. It has a few properties.
+//The media property is an object that defines what to show.
+media :{word:&amp;#39;Hello world&amp;#39;},
+//The css property is an object that defines how to show it.
+css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
+}
+],//Close the layout array, and continue to the trial&amp;#39;s next property.
+//Interactions is an array of if-then scenarios. It defines the flow of the trial (what to do when certain conditions are met).
+interactions: [ //Start the array of interactions.
+// Our array in this example has only one object in it.
+{//This is an interaction object. It has two properties: conditions, and actions.
+//conditions is an array of conditions.
+conditions: [ //Open the array of conditions.
+//Our example has only one condition.
+//The condition: if the input named &amp;#39;space&amp;#39; was activated (tip: go back to the input property: that&amp;#39;s were we defined this event).
+{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}
+],
+//actions is an array of actions: each action defines something that should be done when the interaction&amp;#39;s conditions are true.
+actions: [ //Open the array of actions.
+//There is only one action here: end the trial.
+{type:&amp;#39;endTrial&amp;#39;}
+] //Close the array of actions
+} //Close the interaction object.
+] //Close the array of interactions
+} //Close the trial object.
+]); //Close the array of trials and the addSequence function. use ; to execute the function.
+//In summary, in this trial we showed the text &amp;#39;Hello World!&amp;#39; with the layout property.
+//We then waited for the user to hit space (we used the input object to define that).
+//When the user hit space, we ended the trial (this was done with an interaction object).
+// Activate the player. This will play the trial sequence. In our case, it will play a single trial.
+return API.script;
 }); //Close the define wrapper.
-&lt;/textarea&gt;
-&lt;/div&gt;
-
-
-&lt;script&gt;
-    (function(filename){
-        var win, section;
-        var section = document.getElementById(&#39;pg-&#39; + filename);
-
-        var el = section.querySelector(&#39;.code-mirror&#39;);
-        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
-
-        cm.setSize(null, 500);
-
-        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
-            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
-
-            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
-            else {
-                var elem = window.document.createElement(&#39;a&#39;);
-                elem.href = window.URL.createObjectURL(blob);
-                elem.download = filename;
-                document.body.appendChild(elem);
-                elem.click();
-                document.body.removeChild(elem);
-            }
-        });
-
-        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
-            var runminnoUrl = &#39;\/runminno.html&#39;;
-            if (win) win.close();
-            win = window.open(runminnoUrl, &#39;Playground&#39;);
-            win.onload = function(){
-                win.addEventListener(&#39;unload&#39;, function() {
-                    window.focus();
-                });
-                win.activate(cm.getValue());
-            };
-        });
-    })(&#39;hello.js&#39;);
-&lt;/script&gt;
-
-&lt;h3 id=&#34;epilogue-of-sorts&#34;&gt;Epilogue (of sorts)&lt;/h3&gt;
-&lt;p&gt;You&amp;rsquo;ve learned how to create a single trial, and the different elements that compose it. The next stage is seeing how different trials come together to form a task.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Slide show</title>
-      <link>/docs/time/tutorials/slideshow/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/time/tutorials/slideshow/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This section of the tutorial will walk you through creating a slide show. We will create a simple task that displays a series of stimuli.
-In this tutorial we will learn how to utilize the sequence, and the very basics of inheritance.&lt;/p&gt;
-&lt;h2 id=&#34;a-simple-slide-show&#34;&gt;A simple slide show&lt;/h2&gt;
-&lt;p&gt;Tasks normally include more than one trial.
-The sequence holds an array: the trials in the array will be activated sequentially.&lt;/p&gt;
-&lt;p&gt;This is the trial that we already know from the &lt;a href=&#34;../hello&#34;&gt;&lt;em&gt;Hello world&lt;/em&gt;&lt;/a&gt; tutorial:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Hello world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;css&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;fontSize&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;2em&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;#D7685A&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;interactions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;conditions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inputEquals&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;actions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;endTrial&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will now duplicate this trial a few times for a simple slide show.
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('hello.js');
+&lt;/script>
+&lt;h3 id="epilogue-of-sorts">Epilogue (of sorts)&lt;/h3>
+&lt;p>You&amp;rsquo;ve learned how to create a single trial, and the different elements that compose it. The next stage is seeing how different trials come together to form a task.&lt;/p></description></item><item><title>Docs: Slide show</title><link>/docs/time/tutorials/slideshow/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/tutorials/slideshow/</guid><description>
+&lt;p>This section of the tutorial will walk you through creating a slide show. We will create a simple task that displays a series of stimuli.
+In this tutorial we will learn how to utilize the sequence, and the very basics of inheritance.&lt;/p>
+&lt;h2 id="a-simple-slide-show">A simple slide show&lt;/h2>
+&lt;p>Tasks normally include more than one trial.
+The sequence holds an array: the trials in the array will be activated sequentially.&lt;/p>
+&lt;p>This is the trial that we already know from the &lt;a href="../hello">&lt;em>Hello world&lt;/em>&lt;/a> tutorial:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">input&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">handle&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">on&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
+&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Hello world&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000">css&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">fontSize&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;2em&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">color&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;#D7685A&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">interactions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
+&lt;span style="color:#000">conditions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;inputEquals&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">actions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;endTrial&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>We will now duplicate this trial a few times for a simple slide show.
 You should try it out. Try adding another trial. Try changing the media or style of the stimuli.
-Use the &lt;a href=&#34;/docs/time/api/&#34;&gt;docs&lt;/a&gt;!&lt;/p&gt;
-
-
-
-
-
-    
-
-
-
-
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css&#34; integrity=&#34;sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=&#34; crossorigin=&#34;anonymous&#34;&gt;
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css&#34; integrity=&#34;sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=&#34; crossorigin=&#34;anonymous&#34;&gt;
-    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js&#34;&gt;&lt;/script&gt;
-    &lt;script src=&#34;https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js&#34; integrity=&#34;sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
-    
-
-
-&lt;div class=&#34;pg-section&#34; id=&#34;pg-slideshow1.js&#34;&gt;
-    &lt;p&gt;
-    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
-    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
-    &lt;/p&gt;
-
-    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+Use the &lt;a href="/docs/time/api/">docs&lt;/a>!&lt;/p>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-slideshow1.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
 define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
-
-	var API = new APIconstructor();
-
-    API.addSequence([
-        {
-            input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
-            layout: [{
-                media :{word:&amp;#39;Is\&amp;#39;nt&amp;#39;},
-                css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
-            }],
-            interactions: [{
-                conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
-                actions: [{type:&amp;#39;endTrial&amp;#39;}]
-            }]
-        },
-        {
-            input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
-            layout: [{
-                media :{word:&amp;#39;this&amp;#39;},
-                css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
-            }],
-            interactions: [{
-                conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
-                actions: [{type:&amp;#39;endTrial&amp;#39;}]
-            }]
-        },
-        {
-            input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
-            layout: [{
-                media :{word:&amp;#39;cool?&amp;#39;},
-                css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
-            }],
-            interactions: [{
-                conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
-                actions: [{type:&amp;#39;endTrial&amp;#39;}]
-            }]
-        }
-    ]);
-	return API.script;
-}); 
-&lt;/textarea&gt;
-&lt;/div&gt;
-
-
-&lt;script&gt;
-    (function(filename){
-        var win, section;
-        var section = document.getElementById(&#39;pg-&#39; + filename);
-
-        var el = section.querySelector(&#39;.code-mirror&#39;);
-        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
-
-        cm.setSize(null, 500);
-
-        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
-            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
-
-            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
-            else {
-                var elem = window.document.createElement(&#39;a&#39;);
-                elem.href = window.URL.createObjectURL(blob);
-                elem.download = filename;
-                document.body.appendChild(elem);
-                elem.click();
-                document.body.removeChild(elem);
-            }
-        });
-
-        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
-            var runminnoUrl = &#39;\/runminno.html&#39;;
-            if (win) win.close();
-            win = window.open(runminnoUrl, &#39;Playground&#39;);
-            win.onload = function(){
-                win.addEventListener(&#39;unload&#39;, function() {
-                    window.focus();
-                });
-                win.activate(cm.getValue());
-            };
-        });
-    })(&#39;slideshow1.js&#39;);
-&lt;/script&gt;
-
-&lt;h2 id=&#34;basic-inheritance&#34;&gt;Basic inheritance&lt;/h2&gt;
-&lt;p&gt;Our task is becoming longer and harder to maintain.
+var API = new APIconstructor();
+API.addSequence([
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{
+media :{word:&amp;#39;Is\&amp;#39;nt&amp;#39;},
+css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
+}],
+interactions: [{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{
+media :{word:&amp;#39;this&amp;#39;},
+css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
+}],
+interactions: [{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{
+media :{word:&amp;#39;cool?&amp;#39;},
+css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
+}],
+interactions: [{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}]
+}
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('slideshow1.js');
+&lt;/script>
+&lt;h2 id="basic-inheritance">Basic inheritance&lt;/h2>
+&lt;p>Our task is becoming longer and harder to maintain.
 Imagine a slide show with 50 slides, it will need more than 500 lines of code.
 If we would want to make any changes that apply to all the trials (e.g., increase the font size), we will have to go through each trial individually and make the same change.
 This is where the concept of inheritance comes in.
 Inheritance allows you to create a prototype of a trial (or stimulus or media object), and re-use it whenever you want.
-To understand how this works, we need to first learn a bit about sets.&lt;/p&gt;
-&lt;h3 id=&#34;sets&#34;&gt;Sets&lt;/h3&gt;
-&lt;p&gt;A &lt;a href=&#34;/docs/sequencer/inheritance/#sets&#34;&gt;set&lt;/a&gt; is a list of one or more miTime objects (trials, stimuli or media objects).
+To understand how this works, we need to first learn a bit about sets.&lt;/p>
+&lt;h3 id="sets">Sets&lt;/h3>
+&lt;p>A &lt;a href="/docs/sequencer/inheritance/#sets">set&lt;/a> is a list of one or more miTime objects (trials, stimuli or media objects).
 After defining a set of objects (e.g., trials), we can re-use those objects.
 Therefore, if we want to create a basic trial and re-use it a few times, we create a one-trial set, and then re-use it in a sequence.
-We will focus here on trial sets, but everything that applies to the trials sets also applies to stimuli sets or media sets as well.&lt;/p&gt;
-&lt;p&gt;We create trial sets using the &lt;code&gt;API.addTrialSets()&lt;/code&gt; function.
+We will focus here on trial sets, but everything that applies to the trials sets also applies to stimuli sets or media sets as well.&lt;/p>
+&lt;p>We create trial sets using the &lt;code>API.addTrialSets()&lt;/code> function.
 The simplest use of the function involves two arguments; the first is the set name, and the second is an array of objects to add to the set.
-The following code creates a trial set called &lt;em&gt;slide&lt;/em&gt; and populates it with one trial: our &amp;ldquo;Hello world&amp;rdquo; trial.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addTrialSets&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,[{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Hello world&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}}],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;interactions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;conditions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inputEquals&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;actions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;endTrial&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now, we can refer to this trial in the future with the name we gave it (&amp;lsquo;slide&amp;rsquo;), and re-use it over and over again in a sequence.
-We re-use trials (and media and stimulus objects) using inheritance.&lt;/p&gt;
-&lt;h4 id=&#34;inheritance&#34;&gt;&lt;strong&gt;Inheritance&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;Inheritance allows us to re-use trials: new trials can be created by inheriting a trial from a set. If there is only one trial in the set, we simply inherit the whole set.&lt;/p&gt;
-&lt;p&gt;Trials (and stimuli and media too) have a special property called &lt;a href=&#34;/docs/sequencer/inheritance/#syntax&#34;&gt;inherit&lt;/a&gt; that allows them to specify a specific set to inherit from.
+The following code creates a trial set called &lt;em>slide&lt;/em> and populates it with one trial: our &amp;ldquo;Hello world&amp;rdquo; trial.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addTrialSets&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,[{&lt;/span>
+&lt;span style="color:#000">input&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">handle&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">on&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Hello world&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}],&lt;/span>
+&lt;span style="color:#000">interactions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
+&lt;span style="color:#000">conditions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;inputEquals&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">actions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;endTrial&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}])&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, we can refer to this trial in the future with the name we gave it (&amp;lsquo;slide&amp;rsquo;), and re-use it over and over again in a sequence.
+We re-use trials (and media and stimulus objects) using inheritance.&lt;/p>
+&lt;h4 id="inheritance">&lt;strong>Inheritance&lt;/strong>&lt;/h4>
+&lt;p>Inheritance allows us to re-use trials: new trials can be created by inheriting a trial from a set. If there is only one trial in the set, we simply inherit the whole set.&lt;/p>
+&lt;p>Trials (and stimuli and media too) have a special property called &lt;a href="/docs/sequencer/inheritance/#syntax">inherit&lt;/a> that allows them to specify a specific set to inherit from.
 This allows trials to be significantly shorter.
-The following code activates our slide three times:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addSequence&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;([&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//Our sequence is an array of trials.
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//Each object is a trial. 
-&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This sequence will present the Hello World trial three times, one after the other.&lt;/p&gt;
-&lt;h3 id=&#34;extending&#34;&gt;Extending&lt;/h3&gt;
-&lt;p&gt;But repeating slides is pretty boring.
+The following code activates our slide three times:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSequence&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span> &lt;span style="color:#8f5902;font-style:italic">//Our sequence is an array of trials.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#8f5902;font-style:italic">//Each object is a trial.
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>This sequence will present the Hello World trial three times, one after the other.&lt;/p>
+&lt;h3 id="extending">Extending&lt;/h3>
+&lt;p>But repeating slides is pretty boring.
 Our slideshow should display different text in each trial.
-So, blind inheritance is not enough for us, we need also to extend each trial.&lt;/p&gt;
-&lt;p&gt;When we inherit a trial, we can extend it by simply adding properties or overriding existing ones.
-Let&amp;rsquo;s call the trial that inherits a &lt;code&gt;child&lt;/code&gt;, and the trial that is inherited a &lt;code&gt;parent&lt;/code&gt;.
-A child inherits all of its parent&amp;rsquo;s properties. Any property that is added to it overrides the parent&amp;rsquo;s properties.&lt;/p&gt;
-&lt;p&gt;For example, let&amp;rsquo;s say the following object resides in the &amp;ldquo;parent&amp;rdquo; set.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;family&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Smith&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Simply inheriting it will result in an identical copy. But we can go one step further and extend it by adding an additional property; in this case - &lt;em&gt;name&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;parent&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;John&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This extends the object which becomes:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;family&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Smith&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;John&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Going back to our example, we can now extend each of the slides to display different text by copying all the basic trial&amp;rsquo;s properties, and only overriding the layout object:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addSequence&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;([&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;This&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;is&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;even&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;},&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;Cooler!!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
-
-    
-
-
-
-
-
-&lt;div class=&#34;pg-section&#34; id=&#34;pg-slideshow2.js&#34;&gt;
-    &lt;p&gt;
-    &lt;a class=&#34;pg-play btn btn-warning&#34;&gt;&lt;i class=&#34;fas fa-play&#34;&gt;&lt;/i&gt; Run &lt;/a&gt;
-    &lt;a class=&#34;pg-download btn btn-outline-warning&#34;&gt;&lt;i class=&#34;fas fa-download&#34;&gt;&lt;/i&gt; Download &lt;/a&gt;
-    &lt;/p&gt;
-
-    &lt;textarea class=&#34;code-mirror&#34; rows=&#34;40&#34;&gt;
+So, blind inheritance is not enough for us, we need also to extend each trial.&lt;/p>
+&lt;p>When we inherit a trial, we can extend it by simply adding properties or overriding existing ones.
+Let&amp;rsquo;s call the trial that inherits a &lt;code>child&lt;/code>, and the trial that is inherited a &lt;code>parent&lt;/code>.
+A child inherits all of its parent&amp;rsquo;s properties. Any property that is added to it overrides the parent&amp;rsquo;s properties.&lt;/p>
+&lt;p>For example, let&amp;rsquo;s say the following object resides in the &amp;ldquo;parent&amp;rdquo; set.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">family&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Smith&amp;#39;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simply inheriting it will result in an identical copy. But we can go one step further and extend it by adding an additional property; in this case - &lt;em>name&lt;/em>:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;parent&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;John&amp;#39;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>This extends the object which becomes:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">family&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Smith&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;John&amp;#39;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Going back to our example, we can now extend each of the slides to display different text by copying all the basic trial&amp;rsquo;s properties, and only overriding the layout object:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSequence&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;This&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;is&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;even&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Cooler!!&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="pg-section" id="pg-slideshow2.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
 define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
-
-	var API = new APIconstructor();
-
-	// Create a trial set with the hello world trial
-	API.addTrialSets(&amp;#39;slide&amp;#39;,[{
-		input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
-        layout: [{media :{word:&amp;#39;Hello world&amp;#39;}}],
-		interactions: [{
-			conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
-			actions: [{type:&amp;#39;endTrial&amp;#39;}]
-		}]
-	}]);
-
-	// Create the sequence (Each trial extends the slide and overwrites the layout property)
-	API.addSequence([
-		{
-			inherit:&amp;#39;slide&amp;#39;,
-			layout: [{media :{word:&amp;#39;This&amp;#39;}}]
-		},
-		{
-			inherit:&amp;#39;slide&amp;#39;,
-			layout: [{media :{word:&amp;#39;is&amp;#39;}}]
-		},
-		{
-			inherit:&amp;#39;slide&amp;#39;,
-			layout: [{media :{word:&amp;#39;even&amp;#39;}}]
-		},
-		{
-			inherit:&amp;#39;slide&amp;#39;,
-			layout: [{media :{word:&amp;#39;Cooler!!&amp;#39;}}]
-		}
-	]);
-
-	return API.script;
+var API = new APIconstructor();
+// Create a trial set with the hello world trial
+API.addTrialSets(&amp;#39;slide&amp;#39;,[{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Hello world&amp;#39;}}],
+interactions: [{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}]
+}]);
+// Create the sequence (Each trial extends the slide and overwrites the layout property)
+API.addSequence([
+{
+inherit:&amp;#39;slide&amp;#39;,
+layout: [{media :{word:&amp;#39;This&amp;#39;}}]
+},
+{
+inherit:&amp;#39;slide&amp;#39;,
+layout: [{media :{word:&amp;#39;is&amp;#39;}}]
+},
+{
+inherit:&amp;#39;slide&amp;#39;,
+layout: [{media :{word:&amp;#39;even&amp;#39;}}]
+},
+{
+inherit:&amp;#39;slide&amp;#39;,
+layout: [{media :{word:&amp;#39;Cooler!!&amp;#39;}}]
+}
+]);
+return API.script;
 });
-&lt;/textarea&gt;
-&lt;/div&gt;
-
-
-&lt;script&gt;
-    (function(filename){
-        var win, section;
-        var section = document.getElementById(&#39;pg-&#39; + filename);
-
-        var el = section.querySelector(&#39;.code-mirror&#39;);
-        var cm = CodeMirror.fromTextArea(el,{ theme:&#39;monokai&#39; });
-
-        cm.setSize(null, 500);
-
-        section.querySelector(&#39;.pg-download&#39;).addEventListener(&#39;click&#39;, function(){
-            var blob = new Blob([cm.getValue()], { type: &#39;text/javascript&#39; });
-
-            if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
-            else {
-                var elem = window.document.createElement(&#39;a&#39;);
-                elem.href = window.URL.createObjectURL(blob);
-                elem.download = filename;
-                document.body.appendChild(elem);
-                elem.click();
-                document.body.removeChild(elem);
-            }
-        });
-
-        section.querySelector(&#39;.pg-play&#39;).addEventListener(&#39;click&#39;, function(){
-            var runminnoUrl = &#39;\/runminno.html&#39;;
-            if (win) win.close();
-            win = window.open(runminnoUrl, &#39;Playground&#39;);
-            win.onload = function(){
-                win.addEventListener(&#39;unload&#39;, function() {
-                    window.focus();
-                });
-                win.activate(cm.getValue());
-            };
-        });
-    })(&#39;slideshow2.js&#39;);
-&lt;/script&gt;
-
-&lt;h4 id=&#34;defaults&#34;&gt;&lt;strong&gt;Defaults&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;Let&amp;rsquo;s take this one step further. What if we want to centralize the way stimuli look? Let&amp;rsquo;s use inheritance to control that too. First, we create the basic stimulus (we&amp;rsquo;ll call it &amp;lsquo;default&amp;rsquo;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addStimulusSets&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,[&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;css&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;fontSize&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;2em&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;#D7685A&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then, when we create the stimulus object for the layout in each trial, that stimulus can inherit from our &amp;lsquo;default&amp;rsquo; stimulus:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addSequence&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;([&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;layout&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;inherit&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;word&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;This&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that the default stimulus had no media.
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('slideshow2.js');
+&lt;/script>
+&lt;h4 id="defaults">&lt;strong>Defaults&lt;/strong>&lt;/h4>
+&lt;p>Let&amp;rsquo;s take this one step further. What if we want to centralize the way stimuli look? Let&amp;rsquo;s use inheritance to control that too. First, we create the basic stimulus (we&amp;rsquo;ll call it &amp;lsquo;default&amp;rsquo;):&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addStimulusSets&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;default&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">css&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">fontSize&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;2em&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">color&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;#D7685A&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, when we create the stimulus object for the layout in each trial, that stimulus can inherit from our &amp;lsquo;default&amp;rsquo; stimulus:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSequence&lt;/span>&lt;span style="color:#000;font-weight:bold">([&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">layout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span> &lt;span style="color:#000">inherit&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;default&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">media&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">word&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;This&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span> &lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that the default stimulus had no media.
 It means that each stimulus that will inherit this stimulus will need to add a media object.
-We could have done the same thing with a basic slide trial: create a trial without any layout.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;API&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;addTrialSets&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;slide&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,[{&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;input&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;on&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-	&lt;span style=&#34;color:#000&#34;&gt;interactions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;conditions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;inputEquals&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;space&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}],&lt;/span&gt;
-		&lt;span style=&#34;color:#000&#34;&gt;actions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[{&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;endTrial&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}]&lt;/span&gt;
-&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It means that each trial that will inherit &amp;lsquo;slide&amp;rsquo; will need to add layout stimulus.&lt;/p&gt;
-&lt;p&gt;Try this out for yourself. Can you add the default stimulus? Can you change it&amp;rsquo;s appearance?&lt;/p&gt;
-
-      </description>
-    </item>
-    
-  </channel>
-</rss>
+We could have done the same thing with a basic slide trial: create a trial without any layout.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addTrialSets&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;slide&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,[{&lt;/span>
+&lt;span style="color:#000">input&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">handle&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">on&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">interactions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
+&lt;span style="color:#000">conditions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;inputEquals&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;space&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}],&lt;/span>
+&lt;span style="color:#000">actions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;endTrial&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}])&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>It means that each trial that will inherit &amp;lsquo;slide&amp;rsquo; will need to add layout stimulus.&lt;/p>
+&lt;p>Try this out for yourself. Can you add the default stimulus? Can you change it&amp;rsquo;s appearance?&lt;/p></description></item></channel></rss>

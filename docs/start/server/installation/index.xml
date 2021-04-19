@@ -1,212 +1,117 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Minno Suite – Installation</title>
-    <link>/docs/start/server/installation/</link>
-    <description>Recent content in Installation on Minno Suite</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    
-	  <atom:link href="/docs/start/server/installation/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Requirements</title>
-      <link>/docs/start/server/installation/requirements/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/start/server/installation/requirements/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This page contains the minimum requirements to install the Minnosuite Dashboard.&lt;/p&gt;
-&lt;h3 id=&#34;common-requirements&#34;&gt;Common Requirements&lt;/h3&gt;
-&lt;p&gt;Make sure to install the software on a computer that has &lt;strong&gt;at least 2 GB&lt;/strong&gt; free disc space. We recommend more space (e.g., 10 Gb), to make sure you have enough for many participants and many studies.&lt;/p&gt;
-&lt;p&gt;Although you can restrict the platform to local usage (i.e., participants will complete the experiments on the same computer that runs this software), the platform was developed to enable running studies over the Internet. For that, make sure you are able to &lt;strong&gt;listen to port 80&lt;/strong&gt; on the computer, which may require administrator access, and have &lt;strong&gt;port 80 open to the world and not blocked by your firewall&lt;/strong&gt;. We strongly recommend &lt;strong&gt;opening port 443&lt;/strong&gt; as well (listen and allow access), to allow secure (SSL) connection over the Internet. Additionally, the machine should have a &lt;strong&gt;static IP address&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;You will probably also want to have a domain for your server.  We have a guide for setting up a domain for free with Freenom &lt;a href=&#34;../domain&#34;&gt;here&lt;/a&gt;.  However, you do not need to do that if you already have a domain for your machine, or if your IT department can set up a domain for you.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Manual Installation</title>
-      <link>/docs/start/server/installation/manual/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/start/server/installation/manual/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This page covers manually installing the minnoSuite Dashboard onto a server.&lt;/p&gt;
-&lt;p&gt;In general you will need to download it from &lt;a href=&#34;https://github.com/minnojs/minno-server&#34;&gt;here&lt;/a&gt;, and install &lt;a href=&#34;https://docs.mongodb.com/manual/installation/&#34;&gt;mongoDB&lt;/a&gt; and &lt;a href=&#34;https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/&#34;&gt;nodeJs&lt;/a&gt; onto your system.  The &lt;a href=&#34;https://github.com/minnojs/minno-server/blob/master/installation.sh&#34;&gt;installation.sh&lt;/a&gt; file is a script for Ubuntu Linux that will install mongoDB and nodeJs for you and start the dashboard.  The &lt;a href=&#34;https://github.com/minnojs/minno-server/blob/master/readme.md&#34;&gt;readme&lt;/a&gt; file tells you what to run from your install directory to get the minnoSuite Dashboard running after all dependencies have been installed.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Docker Installation</title>
-      <link>/docs/start/server/installation/basicinstallation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/start/server/installation/basicinstallation/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This page covers the general way to get the MinnoSuite Dashboard installed using Docker, a tool designed to make it easier to create, deploy, and run applications.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Check our &lt;a href=&#34;../requirements&#34;&gt;requirements&lt;/a&gt; page and make sure that the machine that you want to use meets the requirements.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install Docker on your machine, using the Docker CE download link on the right of the page &lt;a href=&#34;https://docs.docker.com/docker-for-windows/install/&#34;&gt;here for windows 8+&lt;/a&gt;, &lt;a href=&#34;https://docs.docker.com/docker-for-mac/install/&#34;&gt;here for MacOs&lt;/a&gt;, or &lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/ubuntu/&#34;&gt;here for Ubuntu&lt;/a&gt;, &lt;a href=&#34;https://docs.docker.com/engine/install/centos/&#34;&gt;CentOS 7&lt;/a&gt; , &lt;a href=&#34;https://docs.docker.com/engine/install/debian/&#34;&gt;Debian&lt;/a&gt; , or &lt;a href=&#34;https://docs.docker.com/engine/install/fedora/&#34;&gt;Fedora&lt;/a&gt; Linux  ,and following the instructions that they give you.  On Linux machines sure to continue to the &lt;a href=&#34;https://docs.docker.com/install/linux/linux-postinstall/&#34;&gt;Linux post installaion steps page&lt;/a&gt; and follow the instructions there for the &amp;ldquo;Manage Docker as a non-root user&amp;rdquo; and &amp;ldquo;Configure Docker to start on boot&amp;rdquo; parts.  For Centos 8 / RHEL 8 use &lt;a href=&#34;https://linuxconfig.org/how-to-install-docker-in-rhel-8&#34;&gt;this guide&lt;/a&gt;, and if it gives you conflict errors run &lt;code&gt;sudo yum erase docker-engine-selinux&lt;/code&gt; and then retry the instructions.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install Docker-compose on your machine, using the guide &lt;a href=&#34;https://docs.docker.com/compose/install/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Create a new folder in your file system to hold your minnoSuite server, and download &lt;a href=&#34;./docker-compose.yml&#34;&gt;this&lt;/a&gt; docker-compose file into it.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;You can update the configuration for your server by editing the docker-compose file with a text editor.  Read about the docker-compose file &lt;a href=&#34;./configfile&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Open the command prompt (windows) or terminal (Linux/Mac) for your machine, and navigate to the folder that you downloaded the docker-compose file to, and type:
-&lt;code&gt;docker-compose up -d&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;To stop the server you can type &lt;code&gt;docker-compose down&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;If you are using a Mac or Linux machine and binding to port 80 or 443, you may get an error unless you start the server as an administrator by typing:
-&lt;code&gt;sudo docker-compose up&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;You should see a message about the server being up, and be given a port and URL to use.  Enter that URL in your browser and you will be connected.  The default user is username : admin and password: admin123&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;To get HTTPS working, first follow the guide to &lt;a href=&#34;./domain&#34;&gt;setting up your domain&lt;/a&gt;.  Then while logged to the open dashboard as an admin go to the admin-&amp;gt; edit configation page.  Change the server type to &amp;ldquo;greenlock&amp;rdquo; and enter in your domain, without the http:// part.  Press the update button and the server should switch to using https.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: AWS Cloud Installation</title>
-      <link>/docs/start/server/installation/awsinstallation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/start/server/installation/awsinstallation/</guid>
-      <description>
-        
-        
-        &lt;p&gt;This page covers getting a minnoServer instance running on AWS using docker. In short, all that it requires is duplicating an image of the server we already created on AWS, and configuring it and launching it.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/&#34;&gt;Sign up for AWS&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://console.aws.amazon.com/console/home?nc2=h_ct&amp;amp;src=header-signin&#34;&gt;Login&lt;/a&gt;, and from the EC2 console left menu chose Images -&amp;gt; AMIs&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Change the filter to public images, and then search for AMI by id &lt;code&gt;ami-0ac765f8ae09dc5a3&lt;/code&gt; .&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;It should show up, with name minnoServer.  Right click on it and select &amp;ldquo;launch&amp;rdquo;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Choose whatever processor you want (the free tier one probably), then click &amp;ldquo;next: configure instance details&amp;rdquo;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Keep clicking next until you get to the &amp;ldquo;configure security group&amp;rdquo; page.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click the &amp;ldquo;add rule&amp;rdquo; button twice, and set the 2 new rules to &amp;ldquo;HTTPS&amp;rdquo; and &amp;ldquo;HTTP&amp;rdquo;, so in total you will have those 2 and &amp;ldquo;SSH&amp;rdquo; rules.  You don&amp;rsquo;t have to mess with any of the details of the rules.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Then you can click &amp;ldquo;review and launch&amp;rdquo; and then &amp;ldquo;launch&amp;rdquo; from the next screen.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the next screen (a pop-up) you will have to create and download a key pair pem file. In the first drop-down list, select “Create a new key pair”. Give it whatever name you would like.  This file is what you will use to log into the server.  Don&amp;rsquo;t lose it- you will not be able to log in without it. Then, click “Launch instances”. You will see a page indicating that “Your instance are now launching”.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the bottom-right, click the button “View instances”. It will now appear in the &amp;ldquo;instances-&amp;gt;instances&amp;rdquo; tab in the console.  Go there and click on it to get the details.  You will need to use the IPv4 Public IP and Public DNS (IPv4) later.  Write them down.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Go to the url in your browsr: Public DNS (IPv4) + &amp;ldquo;/dashboard/&amp;rdquo;, such as ec2-18-218-121-155.us-east-2.compute.amazonaws.com/dashboard/ .  This will be the dashboard.  the default admin user is username:admin , pw: admin123&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;To be able to connect using https and make your server much more secure, follow the guide &lt;a href=&#34;../domain/&#34;&gt;here&lt;/a&gt; for details on connecting securely using a domain you already have, or using a free domain from Freenom.  If you prefer to exclusively use Amazon (for setting up https and obtaining a domain), the process will be a bit more complicated and will not be free. For that, follow our guide &lt;a href=&#34;./awspayssl/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: DigitalOcean Installation</title>
-      <link>/docs/start/server/installation/digitalocean/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/start/server/installation/digitalocean/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Installing MinnoSuite on DigitalOcean is extremely easy. Using DigitalOcean is not free, but probably the cheapest option would be enough for most labs.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Register / sign in to DigitalOcean &lt;a href=&#34;https://www.digitalocean.com/&#34;&gt;here&lt;/a&gt; .&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Go &lt;a href=&#34;https://marketplace.digitalocean.com/apps/docker&#34;&gt;here&lt;/a&gt; and click the &amp;ldquo;Create Docker Droplet&amp;rdquo; button.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pick which price tier to use, probably the cheapest one at $5/month.  The defaults are probably fine for other options.  Go through everything until your droplet is created.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/&#34;&gt;Connect to the droplet using SSH&lt;/a&gt;.  You should have an email from DigitalOcean with the ip address, username, and password to use.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;From the command line, run:  &lt;code&gt;wget &amp;quot;https://minnojs.github.io/docsite/installation/basicinstallation/docker-compose.yml&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Next run:  &lt;code&gt;docker-compose up -d&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;You should now be able to enter the IP address of your droplet into your browser bar and connect to the dashboard.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;To set up your domain with it and enable SSL, follow our guide &lt;a href=&#34;../domain/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;If you need to shutdown the docker server, from the command line run &lt;code&gt;docker-compose down&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: A secure connection (https)</title>
-      <link>/docs/start/server/installation/domain/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/start/server/installation/domain/</guid>
-      <description>
-        
-        
-        &lt;p&gt;It is highly recommended to run MinnoDashboard using a secure connection (i.e., https, using SSL). If you do ont use a secure connection, the data sent by your study participants to our server would not be encrypted. The same is also true for the cummunication sent by the researchers who build the study, including the password to their account. It is the norm to encrypt such communication online. This guide will cover how to enable SSL on your running dashboard server.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Get a domain connected to the IP address of your server, such as using our &lt;a href=&#34;./freedomain&#34;&gt;guide to do so with Freenom&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Log in to the dashboard with an admin account&lt;/li&gt;
-&lt;li&gt;From the dropdown menu&amp;rsquo;s at the top of the screen, select Admin -&amp;gt; edit configuration&lt;/li&gt;
-&lt;li&gt;If you do not have a SSL certificate, use the dropdown to change the server type to &amp;lsquo;Greenlock&amp;rsquo;.  Enter your email in the box provided, and the domain you registered in the next box, i.e. mydomain.com.  This will automatically get the certificate for you using &lt;a href=&#34;https://www.npmjs.com/package/greenlock&#34;&gt;Greenlock&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;If you do have a certificate, use the dropdown to change the server type to &amp;lsquo;https&amp;rsquo;.  Copy the content of your cert and key files into the text boxes provided.&lt;/li&gt;
-&lt;li&gt;Click save, and now it should work.  You&amp;rsquo;ll have to connect using https, such as &lt;a href=&#34;https://mydomain.com/dashboard&#34;&gt;https://mydomain.com/dashboard&lt;/a&gt; from here on out.&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
-    </item>
-    
-  </channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Installation</title><link>/docs/start/server/installation/</link><description>Recent content in Installation on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/start/server/installation/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Requirements</title><link>/docs/start/server/installation/requirements/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/requirements/</guid><description>
+&lt;p>This page contains the minimum requirements to install the Minnosuite Dashboard.&lt;/p>
+&lt;h3 id="common-requirements">Common Requirements&lt;/h3>
+&lt;p>Make sure to install the software on a computer that has &lt;strong>at least 2 GB&lt;/strong> free disc space. We recommend more space (e.g., 10 Gb), to make sure you have enough for many participants and many studies.&lt;/p>
+&lt;p>Although you can restrict the platform to local usage (i.e., participants will complete the experiments on the same computer that runs this software), the platform was developed to enable running studies over the Internet. For that, make sure you are able to &lt;strong>listen to port 80&lt;/strong> on the computer, which may require administrator access, and have &lt;strong>port 80 open to the world and not blocked by your firewall&lt;/strong>. We strongly recommend &lt;strong>opening port 443&lt;/strong> as well (listen and allow access), to allow secure (SSL) connection over the Internet. Additionally, the machine should have a &lt;strong>static IP address&lt;/strong>.&lt;/p>
+&lt;p>You will probably also want to have a domain for your server. We have a guide for setting up a domain for free with Freenom &lt;a href="../domain">here&lt;/a>. However, you do not need to do that if you already have a domain for your machine, or if your IT department can set up a domain for you.&lt;/p></description></item><item><title>Docs: Manual Installation</title><link>/docs/start/server/installation/manual/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/manual/</guid><description>
+&lt;p>This page covers manually installing the minnoSuite Dashboard onto a server.&lt;/p>
+&lt;p>In general you will need to download it from &lt;a href="https://github.com/minnojs/minno-server">here&lt;/a>, and install &lt;a href="https://docs.mongodb.com/manual/installation/">mongoDB&lt;/a> and &lt;a href="https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/">nodeJs&lt;/a> onto your system. The &lt;a href="https://github.com/minnojs/minno-server/blob/master/installation.sh">installation.sh&lt;/a> file is a script for Ubuntu Linux that will install mongoDB and nodeJs for you and start the dashboard. The &lt;a href="https://github.com/minnojs/minno-server/blob/master/readme.md">readme&lt;/a> file tells you what to run from your install directory to get the minnoSuite Dashboard running after all dependencies have been installed.&lt;/p></description></item><item><title>Docs: Docker Installation</title><link>/docs/start/server/installation/basicinstallation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/basicinstallation/</guid><description>
+&lt;p>This page covers the general way to get the MinnoSuite Dashboard installed using Docker, a tool designed to make it easier to create, deploy, and run applications.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Check our &lt;a href="../requirements">requirements&lt;/a> page and make sure that the machine that you want to use meets the requirements.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install Docker on your machine, using the Docker CE download link on the right of the page &lt;a href="https://docs.docker.com/docker-for-windows/install/">here for windows 8+&lt;/a>, &lt;a href="https://docs.docker.com/docker-for-mac/install/">here for MacOs&lt;/a>, or &lt;a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">here for Ubuntu&lt;/a>, &lt;a href="https://docs.docker.com/engine/install/centos/">CentOS 7&lt;/a> , &lt;a href="https://docs.docker.com/engine/install/debian/">Debian&lt;/a> , or &lt;a href="https://docs.docker.com/engine/install/fedora/">Fedora&lt;/a> Linux ,and following the instructions that they give you. On Linux machines sure to continue to the &lt;a href="https://docs.docker.com/install/linux/linux-postinstall/">Linux post installaion steps page&lt;/a> and follow the instructions there for the &amp;ldquo;Manage Docker as a non-root user&amp;rdquo; and &amp;ldquo;Configure Docker to start on boot&amp;rdquo; parts. For Centos 8 / RHEL 8 use &lt;a href="https://linuxconfig.org/how-to-install-docker-in-rhel-8">this guide&lt;/a>, and if it gives you conflict errors run &lt;code>sudo yum erase docker-engine-selinux&lt;/code> and then retry the instructions.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install Docker-compose on your machine, using the guide &lt;a href="https://docs.docker.com/compose/install/">here&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a new folder in your file system to hold your minnoSuite server, and download &lt;a href="./docker-compose.yml">this&lt;/a> docker-compose file into it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You can update the configuration for your server by editing the docker-compose file with a text editor. Read about the docker-compose file &lt;a href="./configfile">here&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the command prompt (windows) or terminal (Linux/Mac) for your machine, and navigate to the folder that you downloaded the docker-compose file to, and type:
+&lt;code>docker-compose up -d&lt;/code>&lt;/p>
+&lt;p>To stop the server you can type &lt;code>docker-compose down&lt;/code>&lt;/p>
+&lt;p>If you are using a Mac or Linux machine and binding to port 80 or 443, you may get an error unless you start the server as an administrator by typing:
+&lt;code>sudo docker-compose up&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You should see a message about the server being up, and be given a port and URL to use. Enter that URL in your browser and you will be connected. The default user is username : admin and password: admin123&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To get HTTPS working, first follow the guide to &lt;a href="./domain">setting up your domain&lt;/a>. Then while logged to the open dashboard as an admin go to the admin-&amp;gt; edit configation page. Change the server type to &amp;ldquo;greenlock&amp;rdquo; and enter in your domain, without the http:// part. Press the update button and the server should switch to using https.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Docs: AWS Cloud Installation</title><link>/docs/start/server/installation/awsinstallation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/awsinstallation/</guid><description>
+&lt;p>This page covers getting a minnoServer instance running on AWS using docker. In short, all that it requires is duplicating an image of the server we already created on AWS, and configuring it and launching it.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/">Sign up for AWS&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://console.aws.amazon.com/console/home?nc2=h_ct&amp;amp;src=header-signin">Login&lt;/a>, and from the EC2 console left menu chose Images -&amp;gt; AMIs&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Change the filter to public images, and then search for AMI by id &lt;code>ami-0ac765f8ae09dc5a3&lt;/code> .&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It should show up, with name minnoServer. Right click on it and select &amp;ldquo;launch&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose whatever processor you want (the free tier one probably), then click &amp;ldquo;next: configure instance details&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Keep clicking next until you get to the &amp;ldquo;configure security group&amp;rdquo; page.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click the &amp;ldquo;add rule&amp;rdquo; button twice, and set the 2 new rules to &amp;ldquo;HTTPS&amp;rdquo; and &amp;ldquo;HTTP&amp;rdquo;, so in total you will have those 2 and &amp;ldquo;SSH&amp;rdquo; rules. You don&amp;rsquo;t have to mess with any of the details of the rules.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Then you can click &amp;ldquo;review and launch&amp;rdquo; and then &amp;ldquo;launch&amp;rdquo; from the next screen.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the next screen (a pop-up) you will have to create and download a key pair pem file. In the first drop-down list, select “Create a new key pair”. Give it whatever name you would like. This file is what you will use to log into the server. Don&amp;rsquo;t lose it- you will not be able to log in without it. Then, click “Launch instances”. You will see a page indicating that “Your instance are now launching”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the bottom-right, click the button “View instances”. It will now appear in the &amp;ldquo;instances-&amp;gt;instances&amp;rdquo; tab in the console. Go there and click on it to get the details. You will need to use the IPv4 Public IP and Public DNS (IPv4) later. Write them down.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Go to the url in your browsr: Public DNS (IPv4) + &amp;ldquo;/dashboard/&amp;rdquo;, such as ec2-18-218-121-155.us-east-2.compute.amazonaws.com/dashboard/ . This will be the dashboard. the default admin user is username:admin , pw: admin123&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To be able to connect using https and make your server much more secure, follow the guide &lt;a href="../domain/">here&lt;/a> for details on connecting securely using a domain you already have, or using a free domain from Freenom. If you prefer to exclusively use Amazon (for setting up https and obtaining a domain), the process will be a bit more complicated and will not be free. For that, follow our guide &lt;a href="./awspayssl/">here&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Docs: DigitalOcean Installation</title><link>/docs/start/server/installation/digitalocean/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/digitalocean/</guid><description>
+&lt;p>Installing MinnoSuite on DigitalOcean is extremely easy. Using DigitalOcean is not free, but probably the cheapest option would be enough for most labs.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Register / sign in to DigitalOcean &lt;a href="https://www.digitalocean.com/">here&lt;/a> .&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Go &lt;a href="https://marketplace.digitalocean.com/apps/docker">here&lt;/a> and click the &amp;ldquo;Create Docker Droplet&amp;rdquo; button.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Pick which price tier to use, probably the cheapest one at $5/month. The defaults are probably fine for other options. Go through everything until your droplet is created.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/">Connect to the droplet using SSH&lt;/a>. You should have an email from DigitalOcean with the ip address, username, and password to use.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>From the command line, run: &lt;code>wget &amp;quot;https://minnojs.github.io/docsite/installation/basicinstallation/docker-compose.yml&amp;quot;&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next run: &lt;code>docker-compose up -d&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You should now be able to enter the IP address of your droplet into your browser bar and connect to the dashboard.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To set up your domain with it and enable SSL, follow our guide &lt;a href="../domain/">here&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you need to shutdown the docker server, from the command line run &lt;code>docker-compose down&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Docs: A secure connection (https)</title><link>/docs/start/server/installation/domain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/installation/domain/</guid><description>
+&lt;p>It is highly recommended to run MinnoDashboard using a secure connection (i.e., https, using SSL). If you do ont use a secure connection, the data sent by your study participants to our server would not be encrypted. The same is also true for the cummunication sent by the researchers who build the study, including the password to their account. It is the norm to encrypt such communication online. This guide will cover how to enable SSL on your running dashboard server.&lt;/p>
+&lt;ol>
+&lt;li>Get a domain connected to the IP address of your server, such as using our &lt;a href="./freedomain">guide to do so with Freenom&lt;/a>&lt;/li>
+&lt;li>Log in to the dashboard with an admin account&lt;/li>
+&lt;li>From the dropdown menu&amp;rsquo;s at the top of the screen, select Admin -&amp;gt; edit configuration&lt;/li>
+&lt;li>If you do not have a SSL certificate, use the dropdown to change the server type to &amp;lsquo;Greenlock&amp;rsquo;. Enter your email in the box provided, and the domain you registered in the next box, i.e. mydomain.com. This will automatically get the certificate for you using &lt;a href="https://www.npmjs.com/package/greenlock">Greenlock&lt;/a>.&lt;/li>
+&lt;li>If you do have a certificate, use the dropdown to change the server type to &amp;lsquo;https&amp;rsquo;. Copy the content of your cert and key files into the text boxes provided.&lt;/li>
+&lt;li>Click save, and now it should work. You&amp;rsquo;ll have to connect using https, such as &lt;a href="https://mydomain.com/dashboard">https://mydomain.com/dashboard&lt;/a> from here on out.&lt;/li>
+&lt;/ol></description></item></channel></rss>
