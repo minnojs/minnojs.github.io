@@ -73,7 +73,7 @@ or you can pull them from the server onto your local machine using git.&lt;/p>
 &lt;h3 id="into-qualtrics">Into Qualtrics&lt;/h3>
 &lt;p>The Evaluative Priming Task will run from a single question in your survey, separated from any other question by a Page Break, like this:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/quiat1.png "/>
+&lt;img src="/blog/tutorials/images/quiat1.png"/>
 &lt;/figure>
 &lt;p>Please &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">Don&amp;rsquo;t forgot&lt;/a>: The question&amp;rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.&lt;/p>
 &lt;p>After creating that question, click the JS icon in the Evaluative Priming Task question, and add the following code:&lt;/p>
@@ -191,7 +191,7 @@ If you’re using words rather than photos, you need to update the &lt;a href="h
 &lt;/ol>
 &lt;p>The steps in an animated gif:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/processiat.gif "/> &lt;figcaption>
+&lt;img src="/blog/tutorials/images/processiat.gif"/> &lt;figcaption>
 &lt;h4>Data image&lt;/h4>
 &lt;/figcaption>
 &lt;/figure>
@@ -210,7 +210,7 @@ If you’re using words rather than photos, you need to update the &lt;a href="h
 &lt;h3 id="into-qualtrics">Into Qualtrics&lt;/h3>
 &lt;p>The AMP will run from a single question in your survey, separated from any other question by a Page Break, like this:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/quiat1.png "/>
+&lt;img src="/blog/tutorials/images/quiat1.png"/>
 &lt;/figure>
 &lt;p>Please &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">Don&amp;rsquo;t forgot&lt;/a>: The question&amp;rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.&lt;/p>
 &lt;p>After creating that question, click the JS icon in the AMP question, and add the following code:&lt;/p>
@@ -340,7 +340,7 @@ If you’re using words rather than photos, you need to update the &lt;a href="h
 &lt;h3 id="into-qualtrics">Into Qualtrics&lt;/h3>
 &lt;p>The ST-IAT will run from a single question in your survey, separated from any other question by a Page Break, like this:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/quiat1.png "/>
+&lt;img src="/blog/tutorials/images/quiat1.png"/>
 &lt;/figure>
 &lt;p>Please &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">Don&amp;rsquo;t forgot&lt;/a>: The question&amp;rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.&lt;/p>
 &lt;p>After creating that question, click the JS icon in the ST-IAT question, and add the following code:&lt;/p>
@@ -469,7 +469,7 @@ You also can just follow the comments along the script above and change the vari
 &lt;/ol>
 &lt;p>The steps in an animated gif:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/processiat.gif "/> &lt;figcaption>
+&lt;img src="/blog/tutorials/images/processiat.gif"/> &lt;figcaption>
 &lt;h4>Data image&lt;/h4>
 &lt;/figcaption>
 &lt;/figure>
@@ -488,7 +488,7 @@ You also can just follow the comments along the script above and change the vari
 &lt;h3 id="into-qualtrics">Into Qualtrics&lt;/h3>
 &lt;p>The BIAT will run from a single question in your survey, separated from any other question by a Page Break, like this:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/quiat1.png "/>
+&lt;img src="/blog/tutorials/images/quiat1.png"/>
 &lt;/figure>
 &lt;p>Please &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">Don&amp;rsquo;t forgot&lt;/a>: The question&amp;rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.&lt;/p>
 &lt;p>After creating that question, click the JS icon in the BIAT question, and add the following code:&lt;/p>
@@ -656,7 +656,7 @@ If you’re using words rather than photos, you need to update the &lt;a href="h
 &lt;/ol>
 &lt;p>The steps in an animated gif:
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/processiat.gif "/> &lt;figcaption>
+&lt;img src="/blog/tutorials/images/processiat.gif"/> &lt;figcaption>
 &lt;h4>Data image&lt;/h4>
 &lt;/figcaption>
 &lt;/figure>
@@ -769,7 +769,7 @@ If you reached this blog post, you probably know what the IAT is and you want to
 &lt;p>To run an IAT on Qualtrics study, I followed the guide from an earlier &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">post&lt;/a>.
 The IAT will run from a single question in your survey, separated from any other question by a Page Break, like this:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/quiat1.png "/>
+&lt;img src="/blog/tutorials/images/quiat1.png"/>
 &lt;/figure>
 &lt;p>Please &lt;a href="https://minnojs.github.io/minnojs-blog/qualtrics/">Don&amp;rsquo;t forgot&lt;/a>: The question&amp;rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.&lt;/p>
 &lt;p>Then, click the JS icon in the IAT question, and add the following code:&lt;/p>
@@ -881,7 +881,7 @@ If you’re using words rather than photos, you need to update the &lt;a href="h
 &lt;/ol>
 &lt;p>The steps in an animated gif:&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/processiat.gif "/> &lt;figcaption>
+&lt;img src="/blog/tutorials/images/processiat.gif"/> &lt;figcaption>
 &lt;h4>Data image&lt;/h4>
 &lt;/figcaption>
 &lt;/figure>
@@ -981,7 +981,7 @@ We need a multiline question because we are going to use a CSV format to save th
 and single line questions do not save new lines.
 Now, make sure that you have a &lt;em>Page Break&lt;/em> before and after the question so that it appears on a separate page (you can do this in the actions section of the settings box on the right).&lt;/p>
 &lt;figure>
-&lt;img src=" /blog/tutorials/images/quiat1.png "/>
+&lt;img src="/blog/tutorials/images/quiat1.png"/>
 &lt;/figure>
 &lt;p>Next we will setup the Javascript.
 The general idea is that qualtrics activates MinnoJS,
