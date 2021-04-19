@@ -1086,7 +1086,7 @@ win.activate(cm.getValue());
 &lt;/tr>
 &lt;tr>
 &lt;td>pattern&lt;/td>
-&lt;td>(text [supports regex]) Validation: require the response to match the regular expression set in pattern (takes either a string &lt;code>&amp;ldquo;a|b&amp;rdquo;&lt;/code> or a regular expression &lt;code>/a|b/&lt;/code>).&lt;/td>
+&lt;td>(text [supports regex]) Validation: require the response to match the regular expression set in pattern (takes either a string &lt;code>&amp;quot;a|b&amp;quot;&lt;/code> or a regular expression &lt;code>/a|b/&lt;/code>).&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>correct&lt;/td>

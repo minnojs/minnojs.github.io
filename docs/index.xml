@@ -1362,7 +1362,7 @@ Templates allow you to use &lt;a href="../variables">Environmental Variables&lt;
 &lt;/tr>
 &lt;tr>
 &lt;td>String&lt;/td>
-&lt;td>&amp;ldquo;Howdy&amp;rdquo;, '' // a string is always wrapped in single or double parenthesis&lt;/td>
+&lt;td>&amp;ldquo;Howdy&amp;rdquo;, '&amp;rsquo; // a string is always wrapped in single or double parenthesis&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>Logical (Boolean)&lt;/td>
