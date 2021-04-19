@@ -1,104 +1,881 @@
-<!doctype html><html lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.74.3"><meta name=ROBOTS content="INDEX, FOLLOW"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Running the AMP on Qulatrics | Minno Suite</title><meta property="og:title" content="Running the AMP on Qulatrics"><meta property="og:description" content="In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 here) and what Qualtrics is. Minno.js is the software developed by Project Implicit to run web studies, including reaction-time tasks."><meta property="og:type" content="article"><meta property="og:url" content="/blog/2020/07/27/running-the-amp-on-qulatrics/"><meta property="article:published_time" content="2020-07-27T00:00:00+00:00"><meta property="article:modified_time" content="2021-03-11T01:05:04+02:00"><meta property="og:site_name" content="Minno Suite"><meta itemprop=name content="Running the AMP on Qulatrics"><meta itemprop=description content="In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 here) and what Qualtrics is. Minno.js is the software developed by Project Implicit to run web studies, including reaction-time tasks."><meta itemprop=datePublished content="2020-07-27T00:00:00+00:00"><meta itemprop=dateModified content="2021-03-11T01:05:04+02:00"><meta itemprop=wordCount content="1352"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Running the AMP on Qulatrics"><meta name=twitter:description content="In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 here) and what Qualtrics is. Minno.js is the software developed by Project Implicit to run web studies, including reaction-time tasks."><link rel=preload href=/scss/main.min.0522e1e02ced4def8074fed4d9859fd2e8f02c4debc9e110587e745715b19574.css as=style><link href=/scss/main.min.0522e1e02ced4def8074fed4d9859fd2e8f02c4debc9e110587e745715b19574.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script><link rel=stylesheet href=/css/tabbed-pane.css></head><body class="td-page td-blog"><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class=navbar-logo></span><span class="text-uppercase font-weight-bold">Minno Suite</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/about/><span>About</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/docs/><span>Documentation</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class="nav-link active" href=/blog/><span class=active>Blog</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/https://groups.google.com/g/minnojs/ target=_blank><span>Forum</span></a></li></ul></div><div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete=off></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><input type=search class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete=off>
-<button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li><a href=/blog/ title="MinnoJS Blog" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>Blog</span></a><ul class="pr-md-3 ul-1"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blogtutorials-li><a href=/blog/tutorials/ class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section" id=m-blogtutorials><span>Tutorials</span></a><ul class="pr-md-3 ul-2"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20210408breaking-out-of-the-canvas-in-minno-time-li><a href=/blog/2021/04/08/breaking-out-of-the-canvas-in-minno-time/ title="Breaking out of the canvas in minno time" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20210408breaking-out-of-the-canvas-in-minno-time><span>Large stimuli</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20210317using-minnojs-with-pavlovia-li><a href=/blog/2021/03/17/using-minnojs-with-pavlovia/ title="Using MinnoJS with Pavlovia" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20210317using-minnojs-with-pavlovia><span>MinnoJS Pavlovia</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200807running-the-evaluative-priming-task-on-qulatrics-li><a href=/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/ title="Running the Evaluative Priming Task on Qulatrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200807running-the-evaluative-priming-task-on-qulatrics><span>Qualtrics priming</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-blog20200727running-the-amp-on-qulatrics-li><a href=/blog/2020/07/27/running-the-amp-on-qulatrics/ title="Running the AMP on Qulatrics" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__page" id=m-blog20200727running-the-amp-on-qulatrics><span class=td-sidebar-nav-active-item>Qualtrics AMP</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200710running-the-st-iat-on-qualtrics-li><a href=/blog/2020/07/10/running-the-st-iat-on-qualtrics/ title="Running the ST-IAT on Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200710running-the-st-iat-on-qualtrics><span>Qualtrics ST-IAT</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200709running-a-brief-iat-on-qualtrics-li><a href=/blog/2020/07/09/running-a-brief-iat-on-qualtrics/ title="Running a Brief-IAT on Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200709running-a-brief-iat-on-qualtrics><span>Qualtrics Brief-IAT</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200312simple-csv-server-li><a href=/blog/2020/03/12/simple-csv-server/ class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200312simple-csv-server><span>Simple CSV server</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200305running-project-implicits-iat-from-qualtrics-li><a href=/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/ title="Running Project Implicit’s IAT from Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200305running-project-implicits-iat-from-qualtrics><span>Qualtrics IAT</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200201develop-localy-with-minnojs-li><a href=/blog/2020/02/01/develop-localy-with-minnojs/ title="Develop localy with MinnoJS" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200201develop-localy-with-minnojs><span>Local development</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20200101using-minno-with-qualtrics-li><a href=/blog/2020/01/01/using-minno-with-qualtrics/ title="Using Minno with Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20200101using-minno-with-qualtrics><span>Qualtrics MinnoJS</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20191217creating-a-custom-logger-li><a href=/blog/2019/12/17/creating-a-custom-logger/ title="Creating a custom logger" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20191217creating-a-custom-logger><span>Custom Loggers</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20191201yoking-participants-seeded-randomization-li><a href=/blog/2019/12/01/yoking-participants-seeded-randomization/ title="Yoking participants (seeded randomization)" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20191201yoking-participants-seeded-randomization><span>Yoking participants</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog20191128fullscreen-mode-in-minnojs-li><a href=/blog/2019/11/28/fullscreen-mode-in-minnojs/ title="Fullscreen mode in MinnoJS" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog20191128fullscreen-mode-in-minnojs><span>Fullscreen</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blog10101manually-activating-minnojs-li><a href=/blog/1/01/01/manually-activating-minnojs/ title="Manually activating MinnoJS" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id=m-blog10101manually-activating-minnojs><span>Manual activation</span></a></li></ul></li></ul></li></ul></nav></div></div><div class="d-none d-xl-block col-xl-2 td-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"><a href=https://github.com/minnojs/minnojs.github.io/edit/hugo-source/content/en/blog/tutorials/qualtrics-amp.md target=_blank><i class="fa fa-edit fa-fw"></i>Edit this page</a>
-<a href="https://github.com/minnojs/minnojs.github.io/new/hugo-source/content/en/blog/tutorials/qualtrics-amp.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" target=_blank><i class="fa fa-edit fa-fw"></i>Create child page</a>
-<a href="https://github.com/minnojs/minnojs.github.io/issues/new?title=Running%20the%20AMP%20on%20Qulatrics" target=_blank><i class="fab fa-github fa-fw"></i>Create documentation issue</a>
-<a href=https://github.com/minnojs/minno-quest/issues/new target=_blank><i class="fas fa-tasks fa-fw"></i>Create project issue</a></div><nav id=TableOfContents><ul><li><ul><li><a href=#project-implicits-minnojs-amp-extension>Project Implicit&rsquo;s MinnoJS AMP extension</a></li><li><a href=#into-qualtrics>Into Qualtrics</a></li><li><a href=#how-we-define-the-amp>How we define the AMP</a></li><li><a href=#use-your-own-script-file>Use your own script file</a></li><li><a href=#define-your-amp>Define your AMP</a></li><li><a href=#processing-the-amp-data>Processing the AMP data</a></li><li><a href=#any-questions>Any questions?</a></li><li><a href=#cite-us>Cite Us</a></li></ul></li></ul></nav></div><main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main><a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href=/blog/tutorials/index.xml target=_blank>RSS <i class="fa fa-rss ml-2"></i></a><div class=td-content><h1>Running the AMP on Qulatrics</h1><div class="td-byline mb-4">By <b>Elinor Bengayev</b> |
-<time datetime=2020-07-27 class=text-muted>Monday, July 27, 2020</time></div><p>In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 <a href=https://users.ugent.be/~jdhouwer/chapterbertram.pdf>here</a>) and what <a href=https://www.qualtrics.com/uk/customer-experience/surveys/>Qualtrics</a> is. <a href=https://minnojs.github.io/>Minno.js</a> is the software developed by <a href=http://projectimplicit.net/>Project Implicit</a> to run web studies, including reaction-time tasks.</p><p>In previous posts, Elad explained <a href=https://minnojs.github.io/minnojs-blog/qualtrics/>how to run a Minno script from Qualtrics</a>, and <a href=https://www.tau.ac.il/~baranan/index.html>Yoav</a> explained <a href=https://minnojs.github.io/minnojs-blog/qualtrics-iat/>how to run Project Implicit’s IAT</a> from Qualtrics. This post is very similar to Yoav&rsquo;s but it&rsquo;s about AMP.</p><h3 id=project-implicits-minnojs-amp-extension>Project Implicit&rsquo;s MinnoJS AMP extension</h3><p>We will use a <a href=https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js>modification</a> of a MinnoJS AMP <a href=https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/amp4.js>script</a> that Project Implicit has developed. In Project Implicit, we use that script to run the study from Open Minno Suite, our platform for running web studies. Before you decide to use that script in Qualtrics, please consider using our free platform as an alternative to Qualtrics (you can read more about it <a href=https://minnojs.github.io/docsite/minnosuitedashboard/>here</a>).</p><p>The script that we created for building an AMP is an extension, implemented as a function that creates an AMP from a few arguments (i.e., parameters) that the researcher defines. You can read more about the basic idea of using extensions in Minno on <a href=https://github.com/baranan/minno-tasks/blob/master/implicitmeasures.md>this page</a>.</p><h3 id=into-qualtrics>Into Qualtrics</h3><p>The AMP will run from a single question in your survey, separated from any other question by a Page Break, like this:</p><figure><img src=/blog/tutorials/images/quiat1.png></figure><p>Please <a href=https://minnojs.github.io/minnojs-blog/qualtrics/>Don&rsquo;t forgot</a>: The question&rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.</p><p>After creating that question, click the JS icon in the AMP question, and add the following code:</p><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#000>Qualtrics</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>SurveyEngine</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>addOnload</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>function</span> <span style=color:#000;font-weight:700>()</span> <span style=color:#000;font-weight:700>{</span>
-    <span style=color:#8f5902;font-style:italic>// hide question and next button
-</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>container</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87;font-weight:700>this</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>getQuestionContainer</span><span style=color:#000;font-weight:700>();</span>
-    <span style=color:#000>container</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>querySelector</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#39;.Inner&#39;</span><span style=color:#000;font-weight:700>).</span><span style=color:#000>style</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>display</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#39;none&#39;</span><span style=color:#000;font-weight:700>;</span>
-    <span style=color:#204a87;font-weight:700>this</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>hideNextButton</span><span style=color:#000;font-weight:700>();</span>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.74.3" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
-    <span style=color:#8f5902;font-style:italic>// load MinnoJS from the CDN (you probably don&#39;t need to change this)
-</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>scriptTag</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87>document</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>createElement</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#39;script&#39;</span><span style=color:#000;font-weight:700>);</span>
-    <span style=color:#000>scriptTag</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>src</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#39;https://cdn.jsdelivr.net/gh/minnojs/minno-quest@0.3/dist/pi-minno.js&#39;</span><span style=color:#000;font-weight:700>;</span>
-    <span style=color:#000>scriptTag</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>onload</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>onLoad</span><span style=color:#000;font-weight:700>;</span>
-    <span style=color:#000>scriptTag</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>onreadystatechange</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>onLoad</span><span style=color:#000;font-weight:700>;</span>
-    <span style=color:#000>container</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>appendChild</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>scriptTag</span><span style=color:#000;font-weight:700>);</span>
 
-    <span style=color:#8f5902;font-style:italic>// create the root element for Minno
-</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>canvas</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87>document</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>createElement</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#39;div&#39;</span><span style=color:#000;font-weight:700>);</span>
-    <span style=color:#000>container</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>appendChild</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>canvas</span><span style=color:#000;font-weight:700>);</span>
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-    <span style=color:#8f5902;font-style:italic>// function to proceed to next question
-</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>proceed</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87;font-weight:700>this</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>clickNextButton</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>bind</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>this</span><span style=color:#000;font-weight:700>);</span>
+<title>Running the AMP on Qulatrics | Minno Suite</title><meta property="og:title" content="Running the AMP on Qulatrics" />
+<meta property="og:description" content="In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 here) and what Qualtrics is. Minno.js is the software developed by Project Implicit to run web studies, including reaction-time tasks." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/2020/07/27/running-the-amp-on-qulatrics/" />
+<meta property="article:published_time" content="2020-07-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-11T01:05:04+02:00" /><meta property="og:site_name" content="Minno Suite" />
+<meta itemprop="name" content="Running the AMP on Qulatrics">
+<meta itemprop="description" content="In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 here) and what Qualtrics is. Minno.js is the software developed by Project Implicit to run web studies, including reaction-time tasks.">
+<meta itemprop="datePublished" content="2020-07-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-03-11T01:05:04+02:00" />
+<meta itemprop="wordCount" content="1352">
 
-    <span style=color:#8f5902;font-style:italic>// This function gets activated only after MinnoJS is loaded
-</span><span style=color:#8f5902;font-style:italic></span>    <span style=color:#204a87;font-weight:700>function</span> <span style=color:#000>onLoad</span><span style=color:#000;font-weight:700>()</span> <span style=color:#000;font-weight:700>{</span>
-        <span style=color:#8f5902;font-style:italic>// Run your study (just set the correct URL)
-</span><span style=color:#8f5902;font-style:italic></span>        <span style=color:#000>minnoJS</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>canvas</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/race_amp.js&#34;</span><span style=color:#000;font-weight:700>);</span>
 
-        <span style=color:#8f5902;font-style:italic>// MinnoJS doesn&#39;t know about Qualtrics, we pass a function to inject the results into the question
-</span><span style=color:#8f5902;font-style:italic></span>        <span style=color:#8f5902;font-style:italic>// For some reason `piGlobal` isn&#39;t available so we attach it to `minnoJS`
-</span><span style=color:#8f5902;font-style:italic></span>        <span style=color:#000>minnoJS</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>logger</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87;font-weight:700>function</span> <span style=color:#000;font-weight:700>(</span><span style=color:#000>value</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>{</span>
-            <span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>el</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>container</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>querySelector</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#39;textarea&#39;</span><span style=color:#000;font-weight:700>);</span>
-            <span style=color:#000>el</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>value</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>value</span><span style=color:#000;font-weight:700>;</span>
-        <span style=color:#000;font-weight:700>}</span>
 
-        <span style=color:#8f5902;font-style:italic>// At the end of the study let MinnoJS proceed to the next question
-</span><span style=color:#8f5902;font-style:italic></span>        <span style=color:#8f5902;font-style:italic>// We need to wait a few miliseconds for Qualtrics to register the value that we entered
-</span><span style=color:#8f5902;font-style:italic></span>        <span style=color:#000>minnoJS</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>onEnd</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87;font-weight:700>function</span> <span style=color:#000;font-weight:700>()</span> <span style=color:#000;font-weight:700>{</span> <span style=color:#000>setTimeout</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>proceed</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>100</span><span style=color:#000;font-weight:700>);</span> <span style=color:#000;font-weight:700>}</span>
-    <span style=color:#000;font-weight:700>}</span>
-<span style=color:#000;font-weight:700>});</span>
-</code></pre></div><p>This code will run our example Qualtrics AMP from <a href=https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/race_amp.js>this page</a>. Start with that example by simply copying the code above to your question in your Qualtrics questionnaire. After you verify that it runs fine on your Qualtrics survey, replace it with your own AMP (we’ll get to that shortly).</p><p><strong>IMPORTANT NOTE:</strong> to skip blocks when you’re testing the AMP, use the key combination: Esc, Enter.</p><h3 id=how-we-define-the-amp>How we define the AMP</h3><p>If you go to <a href=https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/race_amp.js>our example</a>, you will see how simple it can be to define your own AMP:</p><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#000>define</span><span style=color:#000;font-weight:700>([</span><span style=color:#4e9a06>&#39;pipAPI&#39;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#39;https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js&#39;</span><span style=color:#000;font-weight:700>],</span> <span style=color:#204a87;font-weight:700>function</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>APIConstructor</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>ampExtension</span><span style=color:#000;font-weight:700>){</span>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Running the AMP on Qulatrics"/>
+<meta name="twitter:description" content="In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 here) and what Qualtrics is. Minno.js is the software developed by Project Implicit to run web studies, including reaction-time tasks."/>
 
-	<span style=color:#204a87;font-weight:700>var</span> <span style=color:#000>API</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87;font-weight:700>new</span> <span style=color:#000>APIConstructor</span><span style=color:#000;font-weight:700>();</span>
+
+
+
+
+
+
+<link rel="preload" href="/scss/main.min.0522e1e02ced4def8074fed4d9859fd2e8f02c4debc9e110587e745715b19574.css" as="style">
+<link href="/scss/main.min.0522e1e02ced4def8074fed4d9859fd2e8f02c4debc9e110587e745715b19574.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+
+
+<link rel="stylesheet" href="/css/tabbed-pane.css"/>
+
+
+  </head>
+  <body class="td-page td-blog">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Minno Suite</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/about/" ><span>About</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/docs/" ><span>Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/blog/" ><span class="active">Blog</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/https://groups.google.com/g/minnojs/" target="_blank" ><span>Forum</span></a>
+			</li>
+			
+			
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+  
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+    
+    
+    
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
+    <a href="/blog/" title="MinnoJS Blog" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="">Blog</span></a>
+    
+      
+      <ul class="pr-md-3 ul-1">
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blogtutorials-li">
+    <a href="/blog/tutorials/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section" id="m-blogtutorials"><span class="">Tutorials</span></a>
+    
+      
+      <ul class="pr-md-3 ul-2">
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20210408breaking-out-of-the-canvas-in-minno-time-li">
+    <a href="/blog/2021/04/08/breaking-out-of-the-canvas-in-minno-time/" title="Breaking out of the canvas in minno time" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20210408breaking-out-of-the-canvas-in-minno-time"><span class="">Large stimuli</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20210317using-minnojs-with-pavlovia-li">
+    <a href="/blog/2021/03/17/using-minnojs-with-pavlovia/" title="Using MinnoJS with Pavlovia" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20210317using-minnojs-with-pavlovia"><span class="">MinnoJS Pavlovia</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200807running-the-evaluative-priming-task-on-qulatrics-li">
+    <a href="/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/" title="Running the Evaluative Priming Task on Qulatrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200807running-the-evaluative-priming-task-on-qulatrics"><span class="">Qualtrics priming</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20200727running-the-amp-on-qulatrics-li">
+    <a href="/blog/2020/07/27/running-the-amp-on-qulatrics/" title="Running the AMP on Qulatrics" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__page" id="m-blog20200727running-the-amp-on-qulatrics"><span class="td-sidebar-nav-active-item">Qualtrics AMP</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200710running-the-st-iat-on-qualtrics-li">
+    <a href="/blog/2020/07/10/running-the-st-iat-on-qualtrics/" title="Running the ST-IAT on Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200710running-the-st-iat-on-qualtrics"><span class="">Qualtrics ST-IAT</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200709running-a-brief-iat-on-qualtrics-li">
+    <a href="/blog/2020/07/09/running-a-brief-iat-on-qualtrics/" title="Running a Brief-IAT on Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200709running-a-brief-iat-on-qualtrics"><span class="">Qualtrics Brief-IAT</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200312simple-csv-server-li">
+    <a href="/blog/2020/03/12/simple-csv-server/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200312simple-csv-server"><span class="">Simple CSV server</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200305running-project-implicits-iat-from-qualtrics-li">
+    <a href="/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/" title="Running Project Implicit’s IAT from Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200305running-project-implicits-iat-from-qualtrics"><span class="">Qualtrics IAT</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200201develop-localy-with-minnojs-li">
+    <a href="/blog/2020/02/01/develop-localy-with-minnojs/" title="Develop localy with MinnoJS" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200201develop-localy-with-minnojs"><span class="">Local development</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200101using-minno-with-qualtrics-li">
+    <a href="/blog/2020/01/01/using-minno-with-qualtrics/" title="Using Minno with Qualtrics" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20200101using-minno-with-qualtrics"><span class="">Qualtrics MinnoJS</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20191217creating-a-custom-logger-li">
+    <a href="/blog/2019/12/17/creating-a-custom-logger/" title="Creating a custom logger" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20191217creating-a-custom-logger"><span class="">Custom Loggers</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20191201yoking-participants-seeded-randomization-li">
+    <a href="/blog/2019/12/01/yoking-participants-seeded-randomization/" title="Yoking participants (seeded randomization)" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20191201yoking-participants-seeded-randomization"><span class="">Yoking participants</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20191128fullscreen-mode-in-minnojs-li">
+    <a href="/blog/2019/11/28/fullscreen-mode-in-minnojs/" title="Fullscreen mode in MinnoJS" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog20191128fullscreen-mode-in-minnojs"><span class="">Fullscreen</span></a>
+    
+  </li>
+
+          
+        
+          
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog10101manually-activating-minnojs-li">
+    <a href="/blog/1/01/01/manually-activating-minnojs/" title="Manually activating MinnoJS" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__page" id="m-blog10101manually-activating-minnojs"><span class="">Manual activation</span></a>
+    
+  </li>
+
+          
+        
+      </ul>
+    
+  </li>
+
+          
+        
+      </ul>
+    
+  </li>
+
+    </ul>
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+  
+  
+  
+  
+  
+  <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+  
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+
+    <a href="https://github.com/minnojs/minnojs.github.io/edit/hugo-source/content/en/blog/tutorials/qualtrics-amp.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+    <a href="https://github.com/minnojs/minnojs.github.io/new/hugo-source/content/en/blog/tutorials/qualtrics-amp.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+    <a href="https://github.com/minnojs/minnojs.github.io/issues/new?title=Running%20the%20AMP%20on%20Qulatrics" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+    
+      
+      <a href="https://github.com/minnojs/minno-quest/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+    
+
+  
+  
+  </div>
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#project-implicits-minnojs-amp-extension">Project Implicit&rsquo;s MinnoJS AMP extension</a></li>
+        <li><a href="#into-qualtrics">Into Qualtrics</a></li>
+        <li><a href="#how-we-define-the-amp">How we define the AMP</a></li>
+        <li><a href="#use-your-own-script-file">Use your own script file</a></li>
+        <li><a href="#define-your-amp">Define your AMP</a></li>
+        <li><a href="#processing-the-amp-data">Processing the AMP data</a></li>
+        <li><a href="#any-questions">Any questions?</a></li>
+        <li><a href="#cite-us">Cite Us</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="/blog/tutorials/index.xml" target="_blank">
+              RSS <i class="fa fa-rss ml-2 "></i>
+            </a>
+            
+<div class="td-content">
+	<h1>Running the AMP on Qulatrics</h1>
+	
+	<div class="td-byline mb-4">
+		By <b>Elinor Bengayev</b> |
+		<time datetime="2020-07-27" class="text-muted">Monday, July 27, 2020</time>
+	</div>
+	
+	<p>In this post, I will explain how to run the AMP (Affect Misattribution Procedure) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an AMP in Qualtrics. So, it is likely that you know what the AMP is (pages 11-13 <a href="https://users.ugent.be/~jdhouwer/chapterbertram.pdf">here</a>) and what <a href="https://www.qualtrics.com/uk/customer-experience/surveys/">Qualtrics</a> is.  <a href="https://minnojs.github.io/">Minno.js</a> is the software developed by <a href="http://projectimplicit.net/">Project Implicit</a> to run web studies, including reaction-time tasks.</p>
+<p>In previous posts, Elad explained <a href="https://minnojs.github.io/minnojs-blog/qualtrics/">how to run a Minno script from Qualtrics</a>, and <a href="https://www.tau.ac.il/~baranan/index.html">Yoav</a> explained <a href="https://minnojs.github.io/minnojs-blog/qualtrics-iat/">how to run Project Implicit’s IAT</a> from Qualtrics. This post is very similar to Yoav&rsquo;s but it&rsquo;s about AMP.</p>
+<h3 id="project-implicits-minnojs-amp-extension">Project Implicit&rsquo;s MinnoJS AMP extension</h3>
+<p>We will use a <a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js">modification</a> of a MinnoJS AMP <a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/amp4.js">script</a> that Project Implicit has developed. In Project Implicit, we use that script to run the study from Open Minno Suite, our platform for running web studies. Before you decide to use that script in Qualtrics, please consider using our free platform as an alternative to Qualtrics (you can read more about it <a href="https://minnojs.github.io/docsite/minnosuitedashboard/">here</a>).</p>
+<p>The script that we created for building an AMP is an extension, implemented as a function that creates an AMP from a few arguments (i.e., parameters) that the researcher defines. You can read more about the basic idea of using extensions in Minno on <a href="https://github.com/baranan/minno-tasks/blob/master/implicitmeasures.md">this page</a>.</p>
+<h3 id="into-qualtrics">Into Qualtrics</h3>
+<p>The AMP will run from a single question in your survey, separated from any other question by a Page Break, like this:</p>
+
+<figure>
+    <img src="/blog/tutorials/images/quiat1.png"/> 
+</figure>
+
+<p>Please <a href="https://minnojs.github.io/minnojs-blog/qualtrics/">Don&rsquo;t forgot</a>: The question&rsquo;s type should be “Text Entry”, and you would need to set it up as a multiline question (in the setting box on the right). We need a multiline question because we are going to use a CSV format to save the data, and single line questions do not save new lines.</p>
+<p>After creating that question, click the JS icon in the AMP question, and add the following code:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000">Qualtrics</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SurveyEngine</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">addOnload</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">function</span> <span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#8f5902;font-style:italic">// hide question and next button
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">container</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">this</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">getQuestionContainer</span><span style="color:#000;font-weight:bold">();</span>
+    <span style="color:#000">container</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">querySelector</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;.Inner&#39;</span><span style="color:#000;font-weight:bold">).</span><span style="color:#000">style</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">display</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#39;none&#39;</span><span style="color:#000;font-weight:bold">;</span>
+    <span style="color:#204a87;font-weight:bold">this</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">hideNextButton</span><span style="color:#000;font-weight:bold">();</span>
+
+    <span style="color:#8f5902;font-style:italic">// load MinnoJS from the CDN (you probably don&#39;t need to change this)
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">scriptTag</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">document</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">createElement</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;script&#39;</span><span style="color:#000;font-weight:bold">);</span>
+    <span style="color:#000">scriptTag</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">src</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#39;https://cdn.jsdelivr.net/gh/minnojs/minno-quest@0.3/dist/pi-minno.js&#39;</span><span style="color:#000;font-weight:bold">;</span>
+    <span style="color:#000">scriptTag</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">onload</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">onLoad</span><span style="color:#000;font-weight:bold">;</span>
+    <span style="color:#000">scriptTag</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">onreadystatechange</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">onLoad</span><span style="color:#000;font-weight:bold">;</span>
+    <span style="color:#000">container</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">appendChild</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">scriptTag</span><span style="color:#000;font-weight:bold">);</span>
+
+    <span style="color:#8f5902;font-style:italic">// create the root element for Minno
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">canvas</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87">document</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">createElement</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;div&#39;</span><span style="color:#000;font-weight:bold">);</span>
+    <span style="color:#000">container</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">appendChild</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">canvas</span><span style="color:#000;font-weight:bold">);</span>
+
+    <span style="color:#8f5902;font-style:italic">// function to proceed to next question
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">proceed</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">this</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">clickNextButton</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">bind</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">this</span><span style="color:#000;font-weight:bold">);</span>
+
+    <span style="color:#8f5902;font-style:italic">// This function gets activated only after MinnoJS is loaded
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#204a87;font-weight:bold">function</span> <span style="color:#000">onLoad</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#8f5902;font-style:italic">// Run your study (just set the correct URL)
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">minnoJS</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">canvas</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/race_amp.js&#34;</span><span style="color:#000;font-weight:bold">);</span>
+
+        <span style="color:#8f5902;font-style:italic">// MinnoJS doesn&#39;t know about Qualtrics, we pass a function to inject the results into the question
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#8f5902;font-style:italic">// For some reason `piGlobal` isn&#39;t available so we attach it to `minnoJS`
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">minnoJS</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">logger</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">function</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">el</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">container</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">querySelector</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#39;textarea&#39;</span><span style="color:#000;font-weight:bold">);</span>
+            <span style="color:#000">el</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">value</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">;</span>
+        <span style="color:#000;font-weight:bold">}</span>
+
+        <span style="color:#8f5902;font-style:italic">// At the end of the study let MinnoJS proceed to the next question
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#8f5902;font-style:italic">// We need to wait a few miliseconds for Qualtrics to register the value that we entered
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">minnoJS</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">onEnd</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">function</span> <span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">setTimeout</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">proceed</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">100</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">});</span>
+</code></pre></div><p>This code will run our example Qualtrics AMP from <a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/race_amp.js">this page</a>. Start with that example by simply copying the code above to your question in your Qualtrics questionnaire. After you verify that it runs fine on your Qualtrics survey, replace it with your own AMP (we’ll get to that shortly).</p>
+<p><strong>IMPORTANT NOTE:</strong> to skip blocks when you’re testing the AMP, use the key combination: Esc, Enter.</p>
+<h3 id="how-we-define-the-amp">How we define the AMP</h3>
+<p>If you go to <a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/race_amp.js">our example</a>, you will see how simple it can be to define your own AMP:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000">define</span><span style="color:#000;font-weight:bold">([</span><span style="color:#4e9a06">&#39;pipAPI&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#39;https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js&#39;</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#204a87;font-weight:bold">function</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">APIConstructor</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">ampExtension</span><span style="color:#000;font-weight:bold">){</span>
+
+	<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">API</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">APIConstructor</span><span style="color:#000;font-weight:bold">();</span>
 	
 	
-	<span style=color:#204a87;font-weight:700>return</span> <span style=color:#000>ampExtension</span><span style=color:#000;font-weight:700>({</span>
-		<span style=color:#000>primeCats</span> <span style=color:#ce5c00;font-weight:700>:</span>  <span style=color:#000;font-weight:700>[</span>
-			<span style=color:#000;font-weight:700>{</span>
-				<span style=color:#000>nameForFeedback</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;Black people&#39;</span><span style=color:#000;font-weight:700>,</span>  <span style=color:#8f5902;font-style:italic>//Will be used in the user feedback 
-</span><span style=color:#8f5902;font-style:italic></span>				<span style=color:#000>nameForLogging</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;Black people&#39;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#8f5902;font-style:italic>//Will be used in the logging
-</span><span style=color:#8f5902;font-style:italic></span>				<span style=color:#8f5902;font-style:italic>//An array of all media objects for this category.
-</span><span style=color:#8f5902;font-style:italic></span>				<span style=color:#000>mediaArray</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
-				    <span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b01.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b02.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b03.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b04.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b05.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b06.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b07.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b08.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b09.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b10.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b11.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;b12.jpg&#39;</span><span style=color:#000;font-weight:700>}]</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">ampExtension</span><span style="color:#000;font-weight:bold">({</span>
+		<span style="color:#000">primeCats</span> <span style="color:#ce5c00;font-weight:bold">:</span>  <span style="color:#000;font-weight:bold">[</span>
+			<span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">nameForFeedback</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;Black people&#39;</span><span style="color:#000;font-weight:bold">,</span>  <span style="color:#8f5902;font-style:italic">//Will be used in the user feedback 
+</span><span style="color:#8f5902;font-style:italic"></span>				<span style="color:#000">nameForLogging</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;Black people&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">//Will be used in the logging
+</span><span style="color:#8f5902;font-style:italic"></span>				<span style="color:#8f5902;font-style:italic">//An array of all media objects for this category.
+</span><span style="color:#8f5902;font-style:italic"></span>				<span style="color:#000">mediaArray</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+				    <span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b01.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b02.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b03.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b04.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b05.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b06.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b07.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b08.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b09.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b10.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b11.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;b12.jpg&#39;</span><span style="color:#000;font-weight:bold">}]</span>
 
-			<span style=color:#000;font-weight:700>},</span> 
-			<span style=color:#000;font-weight:700>{</span>
-				<span style=color:#000>nameForFeedback</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;White people&#39;</span><span style=color:#000;font-weight:700>,</span>  <span style=color:#8f5902;font-style:italic>//Will be used in the user feedback 
-</span><span style=color:#8f5902;font-style:italic></span>				<span style=color:#000>nameForLogging</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;White people&#39;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#8f5902;font-style:italic>//Will be used in the logging
-</span><span style=color:#8f5902;font-style:italic></span>				<span style=color:#8f5902;font-style:italic>//An array of all media objects for this category.
-</span><span style=color:#8f5902;font-style:italic></span>				<span style=color:#000>mediaArray</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
-				    <span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w01.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w02.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w03.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w04.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w05.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w06.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w07.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w08.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w09.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w10.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w11.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> 
-					<span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;w12.jpg&#39;</span><span style=color:#000;font-weight:700>}]</span>
-			<span style=color:#000;font-weight:700>}</span>
-		<span style=color:#000;font-weight:700>],</span>
+			<span style="color:#000;font-weight:bold">},</span> 
+			<span style="color:#000;font-weight:bold">{</span>
+				<span style="color:#000">nameForFeedback</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;White people&#39;</span><span style="color:#000;font-weight:bold">,</span>  <span style="color:#8f5902;font-style:italic">//Will be used in the user feedback 
+</span><span style="color:#8f5902;font-style:italic"></span>				<span style="color:#000">nameForLogging</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;White people&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">//Will be used in the logging
+</span><span style="color:#8f5902;font-style:italic"></span>				<span style="color:#8f5902;font-style:italic">//An array of all media objects for this category.
+</span><span style="color:#8f5902;font-style:italic"></span>				<span style="color:#000">mediaArray</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+				    <span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w01.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w02.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w03.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w04.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w05.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w06.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w07.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w08.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w09.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w10.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w11.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> 
+					<span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;w12.jpg&#39;</span><span style="color:#000;font-weight:bold">}]</span>
+			<span style="color:#000;font-weight:bold">}</span>
+		<span style="color:#000;font-weight:bold">],</span>
 
-		<span style=color:#000>examplePrimeStimulus</span> <span style=color:#ce5c00;font-weight:700>:</span> 
-		<span style=color:#000;font-weight:700>{</span>
-			<span style=color:#000>nameForLogging</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;examplePrime&#39;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#8f5902;font-style:italic>//Will be used in the logging
-</span><span style=color:#8f5902;font-style:italic></span>			<span style=color:#8f5902;font-style:italic>//An array of all media objects for this category.
-</span><span style=color:#8f5902;font-style:italic></span>			<span style=color:#000>mediaArray</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#000;font-weight:700>[{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;ampchair.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> <span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;amplamp.jpg&#39;</span><span style=color:#000;font-weight:700>},</span> <span style=color:#000;font-weight:700>{</span><span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;ampumbrella.jpg&#39;</span><span style=color:#000;font-weight:700>}]</span>
-		<span style=color:#000;font-weight:700>},</span>
+		<span style="color:#000">examplePrimeStimulus</span> <span style="color:#ce5c00;font-weight:bold">:</span> 
+		<span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#000">nameForLogging</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;examplePrime&#39;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">//Will be used in the logging
+</span><span style="color:#8f5902;font-style:italic"></span>			<span style="color:#8f5902;font-style:italic">//An array of all media objects for this category.
+</span><span style="color:#8f5902;font-style:italic"></span>			<span style="color:#000">mediaArray</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;ampchair.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;amplamp.jpg&#39;</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;ampumbrella.jpg&#39;</span><span style="color:#000;font-weight:bold">}]</span>
+		<span style="color:#000;font-weight:bold">},</span>
 
-		<span style=color:#000>base_url</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span><span style=color:#8f5902;font-style:italic>//Where are your images at?
-</span><span style=color:#8f5902;font-style:italic></span>			<span style=color:#000>image</span> <span style=color:#ce5c00;font-weight:700>:</span> <span style=color:#4e9a06>&#39;https://baranan.github.io/minno-tasks/images/ampImages&#39;</span>
-		<span style=color:#000;font-weight:700>}</span>
-	<span style=color:#000;font-weight:700>});</span>
-<span style=color:#000;font-weight:700>});</span>
+		<span style="color:#000">base_url</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#8f5902;font-style:italic">//Where are your images at?
+</span><span style="color:#8f5902;font-style:italic"></span>			<span style="color:#000">image</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#4e9a06">&#39;https://baranan.github.io/minno-tasks/images/ampImages&#39;</span>
+		<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000;font-weight:bold">});</span>
+<span style="color:#000;font-weight:bold">});</span>
 
-</code></pre></div><h3 id=use-your-own-script-file>Use your own script file</h3><p>Did you run our race AMP successfully from your Qualtrics account? If you did, it&rsquo;s time to create your own AMP. For that, you need to create a script like our example script, and post it online. If you have your own website (e.g., a home directory hosted by your university), you can put that script on that website. It is a static file so pretty much any server will be able to serve it with no issues. Or, you can use a free online service for that. One option is GitHub Pages, which is free and <a href=https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site>easy to setup</a>.</p><p>First, just copy my code and put it on your server. Change the url in the JavaScript code you entered to Qualtrics earlier, and see that my AMP runs fine from your Qualtrics study.</p><h3 id=define-your-amp>Define your AMP</h3><p>In the first line, we tell Minno where the <a href=https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js>full AMP script</a> is:
-<code>define(['pipAPI', 'https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js'], function(APIConstructor, ampExtension){</code></p><p>Now, change your code to build the AMP you need. If you’re using photos, put them in your own directory and change your AMP script to search for images there: base_url: {image:’YOUR URL GOES HERE’}.
-If you’re using words rather than photos, you need to update the <a href=https://minnojs.github.io/minno-time/0.5/time/API.html#media>media</a> object of the categories. For instance: {word: &lsquo;Tyrone&rsquo;}.</p><p>If you want to change anything in the task, search whether it is a parameter to the task as defined at the top of the <a href=https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js>extension script</a> and override the parameter by setting it in your AMP script (as we did for a few of the parametersin the example above).</p><p>In our qualtrics-AMP <a href=https://github.com/baranan/minno-tasks/tree/master/amp/qualtrics>folder</a> on github, you will see a few examples for scripts that use our qualtrics-AMP extension. This includes <a href=https://github.com/baranan/minno-tasks/blob/master/amp/qualtrics/race7_amp.js>an AMP</a> that uses a 1-7 rating response, instead of the usual pleasant/unpleasant response.</p><h3 id=processing-the-amp-data>Processing the AMP data</h3><p>The original <a href=https://minnojs.github.io/minnojs-blog/qualtrics/>post</a> about running MinnoJS scripts from Qualtrics explains how to process the data saved by Qualtrics. To test the data of my example, Yoav created <a href=https://github.com/baranan/minno-tasks/blob/master/amp/qualtrics/minno.qualtrics.test.amp.process.rmd>this R script</a> and it might help you process and score your own data as well.</p><p>If you don’t feel comfortable using R, here is how to create a csv file with the AMP data, using Excel.</p><ol><li>Download the data from Qualtrics as csv.</li><li>Open the csv file with Excel</li><li>Copy only the cells with AMP data. For instance, because the AMP was in Q1 in my Qualtrics questionnaire, the relevant column is under Q1. Select only the cells with that data and copy those cells.</li><li>Open a notepad (or notepad++ or any other simple editor) and paste the data (the cells you copied) to that file.</li><li>Replace (usually, using ctrl-H) the text <em>“block,trial</em> with the text <em>block,trial</em> (to remove the “ before block)</li><li>Replace “”” (three double quotes) with “” (two double quotes)</li><li>Replace “” (two double quotes) with “ (one double quotes)</li><li>Save that file as a csv file</li><li>You can open that csv file to make sure that it is fine.</li></ol><h3 id=any-questions>Any questions?</h3><p>If you have any questions, you can post them in our MinnoJS Google Group, <a href="https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/minnojs">here</a>.</p><h3 id=cite-us>Cite Us</h3><p>You used MinnoJS platform, which is cited like this:</p><p><code>Zlotnick, E., Dzikiewicz, A. J., & Bar-Anan, Y. (2015). Minno.js (Version 0.3) [Computer software].</code></p><p>To cite our Qualtrics AMP script, cite this blog post:</p><p><code>Bengayev, E. (2020, July 27). Running Project Implicit’s AMP from Qulatrics [Blog post]. Retrieved from https://minnojs.github.io/minnojs-blog/qualtrics-amp/</code></p><ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5 d-print-none"><li><a href=/blog/2020/07/10/running-the-st-iat-on-qualtrics/ class="btn btn-primary"><span class=mr-1>←</span> Previous</a></li><a href=/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/ class="btn btn-primary">Next <span class=ml-1>→</span></a></li></ul></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="User mailing list" aria-label="User mailing list"><a class=text-white target=_blank rel="noopener noreferrer" href=https://groups.google.com/g/minnojs><i class="fa fa-envelope"></i></a></li></ul></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub><a class=text-white target=_blank rel="noopener noreferrer" href=https://github.com/minnojs/minno-quest><i class="fab fa-github"></i></a></li></ul></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"><small class=text-white>&copy; 2021 The Docsy Authors All Rights Reserved</small><p class=mt-2><a href=/about/>About MinnoJS</a></p></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js integrity=sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l crossorigin=anonymous></script><script src=/js/main.min.f5cc2e5dec4d9788b0c7bff27ab9fa0e38d31b70165d93b216c7a9e1718f60a7.js integrity="sha256-9cwuXexNl4iwx7/yern6DjjTG3AWXZOyFsep4XGPYKc=" crossorigin=anonymous></script></body></html>
+</code></pre></div><h3 id="use-your-own-script-file">Use your own script file</h3>
+<p>Did you run our race AMP successfully from your Qualtrics account? If you did, it&rsquo;s time to create your own AMP. For that, you need to create a script like our example script, and post it online. If you have your own website (e.g., a home directory hosted by your university), you can put that script on that website. It is a static file so pretty much any server will be able to serve it with no issues. Or, you can use a free online service for that. One option is GitHub Pages, which is free and <a href="https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">easy to setup</a>.</p>
+<p>First, just copy my code and put it on your server. Change the url in the JavaScript code you entered to Qualtrics earlier, and see that my AMP runs fine from your Qualtrics study.</p>
+<h3 id="define-your-amp">Define your AMP</h3>
+<p>In the first line, we tell Minno where the <a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js">full AMP script</a> is:
+<code>define(['pipAPI', 'https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js'], function(APIConstructor, ampExtension){</code></p>
+<p>Now, change your code to build the AMP you need. If you’re using photos, put them in your own directory and change your AMP script to search for images there: base_url: {image:’YOUR URL GOES HERE’}.
+If you’re using words rather than photos, you need to update the <a href="https://minnojs.github.io/minno-time/0.5/time/API.html#media">media</a> object of the categories. For instance: {word: &lsquo;Tyrone&rsquo;}.</p>
+<p>If you want to change anything in the task, search whether it is a parameter to the task as defined at the top of the <a href="https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/amp/qualtrics/qamp.js">extension script</a> and override the parameter by setting it in your AMP script (as we did for a few of the parametersin the example above).</p>
+<p>In our qualtrics-AMP <a href="https://github.com/baranan/minno-tasks/tree/master/amp/qualtrics">folder</a> on github, you will see a few examples for scripts that use our qualtrics-AMP extension. This includes <a href="https://github.com/baranan/minno-tasks/blob/master/amp/qualtrics/race7_amp.js">an AMP</a> that uses a 1-7 rating response, instead of the usual pleasant/unpleasant response.</p>
+<h3 id="processing-the-amp-data">Processing the AMP data</h3>
+<p>The original <a href="https://minnojs.github.io/minnojs-blog/qualtrics/">post</a> about running MinnoJS scripts from Qualtrics explains how to process the data saved by Qualtrics. To test the data of my example, Yoav created <a href="https://github.com/baranan/minno-tasks/blob/master/amp/qualtrics/minno.qualtrics.test.amp.process.rmd">this R script</a> and it might help you process and score your own data as well.</p>
+<p>If you don’t feel comfortable using R, here is how to create a csv file with the AMP data, using Excel.</p>
+<ol>
+<li>Download the data from Qualtrics as csv.</li>
+<li>Open the csv file with Excel</li>
+<li>Copy only the cells with AMP data. For instance, because the AMP was in Q1 in my Qualtrics questionnaire, the relevant column is under Q1. Select only the cells with that data and copy those cells.</li>
+<li>Open a notepad (or notepad++ or any other simple editor) and paste the data (the cells you copied) to that file.</li>
+<li>Replace (usually, using ctrl-H) the text <em>“block,trial</em> with the text <em>block,trial</em> (to remove the “ before block)</li>
+<li>Replace “”” (three double quotes) with “” (two double quotes)</li>
+<li>Replace “” (two double quotes) with “ (one double quotes)</li>
+<li>Save that file as a csv file</li>
+<li>You can open that csv file to make sure that it is fine.</li>
+</ol>
+<h3 id="any-questions">Any questions?</h3>
+<p>If you have any questions, you can post them in our MinnoJS Google Group, <a href="https://groups.google.com/forum/?utm_medium=email&amp;utm_source=footer#!forum/minnojs">here</a>.</p>
+<h3 id="cite-us">Cite Us</h3>
+<p>You used MinnoJS platform, which is cited like this:</p>
+<p><code>Zlotnick, E., Dzikiewicz, A. J., &amp; Bar-Anan, Y. (2015). Minno.js (Version 0.3) [Computer software].</code></p>
+<p>To cite our Qualtrics AMP script, cite this blog post:</p>
+<p><code>Bengayev, E. (2020, July 27). Running Project Implicit’s AMP from Qulatrics [Blog post]. Retrieved from https://minnojs.github.io/minnojs-blog/qualtrics-amp/</code></p>
+
+	
+
+	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5 d-print-none">
+  <li>
+    <a href="/blog/2020/07/10/running-the-st-iat-on-qualtrics/" class="btn btn-primary "><span class="mr-1">←</span> Previous</a>
+  </li>
+    <a href="/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/" class="btn btn-primary ">Next <span class="ml-1">→</span></a>
+  </li>
+</ul>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://groups.google.com/g/minnojs">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="https://github.com/minnojs/minno-quest">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2021 The Docsy Authors All Rights Reserved</small>
+        
+	
+		<p class="mt-2"><a href="/about/">About MinnoJS</a></p>
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"></script>
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.min.f5cc2e5dec4d9788b0c7bff27ab9fa0e38d31b70165d93b216c7a9e1718f60a7.js" integrity="sha256-9cwuXexNl4iwx7/yern6DjjTG3AWXZOyFsep4XGPYKc=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>
