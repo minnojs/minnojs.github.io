@@ -43,11 +43,10 @@ pygmentsUseClassic = false
 # See https://help.farbox.com/pygments.html
 pygmentsStyle = "tango"
 
-[menu]
-  [[menu.main]]
+[[menu.main]]
     name = "Forum"
-    url = "https://groups.google.com/g/minnojs"
     weight = 110
+    url = "https://groups.google.com/g/minnojs/"
 
 # Configure how URLs look like per section.
 [permalinks]
