@@ -582,6 +582,14 @@ If you do not define a logger for a task, it will default to the logger defined 
 &lt;td>pulse&lt;/td>
 &lt;td>Allows you to post your data in pulses of &amp;ldquo;pulse&amp;rdquo; logs instead of all at the end of the task (Does not work for csv logger).&lt;/td>
 &lt;/tr>
+&lt;tr>
+&lt;td>saveLocal&lt;/td>
+&lt;td>Only for the csv logger: save data to participant computer as csv file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fileName&lt;/td>
+&lt;td>Only for the csv logger: set the file name for files save using &lt;code>saveLocal&lt;/code>.&lt;/td>
+&lt;/tr>
 &lt;/tbody>
 &lt;/table>
 &lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000">API&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">addSettings&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;logger&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -609,7 +617,7 @@ You can change the logging style by setting the logger &lt;code>type&lt;/code> a
 &lt;/tr>
 &lt;tr>
 &lt;td>csv&lt;/td>
-&lt;td>Posts all data as CSV at the end of the manager. If you are creating a manager that does not fully complete (for instance, when you have a message as your last page), use the postCSV task in addition to settings the log type to csv.&lt;/td>
+&lt;td>Posts all data as CSV at the end of the manager. If you are creating a manager that does not fully complete (for instance, when you have a message as your last page), use the &lt;a href="/docs/manager/tasks/postcsv/">postCsv&lt;/a> task in addition to settings the log type to csv.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>debug&lt;/td>
