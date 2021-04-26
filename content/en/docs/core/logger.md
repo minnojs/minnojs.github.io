@@ -16,6 +16,8 @@ property    | description
 url         | The url to send to. If it is not set, data will not be sent.
 type        | The strategy to use for sending logs to the server. See options below.
 pulse       | Allows you to post your data in pulses of "pulse" logs instead of all at the end of the task (Does not work for csv logger).
+saveLocal   | Only for the csv logger: save data to participant computer as csv file.
+fileName    | Only for the csv logger: set the file name for files save using `saveLocal`.
 
 ```javascript
 API.addSettings('logger', {
@@ -32,7 +34,7 @@ type    | description
 ------- | -----------
 old     | Uses the post strategy implemented by the old PI server
 new     | Uses the post strategy implemented by the new server  
-csv     | Posts all data as CSV at the end of the manager. If you are creating a manager that does not fully complete (for instance, when you have a message as your last page), use the postCSV task in addition to settings the log type to csv.
+csv     | Posts all data as CSV at the end of the manager. If you are creating a manager that does not fully complete (for instance, when you have a message as your last page), use the [postCsv](/docs/manager/tasks/postcsv/) task in addition to settings the log type to csv.
 debug   | Logs all posts to the console. Do not do this in production! These logs aren't posted to the server at all!
 
 You can change the logging strategy or even create new strategies.
