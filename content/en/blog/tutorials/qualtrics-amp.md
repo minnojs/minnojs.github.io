@@ -1,5 +1,5 @@
 ---
-title: Running the AMP on Qulatrics
+title: Running the AMP on Qualtrics
 linkTitle: Qualtrics AMP
 date: 2020-07-27
 author: Elinor Bengayev
