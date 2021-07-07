@@ -1,5 +1,5 @@
 ---
-title: Running the Evaluative Priming Task on Qulatrics
+title: Running the Evaluative Priming Task on Qualtrics
 linkTitle: Qualtrics priming
 date: 2020-08-07
 author: Gal Maimon
