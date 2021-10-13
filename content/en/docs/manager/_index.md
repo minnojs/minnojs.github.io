@@ -1,28 +1,128 @@
 ---
-title: Study manager
+title: Study Manager
 weight: 40
-description: "*minno-manager* is part of MinnoJS, it is reponsible for orchestrating multiple tasks within a single experiment."
+description: "Study Manager provides a set of tools to organize and present tasks to participants"
 ---
 
-miManager is a player intent on presenting a series of tasks to the users. It uses the same overall API used throught the project implicit tasks.
+Think of the Study Manager as the code that organizes your study, survey, or experiment.
+Within Study Manager you will:
 
-It is written in JavaScript and is built to be extremely versatile and customizable. 
-The scripts are written as JavaScript objects. 
-This format allows writing simple and straightforward scripts using a constrained scripting language.
-The format also allows advanced users to easily create complex and dynamic scripts using in-line JavaScript.
+1. Define the tasks that comprise the study, and
+2. Define the order those tasks are presented to participants
 
-### Central concepts
+There are many types of tasks you can add to the Study Manager but the most common are questionnaires and time-sensitive tasks.
+For the full list, see this [page](https://minnojs.github.io/docs/manager/tasks/). 
 
-The basic unit it PImanager scripts is the task.
-A task is represented by a single object, the properties of the object define the task to be activated and some settings relevant to it.
-Tasks are organized and presented using the task sequence.
-The sequence is an ordered list of tasks.
+Advanced users may also use the Study Manager to define global variables all tasks can access or change the global settings of the study. 
+You can learn more about the global settings [here](https://minnojs.github.io/docs/manager/api/settings/).
 
-Within the sequence you can use several tools in order to control the flow of your tasks.
-[mixers](../basics/sequencer.html#mixer) control the order in which your tasks are presented (and allow you to change the sequence conditionally).
-[inheritance](../basics/sequencer.html#inheritance) allows abstracting tasks and makes them shorter, simpler, more dynamic, and most important, reusable.
-And finally [templates](../basics/sequencer.html#templates) allow you to micro manage the style of your tasks.
 
-### Tasks
-There are four types of tasks built into miManager [miQuest](../quest/overview.html), [miTime](/mino-time/0.3/tutorials/overview.html), [messages](messages.html) and [post](post.html).
-You can run new tasks in several ways (see the [API](API.html#tasks)).
+The Study Manager exists in a ‘mgr.js’ file.
+Start this file by defining a manager object:
+
+```javascript
+define(['managerAPI'], function(Manager) {
+    var API = new Manager();
+	  API.setName('mgr');
+});
+```
+
+Now you must tell Study Manger the tasks to include in your study. 
+Learn about the types of tasks [here](https://minnojs.github.io/docs/manager/tasks/).
+Let’s imagine your study consists of three tasks:
+
+1. An informed consent page defined in the file ‘consent.js’
+2. A self-esteem questionnaire defined in the file ‘rosenberg.js’
+3. A debriefing page defined in the file ‘debrief.js’
+
+You add these tasks to the Study Manager with the following code:
+
+```
+API.addTasksSet({
+  consent: [{
+    type: 'quest',
+    name: 'consent',
+    scriptUrl: 'consent.js'
+  }],
+
+  rosenberg: [{
+    type: 'quest',
+    name: 'rosenberg',
+    scriptUrl: 'rosenberg.js'
+  }],
+
+  debriefing: [{
+    type:'message',
+    name:'lastpage’,
+    scriptUrl: ‘debrief.js’, 
+    last:true   
+  }]    
+});
+```
+Notice that each task is given a ‘name.’
+You will use that name to refer to each task in the next section.
+
+The next task is to define the order in which the tasks are presented to participants. 
+This is referred to as the ‘sequence.’
+Use the addSequence() function to define the sequence (i.e., order) the tasks are presented to participants. 
+You can learn more about the addSequence() function [here](https://minnojs.github.io/docs/sequencer/).
+
+```
+API.addSequence([
+	  {inherit: 'consent'},
+    {inherit: 'rosenbergSelfEsteem'},
+    {inherit: 'lastpage'}
+ ]);
+```
+You can learn more about inheritance and the 'inherit' command [here] (https://minnojs.github.io/docs/sequencer/inheritance/).
+
+Sequences can be much more complicated using mixers.
+With mixers you can randomize the order of tasks, add conditional branches, and use random assignment.
+You can learn more about mixers [here](https://minnojs.github.io/docs/sequencer/mixer/) 
+
+Finally, you must write a line of code that starts the study running!
+
+```
+  return API.script;
+```
+And that’s it!
+See the full example below. 
+Also you can run a working example [here](https://minnojs.github.io/docs/manager/examples/weight/)
+
+
+```javascript
+define(['managerAPI'], function(Manager) {
+    var API = new Manager();
+	  API.setName('mgr');
+
+API.addTasksSet({
+ consent: [{
+    type: 'quest',
+    name: 'consent',
+    scriptUrl: 'consent.js'
+  }],
+
+  rosenberg: [{
+    type: 'quest',
+    name: 'rosenberg',
+    scriptUrl: 'rosenberg.js'
+  }],
+
+  debriefing: [{
+    type:'message',
+    name:'lastpage’,
+    scriptUrl: ‘debrief.js’, 
+    last:true   
+  }]    
+});
+
+API.addSequence([
+	  {inherit: 'consent'},
+    {inherit: 'rosenbergSelfEsteem'},
+    {inherit: 'lastpage'}
+ ]);
+
+ return API.script;
+
+});
+```
