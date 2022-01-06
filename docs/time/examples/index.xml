@@ -367,6 +367,36 @@ conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
 actions: [{type:&amp;#39;endTrial&amp;#39;}]
 }
 ]
+},
+{
+input: [
+// This is an idiom for creating a custom input
+// It is quite advanced, so don&amp;#39;t fret if you don&amp;#39;t understand everything
+// The wrapper function allows us to keep a reference to the listener function
+(function(){
+var $listener;
+return {
+handle: &amp;#39;end&amp;#39;,
+// Setup input listener
+on: function(inputObj, canvas, stream){
+$listener = stream();
+window.addEventListener(&amp;#39;resize&amp;#39;, $listener);
+return $listener;
+},
+// clean listener (for removeInput actions, and end of trial)
+off: function(){
+window.removeEventListener(&amp;#39;resize&amp;#39;, $listener);
+}
+}
+})()
+],
+layout: [{media :{word:&amp;#39;resize the screen&amp;#39;}}],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
 }
 ]);
 return API.script;
