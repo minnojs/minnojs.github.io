@@ -84,13 +84,24 @@ Protip: In addition to the preset input types you can create custom input:
 ```javascript
     {
         handle: 'myInput',
-        on: function(callback){
-            // do your mojo here and then
-            // where e is the raw event, and 'eventType' is the name of this event
-            callback(e, 'eventType');
+        /**
+        * @arguments inputObj<Object>: the full input object passed to Minno
+        * @arguments canvas<HTMLelement>: the canvas element
+        * @arguments stream<Function>: the constructor for a mithril stream
+        * returns Stream
+        **/
+        on: function(inputObj, canvas, stream){
+            var $listener = stream(); // set up listener
+            // trigger listener after 5000ms
+            API.getCurrent().timerID = setTimeout(function(){
+                $listener({}); 
+            }, 5000);
+            // must return a stream
+            return $listener;
         },
         off: function(){
-            // remove your listener (if you need to keep state you can encapsulate the whole input object in a module)
+            // clear listener (get's called when you remove an input)
+            clearTimeout(API.getCurrent().timerID)
         }
     }
 ```
