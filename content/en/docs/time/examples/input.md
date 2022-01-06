@@ -101,6 +101,39 @@ define(['timeAPI'], function(APIconstructor) {
 					actions: [{type:'endTrial'}]
 				}
 			]
+		},
+		
+		{
+			input: [
+                // This is an idiom for creating a custom input
+                // It is quite advanced, so don't fret if you don't understand everything
+                // The wrapper function allows us to keep a reference to the listener function
+               (function(){
+                    var $listener;
+
+                    return {
+                        handle: 'end',
+                        // Setup input listener
+                        on: function(inputObj, canvas, stream){
+                            $listener = stream();
+                            window.addEventListener('resize', $listener);
+                            return $listener;
+                        },
+                        // clean listener (for removeInput actions, and end of trial)
+                        off: function(){
+                            window.removeEventListener('resize', $listener);
+                        }
+                    }   
+                })()
+			],
+			layout: [{media :{word:'resize the screen'}}],
+			interactions: [
+				{
+					conditions: [{type:'inputEquals',value:'end'}],
+					actions: [{type:'endTrial'}]
+				}
+			]
+			
 		}
 	]);
 
