@@ -153,7 +153,7 @@ If you don’t want to change the default value of an argument, you don’t need
 If you change even one parameter within a child object (i.e., within a property that is an object, such as the property *category2*), you must define the whole object in your own code (as we did with category1 and category2 in the example above). 
 The only parameters that we changed in the example above are the categories, the attributes (labels and stimuli), the "isTouch" arguments that define whether this task currently runs on a touch-device, and the url for the folder that hosts the images. 
 
-Note that in the example, when we defined the stimulus words for the attribute categories, we used some code in order to get them (e.g., "word: global.posWords[6]") from a previous step of this study. If you want to change the words, you can simply write them directly in that file. For example:
+Note that in the example, when we defined the stimulus words for the attribute categories, we used some code in order to get them (e.g., `word: global.posWords[6]`) from a previous step of this study. If you want to change the words, you can simply write them directly in that file. For example:
 ```js
             stimulusMedia : [ 
                 {word: 'Fantastic',
