@@ -201,9 +201,9 @@ A couple of notes about these IATs:
 * In the evaluative IATs, for each participant, we randomly choose eight positive and eight negative attribute words from a sets of 48 positive and 48 negativewords, based on [Axt et al. (2021)](https://doi.org/10.3758/s13428-021-01592-8). 
 * In the Sexuality IAT, for each participant, we randomly choose whether the Gay category would refer to women or men, or both. When you process the data, to know which IAT each  participant completed, use the stimuli in the IAT data.
 
-### Launching from another platform
+### How to run the study
 
-Probably, you will launch your study from a platform that is accessible to your participants (e.g., a Sona website, MTurk, Prolific). The relevant URL is the address of the html file. For example, the [exampleiat.html](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/exampleiat.html) in the example study. But, remember to provide the URL that shows the file, not its code. For example, `https://baranan.github.io/minno-tasks/studies/datapipe.example.iat/exampleiat.html` is the URL for my example. 
+Probably, you will launch your study from a platform that is accessible to your participants (e.g., a Sona website, MTurk, Prolific). The relevant URL is the address of the html file. For example, the [exampleiat.html](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/exampleiat.html) in the example study. But, remember to provide the URL that shows the file, not its code. For example, `https://baranan.github.io/minno-tasks/studies/datapipe.example.iat/exampleiat.html` is the URL for my example, whereas `https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/exampleiat.html` is the url to the code of that file. 
 
 At the end of the study, you might want to redirect your participants back to the platform. For example, [this study](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.iat.examples/prolific.iat) redirects participants back to Prolific. 
 The relevant code for the redirection is in the [manager file](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.iat.examples/prolific.iat/mgr.js):
@@ -218,6 +218,10 @@ The relevant code for the redirection is in the [manager file](https://github.co
 
 This code defines a task that redirects participant to the specified URL. That task is added to the end of the sequence in this line:<br/>
 `{inherit: 'redirect'}`
+
+### How to test the study
+
+You can use the launch URL for testing your study. As a reminder, the launch URL is the html file served under the URL that starts with `username.github.io`, whereas the code itself can be see in the URL that starts with `github.com`. 
 
 ### Presenting a feedback to the participant 
 
