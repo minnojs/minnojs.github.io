@@ -51,7 +51,7 @@ You can read more about the basic idea of using extensions in Minno on [this pag
 
 ### How we define the IAT
 
-If you go to [our example](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js), you will see one example for how to define your own IAT:
+If you go to [our example study](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js), you will see how to define an IAT:
 
 ```js
 define(['pipAPI','https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js'], function(APIConstructor, iatExtension){
