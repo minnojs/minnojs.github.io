@@ -166,13 +166,13 @@ Note that in the example, when we defined the stimulus words for the attribute c
 
 We used more complicated code for the attribute stimuli (e.g., `word: global.posWords[6]`) because we randomly select the attribute words from a larger pool of words, as recommended by [Axt et al. (2021)](https://doi.org/10.3758/s13428-021-01592-8).
 
-To change your code to build the IAT you need. If you’re using photos, put them in your own directory and change your IAT script to search for images there: base_url: {image:’YOUR URL GOES HERE’}.
-If you’re using words rather than photos, you need to update the [media](https://minnojs.github.io/minno-time/0.5/time/API.html#media) object of the categories. For instance: {word: 'Tyrone'}.
+To change your code to build the IAT you need. If you’re using photos, put them in your own directory and change your IAT script to search for images there: `base_url: {image:’YOUR URL GOES HERE’}`.
+If you’re using words rather than photos, you need to update the [media](https://minnojs.github.io/minno-time/0.5/time/API.html#media) object of the categories. For instance: `{word: 'Tyrone'}.`
 
 If you want to update the attributes, see how the attributes are defined in the [extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) and override them by defining your own attributes in your IAT script.
 
-Although our IAT script supports touch devices, the IAT does not detect automatically whether the participant is using a touch device (e.g., mobile). Therefore, if you want your participants to run the IAT on a mobile device or a tablet, you will need to create an IAT version specifically for those participants (in your script, set isTouch:true in the IAT parameters). 
-In the example study, we use Minno's internal detection at the beginning of the study, in the [manager file](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js) in the following line:<br/>
+Although our IAT script supports touch devices, the IAT does not detect automatically whether the participant is using a touch device (e.g., mobile). Therefore, if you want your participants to run the IAT on a mobile device or a tablet, it might be best to an IAT version specifically for those participants (in your script, set isTouch:true in the IAT parameters). 
+This is not what we have done in the example study. Rather, in the example study, we use Minno's internal detection at the beginning of the study, in the [manager file](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js) in the following line:<br/>
 
 `{ type: 'isTouch' }, //Use Minno's internal touch detection mechanism. `
 
