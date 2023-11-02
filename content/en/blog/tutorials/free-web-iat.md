@@ -31,7 +31,7 @@ If you want to hire someone to help you out, you can contact [me](mailto:baranan
 
 DataPipe is a service that was developed to allow saving data directly into the OSF. 
 There are some steps you need to follow in your OSF account and your DataPipe account, in order to create a token that MinnoJS can use to save your study data. [DataPipe](https://pipe.jspsych.org/) explains all of that. 
-DataPipe will provide you a token that you are supposed to use in a JavaScript script in order to save the data. We already wrote that JavaScript file, 
+DataPipe will provide you a token that you are supposed to use in a JavaScript script in order to save the data directly on the OSF. We already wrote that JavaScript file, 
 so all that we need from you is the token provided by DataPipe. 
 You provide that code in the following line of code, in the [mgr.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js) file:
 
