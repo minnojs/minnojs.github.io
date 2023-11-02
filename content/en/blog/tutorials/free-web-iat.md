@@ -3,7 +3,6 @@ title: Running Project Implicit’s IAT on your own
 linkTitle: Free Web IAT
 date: 2023-11-01
 author: yoav_bar_anan
-draft: false
 ---
 
 [Project Implicit](http://projectimplicit.net/) has developed [MinnoJS](https://minnojs.github.io/) to program web studies. 
