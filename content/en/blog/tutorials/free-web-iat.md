@@ -185,7 +185,7 @@ If you want an example how to analyze the data from the [example study](https://
 
 ### Using Project Implicit's IATs
 
-We posted [online](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.iat.examples/demo.iats/), many of Project Implicit's IATs. 
+We posted [online](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.iat.examples/demo.iats/), many of Project Implicit's IATs. You can experience them in [this study](https://baranan.github.io/minno-tasks/studies/datapipe.iat.examples/demo.iats/exampleiat.html).
 
 You can duplicate them to your own server, or just call them directly from your own study. That is, when you define the IAT in your manager file, you can use the full url of the IAT you want to use:<br/>
 
