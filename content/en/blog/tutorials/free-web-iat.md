@@ -223,6 +223,8 @@ This code defines a task that redirects participant to the specified URL. That t
 
 You can use the launch URL for testing your study. As a reminder, the launch URL is the html file served under the URL that starts with `username.github.io`, whereas the code itself can be see in the URL that starts with `github.com`. 
 
+IMPORTANT: Make sure to verify that the data are saved in your OSF project as you expect them and that you know how to analyze the data **before** you start running the study. 
+
 ### Presenting a feedback to the participant 
 
 In Project Implicit, for eductional purpopses, at the end of many of our studies, participants see the common interpertation of their IAT result.  In experiments in other settings (e.g., in the lab), I usually don't do that. When we present feedback in Project Implicit's website, we provide much context to the participant, to make sure they don't think that the feedback is more than an educational tool. The IAT (like all the other "implicit measures") is not accurate enough to provide a reliable estimate of attitudes for each participant. Therefore, I strongly recommend not to present feedback to your participants. 
