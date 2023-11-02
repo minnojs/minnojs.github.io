@@ -27,16 +27,6 @@ and insert your DataPipe token in the right place (see below), to allow saving t
 
 If you want to hire someone to help you out, you can contact [me](mailto:baranan@tauex.tau.ac.il).
 
-### Project Implicit's MinnoJS IAT extension 
-
-In the example, the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js) file is the script that defines the IAT. 
-That script uses a MinnoJS [IAT extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) that I programmed for Project Implicit. 
-
-The script that we created for building IATs is an extension, implemented as a function that creates an IAT from a few arguments (i.e., parameters) that the researcher defines. 
-You can read more about the basic idea of using extensions in Minno on [this page](https://github.com/baranan/minno-tasks/blob/master/implicitmeasures.md).
-
-**IMPORTANT NOTE:** to skip blocks when you’re testing the IAT, use the key combination: Esc, Enter.
-
 ### Using DataPipe
 
 DataPipe is a service that was developed to allow saving data directly into the OSF. 
@@ -48,6 +38,16 @@ You provide that code in the following line of code, in the [mgr.js](https://git
 ```js
 init_data_pipe(API, 'YOURDATAPIPETOKENGOESHERE', 'csv'); 
 ```
+
+### Project Implicit's MinnoJS IAT extension 
+
+In the example, the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js) file is the script that defines the IAT. 
+That script uses a MinnoJS [IAT extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) that I programmed for Project Implicit. 
+
+The script that we created for building IATs is an extension, implemented as a function that creates an IAT from a few arguments (i.e., parameters) that the researcher defines. 
+You can read more about the basic idea of using extensions in Minno on [this page](https://github.com/baranan/minno-tasks/blob/master/implicitmeasures.md).
+
+**IMPORTANT NOTE:** to skip blocks when you’re testing the IAT, use the key combination: Esc, Enter.
 
 ### How we define the IAT
 
