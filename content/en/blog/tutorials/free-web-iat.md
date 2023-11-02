@@ -1,6 +1,7 @@
 ---
-layout: post
 title: Running Project Implicit’s IAT on your own
+linkTitle: Free Web IAT
+date: 2023-11-02
 author: yoav_bar_anan
 ---
 
