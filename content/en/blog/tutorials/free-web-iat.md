@@ -165,9 +165,9 @@ Note that in the example, when we defined the stimulus words for the attribute c
             ],
 ```
 
-We used more complicated code for the attribute stimuli (e.g., `word: global.posWords[6]`) because we randomly select the attribute words from a larger pool of words, as recommended by [Axt et al. (2021)](https://doi.org/10.3758/s13428-021-01592-8).
+In our example, we used a more complicated code for the attribute stimuli (e.g., `word: global.posWords[6]`) because we randomly select the attribute words from a larger pool of words, as recommended by [Axt et al. (2021)](https://doi.org/10.3758/s13428-021-01592-8).
 
-To change your code to build the IAT you need. If you’re using photos, put them in your own directory and change your IAT script to search for images there: `base_url: {image:’YOUR URL GOES HERE’}`.
+If you’re using photos, put them in your own directory and change your IAT script to search for images there: `base_url: {image:’YOUR URL GOES HERE’}`.
 If you’re using words rather than photos, you need to update the [media](https://minnojs.github.io/minno-time/0.5/time/API.html#media) object of the categories. For instance: `{word: 'Tyrone'}.`
 
 If you want to update the attributes, see how the attributes are defined in the [extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) and override them by defining your own attributes in your IAT script.
