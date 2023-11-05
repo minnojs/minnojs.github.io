@@ -49,6 +49,8 @@ In order for our studies to run, we need them to be hosted on such a server that
 
 MinnoJS provides several solutions for deploying to the web, depending on your needs.
 
+The most simple solution is to run a MinnoJS study using free services such as Github Pages, DataPipe, and the OSF. [This post](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/) explains how to create an IAT study using those free services. Github Pages will serve the files, and DataPipe and the OSF will save your data.
+
 The full [Minno Suite](server) provides an environment for calaboratively developing MinnoJS studies,
 including a research dashboard, a study editor, and tools for callaboration and study management.
 However, the Minno Suite requires some know how for installation and a server (e.g., one installed by your university IT),
@@ -60,7 +62,7 @@ Its big advantage is that PHP servers are easy to set up, and that free servers 
 However, it does not scale well to multiple studies, and requires direct tinkering with the files.
 For detailed instructions on how to set it up see [this blog post](/blog/2020/03/12/simple-csv-server).
 
-Some commercial sollutions exist that allow direct pluging in of MinnoJS studies.
+Some commercial solutions exist that allow direct pluging in of MinnoJS studies.
 You can [integrate](/blog/2020/01/01/using-minno-with-qualtrics) time sensitive tasks in [Qualtrics](www.qualtrics.com).
 We have a few ready-made extentions that can help you run on Qualtrics tasks such as the [IAT](https://minnojs.github.io/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/), the [AMP](https://minnojs.github.io/blog/2020/07/27/running-the-amp-on-qulatrics/), and [Evaluative Priming](https://minnojs.github.io/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/). You can also run Minno.js studies on [Pavlovia](https://minnojs.github.io/blog/2021/03/17/using-minnojs-with-pavlovia/).
 
