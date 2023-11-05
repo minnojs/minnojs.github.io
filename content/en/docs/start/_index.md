@@ -11,6 +11,9 @@ Creating an online task involves two processes: composing the task, and making i
 MinnoJS offers a full suite of tools for accomplishing both of these tasks.
 
 ## Composing a task
+Most users copy an existing study and modify it to serve their purposes. Therefore, you can use MinnoJS even if you have no programming knowledge. For example, see [this post](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/) about how to duplicate an Implicit Association Test study and modify it. 
+
+However,  if you know how to program, you will be able to create any study you want with our services. 
 Tasks in MinnoJS are represented by simple text files.
 These text files include the instructions needed to implement your task.
 You can learn the basics of how to write these instructions in the [Core concepts](../core) section.
