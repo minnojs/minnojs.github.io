@@ -18,6 +18,12 @@ In short, you need to:
 3. Create a [DataPipe](https://pipe.jspsych.org/) account in order to save your study data directly on the OSF.
 4. In the manager file (e.g., [this](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js), if you copied my example), replace the DATAPIPETOKEN with your datapipe token. 
 
+### A quick start
+
+Start by just completing the first stage: copy the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) to your own directory on a static website (e.g., under your [Github Pages](https://docs.github.com/en/pages) directory, or as a new directory on your personal website, if you have one). In a web browser, load the full URL to the file exampleiat.html on that directory. That's it, you should be able to run the example study from start to end. 
+
+Worked? Great, now read on to understand how to modify the study and save your data.
+
 ### MinnoJS
 
 [MinnoJS](https://minnojs.github.io/) is a JavaScript framework for programming web studies. 
