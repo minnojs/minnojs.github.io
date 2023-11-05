@@ -42,7 +42,7 @@ init_data_pipe(API, 'YOURDATAPIPETOKENGOESHERE', 'csv');
 
 ### Project Implicit's MinnoJS IAT extension 
 
-In the example, the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js) file is the script that defines the IAT. 
+In the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat), the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js) file is the script that defines the IAT. 
 That script uses a MinnoJS [IAT extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) that I programmed for Project Implicit. 
 
 The script that we created for building IATs is an extension, implemented as a function that creates an IAT from a few arguments (i.e., parameters) that the researcher defines. 
