@@ -2589,6 +2589,7 @@ errorLatency : {use:&amp;quot;penalty&amp;quot;, penalty:600, useForSTD:true},
 &lt;h3 id="education">Education&lt;/h3>
 &lt;p>Here are some presentations good for introducing the essentials of the PI system:&lt;/p>
 &lt;ul>
+&lt;li>You can expeirence an internal workshop Project Implicit conducted by visiting &lt;a href="https://docs.google.com/document/d/1bDJYaNuVKaABL26SANU0U4EOSFOHF4RkOUT-fLzhCBQ/edit">this document&lt;/a>. It has a link to a youtube playlist with a few lectures, but it is probably better to skip those and focus on completing the three exercises that we had in the workshop.&lt;/li>
 &lt;li>A lab presentation about integrating miManager with Project implicit, including comparison to &lt;code>expt&lt;/code> files: &lt;a href="http://slides.com/andydzik/deck">presentation&lt;/a>, &lt;a href="https://dw2.psyc.virginia.edu/implicit/showfiles.jsp?user=andy&amp;amp;study=sample/pimanager">sample study&lt;/a>.&lt;/li>
 &lt;li>A &lt;a href="http://eladzlot.github.io/pi-presentations/basics.html">presentation&lt;/a> focused on various features of the sequencer.&lt;/li>
 &lt;/ul>
