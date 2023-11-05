@@ -13,7 +13,7 @@ If you reached this blog post, you probably know what the IAT is and you want to
 ### Overview
 
 In short, you need to:
-1. Copy an [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) of a MinnoJS IAT study into your directory on a static web server. For example, you can create a [github](https://github.com/) account for free and post your files on [Github Pages](https://docs.github.com/en/pages).
+1. Copy an [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) of a MinnoJS IAT study into your directory on a static web server. For example, you can create a [github](https://github.com/) account for free and post your files on [Github Pages](https://docs.github.com/en/pages) or [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/).
 2. Create an [OSF account](https://osf.io/).
 3. Create a [DataPipe](https://pipe.jspsych.org/) account in order to save your study data directly on the OSF.
 4. In the manager file (e.g., [this](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js), if you copied my example), replace the DATAPIPETOKEN with your datapipe token. 
@@ -21,6 +21,7 @@ In short, you need to:
 ### A quick start
 
 Start by just completing the first stage: copy the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) to your own directory on a static website (e.g., under your [Github Pages](https://docs.github.com/en/pages) directory, or as a new directory on your personal website, if you have one). In a web browser, load the full URL to the file exampleiat.html on that directory. That's it, you should be able to run the example study from start to end. 
+Tip: You can download the whole example directory as a zip folder by pasting "https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat" into the input box in [this website](https://download-directory.github.io/). Then, upload all the files to your own [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/) of Githab Page.
 
 Worked? Great, now read on to understand how to modify the study and save your data.
 
