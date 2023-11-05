@@ -65,9 +65,9 @@ Its big advantage is that PHP servers are easy to set up, and that free servers 
 However, it does not scale well to multiple studies, and requires direct tinkering with the files.
 For detailed instructions on how to set it up see [this blog post](/blog/2020/03/12/simple-csv-server).
 
-Some commercial solutions exist that allow direct pluging in of MinnoJS studies.
+In the past, we developed some examples that show you how to integrate MinnoJS studies with commercial solutions:
 You can [integrate](/blog/2020/01/01/using-minno-with-qualtrics) time sensitive tasks in [Qualtrics](www.qualtrics.com).
-We have a few ready-made extentions that can help you run on Qualtrics tasks such as the [IAT](https://minnojs.github.io/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/), the [AMP](https://minnojs.github.io/blog/2020/07/27/running-the-amp-on-qulatrics/), and [Evaluative Priming](https://minnojs.github.io/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/). You can also run Minno.js studies on [Pavlovia](https://minnojs.github.io/blog/2021/03/17/using-minnojs-with-pavlovia/).
+We have a few ready-made extentions that can help you run on Qualtrics tasks such as the [IAT](https://minnojs.github.io/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/), the [AMP](https://minnojs.github.io/blog/2020/07/27/running-the-amp-on-qulatrics/), and [Evaluative Priming](https://minnojs.github.io/blog/2020/08/07/running-the-evaluative-priming-task-on-qulatrics/). You can also run Minno.js studies on [Pavlovia](https://minnojs.github.io/blog/2021/03/17/using-minnojs-with-pavlovia/). However, **we stopped developing extensions for services such as Qualtrics and Pavlovia** and recommend using free services instead, as described at the begginning of this section (i.e., using Github Pages, DataPipe, and the OSF). 
 
 Finally, if you just want to test something out you can use the [playgrounds](/) on this site for single tasks.
 And many times it is useful to run a [local server](/blog/2020/02/01/develop-localy-with-minnojs) so that you can get swift feedback on each change that you make.
