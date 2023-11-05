@@ -226,11 +226,19 @@ You can use the launch URL for testing your study. As a reminder, the launch URL
 
 IMPORTANT: Make sure to verify that the data are saved in your OSF project as you expect them and that you know how to analyze the data **before** you start running the study. 
 
+### Not using github pages
+
+In the example, we used github pages because anyone can create an account for free on that service. However, you have other options. For example, many students and faculty receive a directory for a personal website from their university. If you have a personal website, you probably have access to a directory that serves static pages. You can create a new sub-directory for your study, and use that for running your web studies. 
+
 ### Presenting a feedback to the participant 
 
 In Project Implicit, for eductional purpopses, at the end of many of our studies, participants see the common interpertation of their IAT result.  In experiments in other settings (e.g., in the lab), I usually don't do that. When we present feedback in Project Implicit's website, we provide much context to the participant, to make sure they don't think that the feedback is more than an educational tool. The IAT (like all the other "implicit measures") is not accurate enough to provide a reliable estimate of attitudes for each participant. Therefore, I strongly recommend not to present feedback to your participants. 
 
 If really must present feedback, then you can use [this example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.iat.examples/show.iat.feedback), which shows how to do that. The relevant code appears in the file [lastpage.showresults.jst](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.iat.examples/show.iat.feedback/lastpage.showresults.jst).
+
+### Running other web studies
+
+MinnoJS can be used to run any study, not only IAT studies. Once you learn how to use it, you can use it to run your web studies for free. 
 
 ### Any questions?
 
