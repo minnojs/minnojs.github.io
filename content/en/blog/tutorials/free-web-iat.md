@@ -13,7 +13,7 @@ If you reached this blog post, you probably know what the IAT is and you want to
 ### Overview
 
 In short, you need to:
-1. Copy an [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) of a MinnoJS IAT study into your directory on a satatic web server. For example, you can create a [github](https://github.com/) account for free and post your files on [Github Pages](https://docs.github.com/en/pages).
+1. Copy an [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) of a MinnoJS IAT study into your directory on a static web server. For example, you can create a [github](https://github.com/) account for free and post your files on [Github Pages](https://docs.github.com/en/pages).
 2. Create an [OSF account](https://osf.io/).
 3. Create a [DataPipe](https://pipe.jspsych.org/) account in order to save your study data directly on the OSF.
 4. In the manager file (e.g., [this](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js), if you copied my example), replace the DATAPIPETOKEN with your datapipe token. 
