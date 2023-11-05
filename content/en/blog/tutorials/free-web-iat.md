@@ -172,7 +172,7 @@ If you’re using words rather than photos, you need to update the [media](https
 
 If you want to update the attributes, see how the attributes are defined in the [extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) and override them by defining your own attributes in your IAT script.
 
-Although our IAT script supports touch devices, the IAT does not detect automatically whether the participant is using a touch device (e.g., mobile). Therefore, if you want your participants to run the IAT on a mobile device or a tablet, it might be best to an IAT version specifically for those participants (in your script, set isTouch:true in the IAT parameters). 
+Although our IAT script supports touch devices, the IAT does not detect automatically whether the participant is using a touch device (e.g., mobile). Therefore, if you want your participants to run the IAT on a mobile device or a tablet, it might be best to create an IAT version specifically for those participants (in your script, set isTouch:true in the IAT parameters). 
 This is not what we have done in the example study. Rather, in the example study, we use Minno's internal detection at the beginning of the study, in the [manager file](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js) in the following line:<br/>
 
 `{ type: 'isTouch' }, //Use Minno's internal touch detection mechanism. `
