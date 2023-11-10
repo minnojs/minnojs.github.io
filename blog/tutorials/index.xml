@@ -21,7 +21,7 @@ It supports questionnaires and reaction-time tasks.
 It is free to use, and it has a &lt;a href="https://groups.google.com/g/minnojs/?pli=1">Google Forum&lt;/a> that might help, if you have programming questions.
 For a simple IAT study, you do not need to know how to program MinnoJS studies, and you can probably do this on your own. You just need to copy one of our example studies,
 and insert your DataPipe token in the right place (see below), to allow saving the data in your OSF account.&lt;/p>
-&lt;p>If you want to hire someone to help you out, you can contact &lt;a href="mailto:baranan@tauex.tau.ac.il">me&lt;/a> at &lt;a href="mailto:baranan@tauex.tau.ac.il">baranan@tauex.tau.ac.il&lt;/a>.&lt;/p>
+&lt;p>If you want to hire someone to help you out, you can &lt;a href="mailto:baranan@tauex.tau.ac.il">contact&lt;/a> &lt;a href="https://www.tau.ac.il/~baranan/index.html">me&lt;/a> at &lt;a href="mailto:baranan@tauex.tau.ac.il">baranan@tauex.tau.ac.il&lt;/a>.&lt;/p>
 &lt;h3 id="using-datapipe">Using DataPipe&lt;/h3>
 &lt;p>DataPipe is a service that was developed to allow saving data directly into the OSF.
 There are some steps you need to follow in your OSF account and your DataPipe account, in order to create a token that MinnoJS can use to save your study data. &lt;a href="https://pipe.jspsych.org/">DataPipe&lt;/a> explains all of that.
