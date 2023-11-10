@@ -33,7 +33,7 @@ It is free to use, and it has a [Google Forum](https://groups.google.com/g/minno
 For a simple IAT study, you do not need to know how to program MinnoJS studies, and you can probably do this on your own. You just need to copy one of our example studies, 
 and insert your DataPipe token in the right place (see below), to allow saving the data in your OSF account.
 
-If you want to hire someone to help you out, you can contact [me](mailto:baranan@tauex.tau.ac.il) at baranan@tauex.tau.ac.il.
+If you want to hire someone to help you out, you can [contact](mailto:baranan@tauex.tau.ac.il) [me](https://www.tau.ac.il/~baranan/index.html) at baranan@tauex.tau.ac.il.
 
 ### Using DataPipe
 
