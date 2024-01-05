@@ -47,6 +47,8 @@ You provide that token in the following line of code, in your [mgr.js](https://g
 init_data_pipe(API, 'YOURDATAPIPETOKENGOESHERE', 'csv'); 
 ```
 
+IMPORTANT: When you set up your DataPipe project, make sure **not** to enable data validation or base64 data collection.
+
 ### Project Implicit's MinnoJS IAT extension 
 
 In the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat), the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js) file is the script that defines the IAT. 
