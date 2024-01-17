@@ -149,7 +149,7 @@ This is not what we have done in the example study. Rather, in the example study
 &lt;p>&lt;code>{ type: 'isTouch' }, //Use Minno's internal touch detection mechanism. &lt;/code>&lt;/p>
 &lt;h3 id="processing-the-iat-data">Processing the IAT data&lt;/h3>
 &lt;p>The data will be saved under your OSF project, based on the information you provided in the DataPipe website.
-There will be a separate file for each task in the study, for each participant. The participant is identifed by session_id. The session_id is a part of the file name and it is also saved on each row of each data file.&lt;/p>
+There will be a separate file for each task in the study, for each participant. The participant is identifed by sessionId. The sessionId is a part of the file name and it is also saved on each row of each data file.&lt;/p>
 &lt;p>If you want an example how to analyze the data from the &lt;a href="https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1">example study&lt;/a>, you can download &lt;a href="https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.data.analysis/iat.data.analysis.rmd">this R script&lt;/a>.&lt;/p>
 &lt;h3 id="using-project-implicits-iats">Using Project Implicit&amp;rsquo;s IATs&lt;/h3>
 &lt;p>We posted &lt;a href="https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.iat.examples/demo.iats/">online&lt;/a>, many of Project Implicit&amp;rsquo;s IATs. You can experience them in &lt;a href="https://baranan.github.io/minno-tasks/studies/datapipe.iat.examples/demo.iats/exampleiat.html">this study&lt;/a>.&lt;/p>
