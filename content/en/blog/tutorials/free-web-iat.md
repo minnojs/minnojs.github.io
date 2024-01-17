@@ -13,15 +13,15 @@ If you reached this blog post, you probably know what the IAT is and you want to
 ### Overview
 
 In short, you need to:
-1. Copy an [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) of a MinnoJS IAT study into your directory on a static web server. For example, you can create a [github](https://github.com/) account for free and post your files on [Github Pages](https://docs.github.com/en/pages).
+1. Copy an [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1) of a MinnoJS IAT study into your directory on a static web server. For example, you can create a [github](https://github.com/) account for free and post your files on [Github Pages](https://docs.github.com/en/pages).
 2. Create an [OSF account](https://osf.io/).
 3. Create a [DataPipe](https://pipe.jspsych.org/) account in order to save your study data directly on the OSF.
-4. In the manager file (e.g., [this](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js), if you copied my example), replace the DATAPIPETOKEN with your datapipe token. 
+4. In the manager file (e.g., [this](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/mgr.js), if you copied my example), replace the DATAPIPETOKEN with your datapipe token. 
 
 ### A quick start
 
-Start by just completing the first stage: copy the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat) to your own directory on a static website (e.g., under your [Github Pages](https://docs.github.com/en/pages) directory, or as a new directory on your personal website, if you have one). In a web browser, load the full URL to the file exampleiat.html on that directory. That's it, you should be able to run the example study from start to end. 
-Tip: You can download the whole example directory as a zip folder by pasting "https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat" into the input box in [this website](https://download-directory.github.io/). Then, upload all the files to your own Githab Pages directory.
+Start by just completing the first stage: copy the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1) to your own directory on a static website (e.g., under your [Github Pages](https://docs.github.com/en/pages) directory, or as a new directory on your personal website, if you have one). In a web browser, load the full URL to the file exampleiat.html on that directory. That's it, you should be able to run the example study from start to end. 
+Tip: You can download the whole example directory as a zip folder by pasting "https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1" into the input box in [this website](https://download-directory.github.io/). Then, upload all the files to your own Githab Pages directory.
 
 Worked? Great, now read on to understand how to modify the study and save your data.
 
@@ -41,17 +41,17 @@ DataPipe is a service that was developed to allow saving data directly into the 
 There are some steps you need to follow in your OSF account and your DataPipe account, in order to create a token that MinnoJS can use to save your study data. [DataPipe](https://pipe.jspsych.org/) explains all of that. 
 DataPipe will provide you a token that you are supposed to use in a JavaScript script in order to save the data directly on the OSF. We already wrote that JavaScript file, 
 so all that we need from you is the token provided by DataPipe. 
-You provide that token in the following line of code, in your [mgr.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js) file:
+You provide that token in the following line of code, in your [mgr.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/mgr.js) file:
 
 ```js
-init_data_pipe(API, 'YOURDATAPIPETOKENGOESHERE', 'csv'); 
+init_data_pipe(API, 'zpjKaPesdEOI', 'csv'); // Replace zpjKaPesdEOI with your DataPipe token
 ```
 
 IMPORTANT: When you set up your DataPipe project, make sure **not** to enable data validation or base64 data collection.
 
 ### Project Implicit's MinnoJS IAT extension 
 
-In the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat), the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js) file is the script that defines the IAT. 
+In the [example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1), the [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/raceiat.js) file is the script that defines the IAT. 
 That script uses a MinnoJS [IAT extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) that I programmed for Project Implicit. 
 
 The script that we created for building IATs is an extension, implemented as a function that creates an IAT from a few arguments (i.e., parameters) that the researcher defines. 
@@ -61,7 +61,7 @@ You can read more about the basic idea of using extensions in Minno on [this pag
 
 ### How we define the IAT
 
-In [our example study](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat), we define an IAT in the file [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/raceiat.js):
+In [our example study](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1), we define an IAT in the file [raceiat.js](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/raceiat.js):
 
 ```js
 define(['pipAPI','https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js'], function(APIConstructor, iatExtension){
@@ -182,7 +182,7 @@ If you’re using words rather than photos, you need to update the [media](https
 If you want to update the attributes, see how the attributes are defined in the [extension script](https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/iat10.js) and override them by defining your own attributes in your IAT script.
 
 Although our IAT script supports touch devices, the IAT does not detect automatically whether the participant is using a touch device (e.g., mobile). Therefore, if you want your participants to run the IAT on a mobile device or a tablet, it might be best to create an IAT version specifically for those participants (in your script, set isTouch:true in the IAT parameters). 
-This is not what we have done in the example study. Rather, in the example study, we use Minno's internal detection at the beginning of the study, in the [manager file](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/mgr.js) in the following line:<br/>
+This is not what we have done in the example study. Rather, in the example study, we use Minno's internal detection at the beginning of the study, in the [manager file](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/mgr.js) in the following line:<br/>
 
 `{ type: 'isTouch' }, //Use Minno's internal touch detection mechanism. `
 
@@ -191,7 +191,7 @@ This is not what we have done in the example study. Rather, in the example study
 The data will be saved under your OSF project, based on the information you provided in the DataPipe website. 
 There will be a separate file for each task in the study, for each participant. The participant is identifed by session_id. The session_id is a part of the file name and it is also saved on each row of each data file.
 
-If you want an example how to analyze the data from the [example study](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat), you can download [this R script](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.data.analysis/iat.data.analysis.rmd).
+If you want an example how to analyze the data from the [example study](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1), you can download [this R script](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.data.analysis/iat.data.analysis.rmd).
 
 ### Using Project Implicit's IATs
 
@@ -213,7 +213,7 @@ A couple of notes about these IATs:
 
 ### How to run the study
 
-Probably, you will launch your study from a platform that is accessible to your participants (e.g., a Sona website, MTurk, Prolific). The relevant URL is the address of the html file. For example, the [exampleiat.html](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/exampleiat.html) in the example study. But, remember to provide the URL that shows the file, not its code. For example, `https://baranan.github.io/minno-tasks/studies/datapipe.example.iat/exampleiat.html` is the URL for my example, whereas `https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat/exampleiat.html` is the url to the code of that file. 
+Probably, you will launch your study from a platform that is accessible to your participants (e.g., a Sona website, MTurk, Prolific). The relevant URL is the address of the html file. For example, the [exampleiat.html](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/exampleiat.html) in the example study. But, remember to provide the URL that shows the file, not its code. For example, `https://baranan.github.io/minno-tasks/studies/datapipe.example.iat1/exampleiat.html` is the URL for my example, whereas `https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/exampleiat.html` is the url to the code of that file. 
 
 At the end of the study, you might want to redirect your participants back to the platform. For example, [this study](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.iat.examples/prolific.iat) redirects participants back to Prolific. 
 The relevant code for the redirection is in the [manager file](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.iat.examples/prolific.iat/mgr.js):
@@ -239,6 +239,54 @@ IMPORTANT: Make sure to verify that the data are saved in your OSF project as yo
 
 In the example, we used github pages because anyone can create an account for free on that service. However, you have other options. For example, many students and faculty receive a directory for a personal website from their university. If you have a personal website, you probably have access to a directory that serves static pages. You can create a new sub-directory for your study, and use that for running your web studies. 
 
+### Waiting for the data recording
+
+Rarely, participants might complete the study before all the data are sent to the OSF server. 
+This might happen if your study ends right after a long task with much data (e.g., the IAT), if your participants have a slow Internet connection, or if the OSF server is not easily accessible. 
+To reduce the likelihood of such loss of data, you can use the "uploading" task. That task waits until the last batch of data has been sent to the server (the OSF), only then continues. 
+
+In our [manager file](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.example.iat1/mgr.js), we first define the uploading task like this:
+```js
+    //This task waits until the data are sent to the server.
+    uploading: uploading_task({header: 'just a moment', body:'Please wait, sending data... '})
+```
+
+And we then insert that task to the study sequence right before showing the last page:
+```js
+    {inherit: 'uploading'},
+    {inherit: 'lastpage'},
+```
+
+In our example, we provided two arguments to the uploading_task: the text for the header of the page (appears at the top of the page) and the text for the body of the page (the main text shown to the participant). 
+You can also add the following arguments: 
+"title" will appear as text in the browser's window or tab, 
+"buttonText" will appear on a button. That button will appear disabled and will become enabled after the data are sent to the OSF. The participant will then need to press that button to continue to the next task (probably the end of the study). In our example, we did not include a buttonText, and therefore the task ends automatically and loads the next task, as soon as the OSF server informs the browser that it received the data. 
+
+### Saving previous details (using URL parameters)
+
+You might want to launch the study with some information about the session or the participant. For example, you might have obtained or created a participant ID in a previous part of the study, and you want the ID to appear in the IAT data on the OSF, in order to link that data with the data you collected about this participant in previous parts of the study. You can do that by adding the information to the launch URL as a URL parameter. For example, instead of using `https://baranan.github.io/minno-tasks/studies/datapipe.example.iat1/exampleiat.html`, you can use `https://baranan.github.io/minno-tasks/studies/datapipe.example.iat1/exampleiat.html?pid=xyz`. 
+The value of the parameter that you added to the URL will be added to **ALL** the rows recorded from Minno (just like the sessionId created by Minno). 
+
+You can also use the value of the details you added to the URL in your own Minno code. To obtain those details, you can use the following code, at the beginning of the manager file:
+
+```js
+//You can use the commented-out code to get parameters from the URL.
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const pid = urlParams.get('pid');
+```
+
+In that code, we get the value of the parameter 'pid'. We can use such code to pass that information forward, when redirecting from our Minnos study. That is, let's say you want to redirect your participant to a different platform after they completed the IAT on Minno. You can add the information you obtained from the URL that launched Minno's study to the URL that you use for redirecting participants from Minno to a different platform:
+```js
+    redirect:
+    [{ 
+        //Replace with any URL you need to put at the end of your study, or just remove this task from the sequence below
+        type:'redirect', name:'redirecting', url: 'https://www.google.com/search?pid='+pid 
+    }],		
+```
+
+You can also use URL parameter to indicate to your Minno code the participant's condition and then use that condition in Minno's code. 
+
 ### Presenting a feedback to the participant 
 
 In Project Implicit, for eductional purpopses, at the end of many of our studies, participants see the common interpertation of their IAT result.  In experiments in other settings (e.g., in the lab), I usually don't do that. When we present feedback in Project Implicit's website, we provide much context to the participant, to make sure they don't think that the feedback is more than an educational tool. The IAT (like all the other "implicit measures") is not accurate enough to provide a reliable estimate of attitudes for each participant. Therefore, I strongly recommend not to present feedback to your participants. 
@@ -248,6 +296,7 @@ If really must present feedback, then you can use [this example](https://github.
 ### Running other web studies
 
 MinnoJS can be used to run any study, not only IAT studies. Once you learn how to use it, you can use it to run your web studies for free. 
+If you want a workshop on how to program studies with MinnoJS, try [contacting](mailto:baranan@tauex.tau.ac.il) [me](https://www.tau.ac.il/~baranan/index.html) at baranan@tauex.tau.ac.il.
 
 ### Any questions?
 
