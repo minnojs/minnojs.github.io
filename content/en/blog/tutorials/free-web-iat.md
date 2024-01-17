@@ -189,7 +189,7 @@ This is not what we have done in the example study. Rather, in the example study
 ### Processing the IAT data
 
 The data will be saved under your OSF project, based on the information you provided in the DataPipe website. 
-There will be a separate file for each task in the study, for each participant. The participant is identifed by session_id. The session_id is a part of the file name and it is also saved on each row of each data file.
+There will be a separate file for each task in the study, for each participant. The participant is identifed by sessionId. The sessionId is a part of the file name and it is also saved on each row of each data file.
 
 If you want an example how to analyze the data from the [example study](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.example.iat1), you can download [this R script](https://github.com/baranan/minno-tasks/blob/master/docs/studies/datapipe.data.analysis/iat.data.analysis.rmd).
 
