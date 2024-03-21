@@ -308,6 +308,6 @@ You used MinnoJS platform, which is cited like this:
 
 `Zlotnick, E., Dzikiewicz, A. J., & Bar-Anan, Y. (2015). Minno.js (Version 0.3) [Computer software].`
 
-To cite our Qualtrics-IAT script, cite this blog post:
+To cite our IAT script, cite this blog post:
 
 `Bar-Anan, Y. (2023, November 2nd). Free Web IAT [Blog post]. Retrieved from https://minnojs.github.io/minnojs-blog/free-iat/`
