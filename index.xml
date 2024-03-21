@@ -220,7 +220,7 @@ If you want a workshop on how to program studies with MinnoJS, try &lt;a href="m
 &lt;h3 id="cite-us">Cite Us&lt;/h3>
 &lt;p>You used MinnoJS platform, which is cited like this:&lt;/p>
 &lt;p>&lt;code>Zlotnick, E., Dzikiewicz, A. J., &amp;amp; Bar-Anan, Y. (2015). Minno.js (Version 0.3) [Computer software].&lt;/code>&lt;/p>
-&lt;p>To cite our Qualtrics-IAT script, cite this blog post:&lt;/p>
+&lt;p>To cite our IAT script, cite this blog post:&lt;/p>
 &lt;p>&lt;code>Bar-Anan, Y. (2023, November 2nd). Free Web IAT [Blog post]. Retrieved from https://minnojs.github.io/minnojs-blog/free-iat/&lt;/code>&lt;/p></description></item><item><title>Blog: Breaking out of the canvas in minno time</title><link>/blog/2021/04/08/breaking-out-of-the-canvas-in-minno-time/</link><pubDate>Thu, 08 Apr 2021 00:00:00 +0000</pubDate><guid>/blog/2021/04/08/breaking-out-of-the-canvas-in-minno-time/</guid><description>
 &lt;p>By default minno-time makes sure that stimuli stay confined to the limits of the canvas.
 This is done because of the assumption that all the action should be focused and controled within the screen.&lt;/p>
