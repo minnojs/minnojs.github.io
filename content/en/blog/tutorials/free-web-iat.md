@@ -296,6 +296,11 @@ If really must present feedback, then you can use [this example](https://github.
 ### Running other web studies
 
 MinnoJS can be used to run any study, not only IAT studies. Once you learn how to use it, you can use it to run your web studies for free. 
+
+In [this example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.personalized), you can see how to run a *Single-Target IAT* with personalized stimuli (created by the participants).
+
+In [this example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.indirects), you can find code for running other indirect measures: **The AMP, the Brief-IAT, the Single-Target IAT, the Evaluative Priming Task, and the Sorting paired features (SPF) task**. 
+
 If you want a workshop on how to program studies with MinnoJS, try [contacting](mailto:baranan@tauex.tau.ac.il) [me](https://www.tau.ac.il/~baranan/index.html) at baranan@tauex.tau.ac.il.
 
 ### Any questions?
