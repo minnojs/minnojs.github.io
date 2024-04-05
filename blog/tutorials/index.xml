@@ -2,7 +2,7 @@
 &lt;p>&lt;a href="http://projectimplicit.net/">Project Implicit&lt;/a> has developed &lt;a href="https://minnojs.github.io/">MinnoJS&lt;/a> to program web studies.
 The main instrument that we use in Project Implicit is the Implicit Association Test (IAT).
 The IAT is a commonly used indirect measure of social cognition (read more about such measures &lt;a href="https://www.tau.ac.il/~baranan/imp.html">here&lt;/a>).
-If you reached this blog post, you probably know what the IAT is and you want to use it in your own study. In this blog post, I will explain how you can run a web study with an IAT and a questionnaire using MinnoJS. If you want to run other indirect measures of social cognition using Minno.js, there are links to examples of non-IAT measures at the end of this post.&lt;/p>
+If you reached this blog post, you probably know what the IAT is and you want to use it in your own study. In this blog post, I will explain how you can run a web study with an IAT and a questionnaire using MinnoJS. If you want to run other indirect measures of social cognition using MinnoJS, there are links to examples of non-IAT measures at the end of this post.&lt;/p>
 &lt;h3 id="overview">Overview&lt;/h3>
 &lt;p>In short, you need to:&lt;/p>
 &lt;ol>
