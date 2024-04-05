@@ -216,9 +216,9 @@ The value of the parameter that you added to the URL will be added to &lt;strong
 &lt;p>MinnoJS can be used to run any study, not only IAT studies. Once you learn how to use it, you can use it to run your web studies for free.&lt;/p>
 &lt;p>In &lt;a href="https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.personalized">this example&lt;/a>, you can see how to run a &lt;em>Single-Target IAT&lt;/em> with personalized stimuli (created by the participants).&lt;/p>
 &lt;p>In &lt;a href="https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.indirects">this example&lt;/a>, you can find code for running other indirect measures: &lt;strong>The AMP, the Brief-IAT, the Single-Target IAT, the Evaluative Priming Task, and the Sorting paired features (SPF) task&lt;/strong>.&lt;/p>
-&lt;p>If you want a workshop on how to program studies with MinnoJS, try &lt;a href="mailto:baranan@tauex.tau.ac.il">contacting&lt;/a> &lt;a href="https://www.tau.ac.il/~baranan/index.html">me&lt;/a> at &lt;a href="mailto:baranan@tauex.tau.ac.il">baranan@tauex.tau.ac.il&lt;/a>.&lt;/p>
+&lt;p>If you want a workshop on how to program studies with MinnoJS, such workshops do not exist. However, you can try &lt;a href="mailto:baranan@tauex.tau.ac.il">contacting&lt;/a> &lt;a href="https://www.tau.ac.il/~baranan/index.html">me&lt;/a> at &lt;a href="mailto:baranan@tauex.tau.ac.il">baranan@tauex.tau.ac.il&lt;/a>.&lt;/p>
 &lt;h3 id="any-questions">Any questions?&lt;/h3>
-&lt;p>If you have any questions, you post questions in our MinnoJS Google Group, &lt;a href="https://groups.google.com/forum/?utm_medium=email&amp;amp;utm_source=footer#!forum/minnojs">here&lt;/a>.&lt;/p>
+&lt;p>If you have any questions, you can post questions in our MinnoJS Google Group, &lt;a href="https://groups.google.com/forum/?utm_medium=email&amp;amp;utm_source=footer#!forum/minnojs">here&lt;/a>.&lt;/p>
 &lt;h3 id="cite-us">Cite Us&lt;/h3>
 &lt;p>You used MinnoJS platform, which is cited like this:&lt;/p>
 &lt;p>&lt;code>Zlotnick, E., Dzikiewicz, A. J., &amp;amp; Bar-Anan, Y. (2015). Minno.js (Version 0.3) [Computer software].&lt;/code>&lt;/p>
