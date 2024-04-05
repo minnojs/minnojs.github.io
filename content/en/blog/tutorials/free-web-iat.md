@@ -301,11 +301,11 @@ In [this example](https://github.com/baranan/minno-tasks/tree/master/docs/studie
 
 In [this example](https://github.com/baranan/minno-tasks/tree/master/docs/studies/datapipe.indirects), you can find code for running other indirect measures: **The AMP, the Brief-IAT, the Single-Target IAT, the Evaluative Priming Task, and the Sorting paired features (SPF) task**. 
 
-If you want a workshop on how to program studies with MinnoJS, try [contacting](mailto:baranan@tauex.tau.ac.il) [me](https://www.tau.ac.il/~baranan/index.html) at baranan@tauex.tau.ac.il.
+If you want a workshop on how to program studies with MinnoJS, such workshops do not exist. However, you can try [contacting](mailto:baranan@tauex.tau.ac.il) [me](https://www.tau.ac.il/~baranan/index.html) at baranan@tauex.tau.ac.il.
 
 ### Any questions?
 
-If you have any questions, you post questions in our MinnoJS Google Group, [here](https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/minnojs). 
+If you have any questions, you can post questions in our MinnoJS Google Group, [here](https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/minnojs). 
 
 ### Cite Us
 
