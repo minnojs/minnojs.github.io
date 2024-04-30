@@ -2597,7 +2597,8 @@ errorLatency : {use:&amp;quot;penalty&amp;quot;, penalty:600, useForSTD:true},
 &lt;p>The PI tasks are easily extensible.&lt;/p>
 &lt;p>&lt;a href="http://www.bgu.ac.il/~baranany/">Yoav Bar-Anan&lt;/a> from &lt;a href="https://implicit.harvard.edu/implicit/aboutus.html">Project Implicit&lt;/a>
 has created several extensions for the easy creation of a few common reaction-time tasks.
-You can find the instructions for using them right &lt;a href="https://git.io/JvE5H">here&lt;/a>.&lt;/p></description></item><item><title>Docs: Allow Leaving</title><link>/docs/manager/tasks/allowleaving/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/manager/tasks/allowleaving/</guid><description>
+You can find the instructions for using them right &lt;a href="https://git.io/JvE5H">here&lt;/a>.&lt;/p></description></item><item><title>Docs:</title><link>/docs/start/test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/test/</guid><description>
+&lt;p>only a test&lt;/p></description></item><item><title>Docs: Allow Leaving</title><link>/docs/manager/tasks/allowleaving/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/manager/tasks/allowleaving/</guid><description>
 &lt;p>By default, each time users attempt to leave the page, minno-manager inquires whether they actually mean it.
 The &lt;code>allowLeave&lt;/code> task cancels this inquiry, and allows easily leaving the player..
 It is usefull if you want to allow users to browse away from a page, for example toward the end of a task in a debriefing page.
@@ -4425,71 +4426,4 @@ win.activate(cm.getValue());
 };
 });
 })('inheritanceAbstraction.md');
-&lt;/script></description></item><item><title>Docs: inheritanceByData</title><link>/docs/sequencer/inheritance/inheritancebydata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/sequencer/inheritance/inheritancebydata/</guid><description>
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
-&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
-&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
-&lt;div class="pg-section" id="pg-inheritanceByData.md">
-&lt;p>
-&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
-&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
-&lt;/p>
-&lt;textarea class="code-mirror" rows="40">
-// Sometimes you need to handpick a specific object out of a set.
-// `byData` allows you to do that by matching the `data` properties of the inherit object and the objects within the set.
-// Note, that if there are multiple fits to your data object, a random object will be picked from among them.
-define([&amp;#39;managerAPI&amp;#39;], function(Manager){
-var API = new Manager();
-API.addTasksSet(&amp;#39;default&amp;#39;, [
-{
-type:&amp;#39;message&amp;#39;,
-keys: &amp;#39; &amp;#39;
-}
-]);
-API.addTasksSet(&amp;#39;tasks&amp;#39;,[
-{inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 1&amp;#39;, data:{num:1}},
-{inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 2&amp;#39;, data:{num:2}},
-{inherit:&amp;#39;default&amp;#39;, template:&amp;#39;Task 3&amp;#39;, data:{num:3}}
-]);
-API.addSequence([
-{inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;byData&amp;#39;, data:{num:2}}},
-{inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;byData&amp;#39;, data:{num:1}}},
-{inherit:{set:&amp;#39;tasks&amp;#39;, type:&amp;#39;byData&amp;#39;, data:{num:3}}}
-]);
-return API.script;
-});
-&lt;/textarea>
-&lt;/div>
-&lt;script>
-(function(filename){
-var win, section;
-var section = document.getElementById('pg-' + filename);
-var el = section.querySelector('.code-mirror');
-var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
-cm.setSize(null, 500);
-section.querySelector('.pg-download').addEventListener('click', function(){
-var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
-if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
-else {
-var elem = window.document.createElement('a');
-elem.href = window.URL.createObjectURL(blob);
-elem.download = filename;
-document.body.appendChild(elem);
-elem.click();
-document.body.removeChild(elem);
-}
-});
-section.querySelector('.pg-play').addEventListener('click', function(){
-var runminnoUrl = '\/runminno.html';
-if (win) win.close();
-win = window.open(runminnoUrl, 'Playground');
-win.onload = function(){
-win.addEventListener('unload', function() {
-window.focus();
-});
-win.activate(cm.getValue());
-};
-});
-})('inheritanceByData.md');
 &lt;/script></description></item></channel></rss>
