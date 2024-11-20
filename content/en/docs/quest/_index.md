@@ -11,10 +11,14 @@ The format also allows advanced users to easily create complex and dynamic scrip
 
 ### Central concepts
 
-The player treats each questionnaire as **sequence** of **pages**. Each page may have one or more **questions**.
+Each **questionnaire** is a **sequence** of **pages**.
+Each **page** can have one or more **questions**.
+To create a **questionnaire** you must:
 
-The pages are set into a sequence and presented sequentially. 
-This is essentially all you need to know in order to start writing questionnaires.
+1. Define the questionnaire.
+1. Define the pages in the questionnaire.
+2. Define the questions on each page.
+3. Define the order the pages will be presented to participants.
 
 Questionnaires are created by writing a Java-script object that has several property objects: `settings`, `sequence`, `pages`, `questions`, `global` and `current`.
 Some of these properties have to do with advanced uses of the player.
@@ -102,7 +106,7 @@ var sequence = [
 
 The sequence also supports randomization and branching. Read about it [here]({{< relref "/docs/sequencer/mixer" >}}).
 
-Now that we've created the sequence, let's put it into the player. The first and last two lines are the same for all scripts (they have to do with the way Javascript works), you can simply ignore them. The `API` object assists you in putting your script together, you will [eventually](API.html#API) learn more about its functionality, but for now we only need to know that the `addSequence` function is responsible for adding pages into the sequence. You may call it as many times as you like.
+Now that we've created the sequence, let's put it into the player. The first and last two lines are the same for all scripts (they have to do with the way Javascript works), you can simply ignore them. The `API` object assists you in putting your script together, you will [eventually](https://minnojs.github.io/docs/quest/api/) learn more about its functionality, but for now we only need to know that the `addSequence` function is responsible for adding pages into the sequence. You may call it as many times as you like.
 
 ```javascript
 define(['questAPI'], function(quest){
