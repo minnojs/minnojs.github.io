@@ -5,6 +5,9 @@ date: 2020-08-07
 author: Gal Maimon
 ---
 
+> ⚠️ *Note*: We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support.  
+> Instead, see [our standalone webpage solution](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/), which can be linked to and from Qualtrics and has a [priming version](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/#running-other-web-studies).
+
 In this post, I will explain how to run the Evaluative Priming Task in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an Evaluative Priming Task in Qualtrics. So, it is likely that you know what the Evaluative Priming Task is (pages 9-10 [here](https://users.ugent.be/~jdhouwer/chapterbertram.pdf)) and what [Qualtrics](https://www.qualtrics.com/uk/customer-experience/surveys/) is.  [Minno.js](https://minnojs.github.io/) is the software developed by [Project Implicit](http://projectimplicit.net/) to run web studies, including reaction-time tasks. 
 
 In previous posts, Elad explained [how to run a Minno script from Qualtrics](https://minnojs.github.io/minnojs-blog/qualtrics/), and [Yoav](https://www.tau.ac.il/~baranan/index.html) explained [how to run Project Implicit’s IAT](https://minnojs.github.io/minnojs-blog/qualtrics-iat/) from Qualtrics. This post is very similar to Yoav's but it's about the Evaluative Priming Task. 
