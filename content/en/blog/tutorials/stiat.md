@@ -5,6 +5,9 @@ date: 2020-07-10
 author: Elinor Bengayev
 ---
 
+> ⚠️ *Note*: We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support.  
+> Instead, see our standalone webpage solution, which can be linked to and from Qualtrics: [Running IATs on your own](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/)
+
 In this post, I will explain how to run the Single Target IAT (ST-IAT; some call it the Single-Category IAT) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an ST-IAT in Qualtrics. So, it is likely that you know what the ST-IAT is (see [this paper](https://www.researchgate.net/publication/230881869_Reliability_and_validity_of_the_Single-Target_IAT_ST-IAT_Assessing_automatic_affect_towards_multiple_attitude_objects)) and what [Qualtrics](https://www.qualtrics.com/uk/customer-experience/surveys/) is.  [Minno.js](https://minnojs.github.io/) is the software developed by [Project Implicit](http://projectimplicit.net/) to run web studies, including reaction-time tasks. 
 
 In previous posts, Elad explained [how to run a Minno script from Qualtrics](https://minnojs.github.io/minnojs-blog/qualtrics/), and [Yoav](https://www.tau.ac.il/~baranan/index.html) explained [how to run Project Implicit’s IAT](https://minnojs.github.io/minnojs-blog/qualtrics-iat/) from Qualtrics. This post is very similar to Yoav's but it's about ST-IAT. 
