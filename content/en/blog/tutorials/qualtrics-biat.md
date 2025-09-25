@@ -5,6 +5,9 @@ date: 2020-07-09
 author: Gal Maimon
 ---
 
+> ⚠️ *Note*: We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support.  
+> Instead, see [our standalone webpage solution](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/), which can be linked to and from Qualtrics and has a [BIAT version](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/#running-other-web-studies).
+
 In this post, I explain how to run the Brief IAT (BIAT) in Qualtrics, using Minno.js. First, let’s make sure we all know all the concepts. You are probably reading this because you want to run an BIAT in Qualtrics. So, it is likely that you know what the BIAT is (see [this paper](https://psycnet.apa.org/journals/zea/56/4/283.pdf) and/or [this paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0110938)), and what [Qualtrics](https://www.qualtrics.com/uk/customer-experience/surveys/) is.  [Minno.js](https://minnojs.github.io/) is the software developed by [Project Implicit](http://projectimplicit.net/) to run web studies, including reaction-time tasks. 
 
 In previous posts, Elad explained [how to run a Minno script from Qualtrics](https://minnojs.github.io/minnojs-blog/qualtrics/), and [Yoav](https://www.tau.ac.il/~baranan/index.html) explained [how to run Project Implicit’s IAT](https://minnojs.github.io/minnojs-blog/qualtrics-iat/) from Qualtrics. This is the same post as Yoav's but about the BIAT. 
