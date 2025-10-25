@@ -4,10 +4,13 @@ linkTitle: Qualtrics IAT
 date: 2020-03-05
 author: Yoav Bar_anan
 ---
+> ⚠️ **Notice**  
+> We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support.  
+> Instead, use our standalone webpage flow that links to and from Qualtrics:  
+> [Running Project Implicit’s IAT on your own](https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/)
 
-{{< alert color="warning" >}}
-<small>⚠️ We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support. Instead, use our standalone webpage flow that links to and from Qualtrics: <a href="https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/">Running Project Implicit’s IAT on your own</a>.</small>
-{{< /alert >}}
+---
+
 
 [Project Implicit](http://projectimplicit.net/) has developed [MinnoJS](https://minnojs.github.io/) to program web studies. 
 The main instrument that we use in Project Implicit is the Implicit Association Test (IAT). 
