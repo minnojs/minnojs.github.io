@@ -999,9 +999,13 @@ communication with the server (i.e. an FTP client. I highly recommend &lt;a href
 &lt;p>That&amp;rsquo;s it really.
 Go ahead, try it out.
 It&amp;rsquo;s easier than it looks.&lt;/p></description></item><item><title>Blog: Running Project Implicit’s IAT from Qualtrics</title><link>/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/</link><pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate><guid>/blog/2020/03/05/running-project-implicits-iat-from-qualtrics/</guid><description>
-&lt;div class="alert alert-warning" role="alert">
-&lt;small>⚠️ We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support. Instead, use our standalone webpage flow that links to and from Qualtrics: &lt;a href="https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/">Running Project Implicit’s IAT on your own&lt;/a>.&lt;/small>
-&lt;/div>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Notice&lt;/strong>&lt;br>
+We no longer maintain the Qualtrics scripts. They may still work, but we cannot provide support.&lt;br>
+Instead, use our standalone webpage flow that links to and from Qualtrics:&lt;br>
+&lt;a href="https://minnojs.github.io/blog/2023/11/01/running-project-implicits-iat-on-your-own/">Running Project Implicit’s IAT on your own&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;hr>
 &lt;p>&lt;a href="http://projectimplicit.net/">Project Implicit&lt;/a> has developed &lt;a href="https://minnojs.github.io/">MinnoJS&lt;/a> to program web studies.
 The main instrument that we use in Project Implicit is the Implicit Association Test (IAT).
 The IAT is a commonly used indirect measure of social cognition (read more about such measures &lt;a href="https://www.tau.ac.il/~baranan/imp.html">here&lt;/a>).
