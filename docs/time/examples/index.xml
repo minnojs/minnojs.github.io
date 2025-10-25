@@ -1,0 +1,2468 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Examples</title><link>/docs/time/examples/</link><description>Recent content in Examples on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/time/examples/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: helloPlay</title><link>/docs/time/examples/helloplay/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/helloplay/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-helloPlay.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// #### Create trial sequence
+API.addSequence([
+{
+input: [
+{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}
+],
+layout: [
+// This is a stimulus object
+{
+media :{word:&amp;#39;Hello world&amp;#39;},
+css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#D7685A&amp;#39;}
+}
+],
+interactions: [
+// This is an interaction (it has a condition and an action)
+{
+conditions: [
+{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}
+],
+actions: [
+{type:&amp;#39;endTrial&amp;#39;}
+]
+}
+]
+}
+]);
+// #### Activate the player
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('helloPlay.js');
+&lt;/script></description></item><item><title>Docs: inheritance</title><link>/docs/time/examples/inheritance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/inheritance/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-inheritance.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// In this tutorial we will learn how to create sets of Trials/Stimuli/Media and use them for randomization.
+// Sets are essentialy lists of objects that allow us to select objects out of them.
+// The typical set definition looks something like this:
+// API.addMediaSet(&amp;#39;setName&amp;#39;,[
+// media1,
+// media2
+// ]);
+// Using objects from a set is simple. all you have to do is add the `inherit` property to the inheriting object.
+// There are two syntax types for inheriting.
+// The simplified version randomly inherits a media object form the set &amp;#39;mediaSet&amp;#39;:
+// media: {inherit: &amp;#39;mediaSet&amp;#39;}
+// The full syntax allows you to pick the inheritance type:
+// media: {
+// inherit: {
+// set: &amp;#39;mediaSet&amp;#39;,
+// type: &amp;#39;exRandom&amp;#39;
+// }
+// }
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// #### media sets
+// We define a set of media objects and call it *good*.
+API.addMediaSets(&amp;#39;good&amp;#39;, [
+{word: &amp;#39;Paradise&amp;#39;},
+{word: &amp;#39;Pleasure&amp;#39;},
+{word: &amp;#39;Cheer&amp;#39;},
+{word: &amp;#39;Wonderful&amp;#39;},
+{word: &amp;#39;Splendid&amp;#39;},
+{word: &amp;#39;Love&amp;#39;}
+]);
+// We define a set of media objects and call it *bad*.
+API.addMediaSets(&amp;#39;bad&amp;#39;, [
+{word: &amp;#39;Bomb&amp;#39;},
+{word: &amp;#39;Abuse&amp;#39;},
+{word: &amp;#39;Sadness&amp;#39;},
+{word: &amp;#39;Pain&amp;#39;},
+{word: &amp;#39;Poison&amp;#39;},
+{word: &amp;#39;Grief&amp;#39;}
+]);
+// #### Stimulus sets
+// We define two types of stimuli: bad media on the left, good media on the right.
+// This way, we use inheritance to style each media set in a uniform way.
+API.addStimulusSets(&amp;#34;Default&amp;#34;, [
+// randomly inherit a media object from the &amp;#39;bad&amp;#39; media set
+{
+data: {type:&amp;#39;bad&amp;#39;},
+location: {left:30},
+media: {inherit:&amp;#39;bad&amp;#39;}
+},
+// randomly inherit a media object from the &amp;#39;good&amp;#39; media set
+{
+data: {type:&amp;#39;good&amp;#39;},
+location: {right:30},
+media: {inherit:&amp;#39;good&amp;#39;}
+}
+]);
+// #### Trial sets
+// We define only one trial, this is inherantly gives us a shortcut to this trial, and will eventuall allow us to use it as a prototype. &amp;lt;/br&amp;gt;
+// This trial simply displays a random stimulus.
+API.addTrialSets(&amp;#34;Default&amp;#34;, [
+{
+input: [{handle: &amp;#39;end&amp;#39;, on:&amp;#39;space&amp;#39;}],
+layout: [{inherit:&amp;#39;Default&amp;#39;}],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+]);
+// #### sequence
+API.addSequence([
+// ##### Simple inheritance
+// We can simply inherit the Default trial and have it display random stimuli.
+{inherit:&amp;#39;Default&amp;#39;},
+{inherit:&amp;#39;Default&amp;#39;},
+{inherit:&amp;#39;Default&amp;#39;},
+// ##### Exclusive Randomization
+// `exRandom`: pick a random object with exclusion.
+// Repeated calls to `exRandom` will not return the same object until all objects in the set have been used. &amp;lt;/br&amp;gt;
+// Specificaly this Trial presents a random &amp;#39;bad&amp;#39; media object (note that in this case we inherit a media object, not a stimulus).
+{
+input: [{handle: &amp;#39;end&amp;#39;, on:&amp;#39;space&amp;#39;}],
+layout: [
+/* begin stimulus */
+{
+/* begin media */
+media: {
+inherit:{
+set:&amp;#39;bad&amp;#39;,
+type:&amp;#39;exRandom&amp;#39;
+}
+}
+/* end media */
+}
+/* end stimulus */
+],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### Inherit by Data
+// `byData` checks if the inherit objtects&amp;#39; `data` property is a subset of the elements&amp;#39; `data` property and if it is it picks the element.
+// (this means that if all properties of `data` equal to the properties of the same name in `element.data` it is a fit). &amp;lt;/br&amp;gt;
+// Specificaly, this trial picks the stimulus that has `data:{type:&amp;#39;good&amp;#39;}` (note that in this case we inherit a whole stimulus object).
+{
+input: [{handle: &amp;#39;end&amp;#39;, on:&amp;#39;space&amp;#39;}],
+layout: [
+/* begin stimulus */
+{
+inherit:{
+set:&amp;#39;Default&amp;#39;,
+type:&amp;#39;byData&amp;#39;,
+data: {type:&amp;#39;good&amp;#39;}
+}
+}
+/* end stimulus */
+],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### Prototyping
+// One of the greatest powers of inheritance is prototyping; using a the inheritance as a template for more advanced elements.
+// When an element (the child) has an inherit property, then the child is used to extend the inherited element (the parent).
+// What this means is that inherited properties are overwritten by explicit properties. Let&amp;#39;s see how this works.
+{
+// Inherit the &amp;#39;Default&amp;#39; trial.
+inherit: &amp;#39;Default&amp;#39;,
+// The layout property gets overridden
+layout: [{media:{word:&amp;#39;One Child&amp;#39;}}]
+},
+{
+// Inherit the &amp;#39;Default&amp;#39; trial.
+inherit: &amp;#39;Default&amp;#39;,
+// The layout property gets overriden in a different way.
+layout: [{media:{word:&amp;#39;A differen child&amp;#39;}}]
+}
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('inheritance.js');
+&lt;/script></description></item><item><title>Docs: input</title><link>/docs/time/examples/input/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/input/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-input.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// create html element for use in click example
+var htmlElement = document.createElement(&amp;#39;div&amp;#39;)
+htmlElement.innerHTML = &amp;#39;Click Me&amp;#39;;
+// ### input
+// The trial input attribute lists the input types that the player is familiar with.
+// Each input element must include both a handle and an on propery. &amp;lt;/br&amp;gt;
+// The **handle** is the way we refer to this type of input inside the player (in the interaction section), it is basicly the name we give this input.
+// The **on** parameter describes the specific input that triggers this element.
+API.addSequence([
+// ##### Keypressed
+// The keypressed input takes an additional property: *key*.
+{
+input: [
+// Key can take single characters.
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;i&amp;#39;},
+// Or key codes (69 is the key code for e).
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:69},
+// And even arrays
+{handle:&amp;#39;otherHandle&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:[&amp;#39;i&amp;#39;,69]}
+],
+layout: [{media :{word:&amp;#39;Click e or i to move on&amp;#39;}}],
+interactions: [
+{
+// This is where we tell the player to respond to the input.
+// More about this in the conditions tutorial.
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// There are several shortcuts for usefull keypresses that do not require the *key* paramater.
+{
+input: [
+// Space
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;space&amp;#39;},
+// Enter
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;enter&amp;#39;},
+// Escape
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;esc&amp;#39;}
+],
+layout: [{media :{word:&amp;#39;Click enter escape or space to move on&amp;#39;}}],
+interactions: [
+{
+// This is where we tell the player to respond to the input.
+// More about this in the conditions tutorial.
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### Click
+// React to a click on an element.
+// Takes either a class handle or an html element to present.
+// In case an element is defined it is presented when the input is activated.
+{
+input: [
+// **stimHandle** is used to indicate stimuli with the appropriate Handle (in this case &amp;#34;myStimulus&amp;#34;).
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;click&amp;#39;,stimHandle:&amp;#39;myStimulus&amp;#39;},
+// **element** allows you to insert an html (or even jquery) element for this interaction
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;click&amp;#39;,element:htmlElement}
+],
+layout: [{data:{handle:&amp;#39;myStimulus&amp;#39;},media :{word:&amp;#39;Click me too!!&amp;#39;}, location:{bottom:30}}],
+interactions: [
+{
+// This is where we tell the player to respond to the input.
+// More about this in the conditions tutorial.
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### Timeout
+// React after a set time.
+// Takes a duration property in miliseconds. &amp;lt;/br&amp;gt;
+// This input is especialy usefell together with the removeInput action. (see the actions tutorial)
+{
+input: [
+// This trial will end after five seconds.
+{handle:&amp;#39;end&amp;#39;, on: &amp;#39;timeout&amp;#39;, duration: 3000}
+],
+layout: [{media :{word:&amp;#39;Wait just five seconds&amp;#39;}}],
+interactions: [
+{
+// This is where we tell the player to respond to the input.
+// More about this in the conditions tutorial.
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+{
+input: [
+// This is an idiom for creating a custom input
+// It is quite advanced, so don&amp;#39;t fret if you don&amp;#39;t understand everything
+// The wrapper function allows us to keep a reference to the listener function
+(function(){
+var $listener;
+return {
+handle: &amp;#39;end&amp;#39;,
+// Setup input listener
+on: function(inputObj, canvas, stream){
+$listener = stream();
+window.addEventListener(&amp;#39;resize&amp;#39;, $listener);
+return $listener;
+},
+// clean listener (for removeInput actions, and end of trial)
+off: function(){
+window.removeEventListener(&amp;#39;resize&amp;#39;, $listener);
+}
+}
+})()
+],
+layout: [{media :{word:&amp;#39;resize the screen&amp;#39;}}],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('input.js');
+&lt;/script></description></item><item><title>Docs: interactions</title><link>/docs/time/examples/interactions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/interactions/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-interactions.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// The `interactions` module of the miTime is composed of pairs of conditions and actions.
+// Each interaction object has both a conditions and an actions property. &amp;lt;/br&amp;gt;
+// {
+// conditions: [condition1, condition2],
+// actions: [action1, action2]
+// }
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// ### conditions
+// `conditions` are sets of conditions that can be either true or false.
+// Each time there is an event (any input or the begining of a trial) all the conditions are evaluated.
+// In case all the conditions of an interaction are true, we execute all the `actions` associated with it.
+API.addSequence([
+// ##### begin
+// begin is a special condition that gets automaticaly fired at the begining of each trial.
+// Use it to dispaly stimuli, and setup any time based action in your task.
+{
+// &amp;nbsp;
+input: [
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;space&amp;#39;}
+],
+stimuli: [{data:{handle:&amp;#39;myStim&amp;#39;},media :{word:&amp;#39;[begin]: Click space to move on&amp;#39;}}],
+interactions: [
+// This first interaction displays the stimulus
+{
+conditions: [
+{
+// Set the condition type
+type:&amp;#39;begin&amp;#39;
+}
+],
+actions: [{type:&amp;#39;showStim&amp;#39;,handle:&amp;#39;myStim&amp;#39;}]
+},
+// The second interaction is responsible for moving on (more about this in the inputEquals section)
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### inputEquals
+// Check if the triggering input handle is a static value.
+{
+// We set i as the right key, and e as the left key
+input: [
+{handle:&amp;#39;right&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;i&amp;#39;},
+{handle:&amp;#39;left&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;e&amp;#39;}
+],
+layout: [{media :{word:&amp;#39;[inputEquals]: Click e to move on&amp;#39;}}],
+interactions: [
+{
+conditions: [
+{
+// Set the condition type
+type:&amp;#39;inputEquals&amp;#39;,
+// This action will only be activated if the input handle is &amp;#39;left&amp;#39; &amp;lt;/br&amp;gt;
+// Pro tip: You can pass an array to the `value` property instead of just a handle name
+value:&amp;#39;left&amp;#39;
+}
+],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### inputEqualsTrial
+// Each trial has an optional data property that holds an array of user defined values.
+// The `inputEqualsTrial` condition compares the input handle with the contents of the `property` property of the current trials data property.
+{
+// We set the leftOrRight property of trial data to &amp;#39;right&amp;#39;
+data: {leftOrRight: &amp;#39;right&amp;#39;},
+input: [
+{handle:&amp;#39;right&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;i&amp;#39;},
+{handle:&amp;#39;left&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;e&amp;#39;}
+],
+layout: [{media :{word:&amp;#39;[inputEqualsTrial]: Click i to move on&amp;#39;}}],
+interactions: [
+{
+conditions: [
+{
+// Set the condition type
+type:&amp;#39;inputEqualsTrial&amp;#39;,
+// This action will only be activated if the input handle is equal to the leftOrRight property of the trial data.
+// in this case it will only be activated if the input handle is equal to &amp;#39;right&amp;#39;.
+property:&amp;#39;leftOrRight&amp;#39;
+}
+],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### inputEqualsStim
+// Each stimulus has an optional data property that holds an array of user defined values.
+// The `inputEqualsStim` condition compares the input handle with the contents of the `property` property of the current stimulus data property.
+// Note that only stimuli in the stimuli property are checked, stimuli under layout are ignored!!
+{
+// &amp;nbsp;
+input: [
+{handle:&amp;#39;right&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;i&amp;#39;},
+{handle:&amp;#39;left&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;e&amp;#39;}
+],
+stimuli: [{data:{handle:&amp;#39;myStim&amp;#39; ,leftOrRight:&amp;#39;left&amp;#39;}, media :{word:&amp;#39;[inputEqualsStim]: Click e to move on&amp;#39;}}],
+interactions: [
+// Just display the stimulus
+{
+conditions: [{type:&amp;#39;begin&amp;#39;}],
+actions: [{type:&amp;#39;showStim&amp;#39;,handle:&amp;#39;myStim&amp;#39;}]
+},
+// End trial when the correct key is pressed
+{
+conditions: [
+{
+// Set the condition type
+type:&amp;#39;inputEqualsStim&amp;#39;,
+// This action will only be activated if the input handle is equal to the leftOrRight property of the stimulus data.
+// In this case it will only be activated if the input handle is equal to &amp;#39;right&amp;#39;.
+property:&amp;#39;leftOrRight&amp;#39;,
+// The handle tells the player to search for the triggering property only in stimuli with the &amp;#39;myStim&amp;#39; handle.
+// (You can ommit the handle property and the condition activates if any of the stimuli fit the inputEqualsStim criteria)
+handle:&amp;#39;myStim&amp;#39;
+}
+],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+},
+// ##### Negate
+// Sometimes we want a condition to be true only if a certain condition does NOT happen.
+// In these cases we can use the negate property to reverse a condition.
+// (when using negate you should be carefull that the condition doesn&amp;#39;t turn out true in unexpected situations, for instance - on the begin input, or when triggering various timeouts)
+{
+data: {leftOrRight: &amp;#39;right&amp;#39;},
+input: [
+{handle:&amp;#39;right&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;i&amp;#39;},
+{handle:&amp;#39;left&amp;#39;,on:&amp;#39;keypressed&amp;#39;, key:&amp;#39;e&amp;#39;}
+],
+layout: [{media :{word:&amp;#39;[inputEqualsTrial&amp;#43;negate]: Click e to move on&amp;#39;}}],
+interactions: [
+{
+conditions: [
+// If input does not equal to the leftOrRight property
+{
+type:&amp;#39;inputEqualsTrial&amp;#39;,
+property:&amp;#39;leftOrRight&amp;#39;,
+negate: true
+},
+// And does not equal to the begin either.
+// (Without this part of the condition the endTrial action would be fired upon the begin of the trial - which isn&amp;#39;t a right keypress)
+{
+type:&amp;#39;begin&amp;#39;,
+negate:true
+}
+],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+// ### Actions
+// Each time there is an event (any input or the begining of a trial) all the conditions are evaluated.
+// In case all the conditions of an interaction are true, we execute all the `actions` associated with it.
+,
+// ##### Stimulus actions
+// This trial allows showing and hiding stimuli using keyboard input.
+// It also saves the status of the stimuli into the displayed property of the stimulus data object.
+{
+/* This trial marker is used in the goto trial later*/
+data: {actionStart:true},
+input: [
+{handle:&amp;#39;show&amp;#39;,on:&amp;#39;enter&amp;#39;},
+{handle:&amp;#39;hide&amp;#39;,on:&amp;#39;space&amp;#39;},
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;esc&amp;#39;}
+],
+layout: [{location:{top:0}, media :{word:&amp;#39;[showStim, hideStim, endTrial]: Click escape to move on, enter to show stimulus, space to hide it&amp;#39;}}],
+stimuli: [{data:{handle:&amp;#39;myStim&amp;#39;, displayed:false},media :{word:&amp;#39;MyStim&amp;#39;}}],
+interactions: [
+// *Display the stimulus*
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;, value:&amp;#39;show&amp;#39;}],
+actions: [
+// `type:&amp;#39;showStim&amp;#39;` displays a stimulus. `handle` defines which stimuli should be affected
+{
+type:&amp;#39;showStim&amp;#39;,
+handle:&amp;#39;myStim&amp;#39;
+},
+// `typ:&amp;#39;setStimAttr&amp;#39;` logs data into the stimulus data object. &amp;lt;/br&amp;gt;
+// `handle` defines which stimuli should be affected. &amp;lt;/br&amp;gt;
+// `setter` is an object to merge with the current stimulus data, overinging any clashing properties.&amp;lt;/br&amp;gt;
+// In this case `type:&amp;#39;setStimAttr&amp;#39;` marks displayed as true.
+{
+type:&amp;#39;setStimAttr&amp;#39;,
+handle:&amp;#39;myStim&amp;#39;,
+setter:{displayed:true}
+}
+]
+},
+// *Hide the stimulus*
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;, value:&amp;#39;hide&amp;#39;}],
+actions: [
+// `type:&amp;#39;hideStim&amp;#39;` displays a stimulus. `handle` defines which stimuli should be affected
+{
+type:&amp;#39;hideStim&amp;#39;,
+handle:&amp;#39;myStim&amp;#39;
+},
+// In this case `type:&amp;#39;setStimAttr&amp;#39;` marks displayed as false.
+{
+type:&amp;#39;setStimAttr&amp;#39;,
+handle:&amp;#39;myStim&amp;#39;,
+setter:{displayed:false}
+}
+]
+},
+// *End the trial*
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;, value:&amp;#39;end&amp;#39;}],
+actions: [
+// `type:&amp;#39;endTrial&amp;#39;` ends a trial and moves us on.
+{
+type:&amp;#39;endTrial&amp;#39;
+}
+]
+}
+]
+},
+// ##### Trial Actions
+// This trial ends when space is clicked or 5 seconds have passed. &amp;lt;/br&amp;gt;
+// You should note in particular the `type:&amp;#39;log&amp;#39;` action that is the way we tell the player to save the interaction and later send it to the server.
+{
+input: [
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;space&amp;#39;}
+],
+layout: [{media :{word:&amp;#39;[Trial actions]: Click space to move on or wait 5 seconds&amp;#39;}}],
+interactions: [
+// *Activate timeout at the begining* &amp;lt;/br&amp;gt;
+{
+conditions: [{type:&amp;#39;begin&amp;#39;}],
+actions: [
+// `type:&amp;#39;setInput&amp;#39;` creates a new input for this trial. `input` is a regular input object.
+{
+type:&amp;#39;setInput&amp;#39;,
+input:{handle:&amp;#39;time&amp;#39;,on:&amp;#39;timeout&amp;#39;,duration:5000}
+}
+]
+},
+// *End trial on timeout*
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;, value:&amp;#39;time&amp;#39;}],
+actions: [
+{
+type:&amp;#39;endTrial&amp;#39;
+},
+// The `type:&amp;#39;log&amp;#39;` action tells the player to log this interaction.
+{
+type:&amp;#39;log&amp;#39;
+}
+]
+},
+// *End trial on click*&amp;lt;/br&amp;gt;
+// On space click, remove listerner for the timeout, mark this trial as manualy terminated, log it and end trial.
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [
+// `type:&amp;#39;removeInput&amp;#39;` removes all inputs that have the `handle` handles.
+{
+type:&amp;#39;removeInput&amp;#39;,
+handle :&amp;#39;time&amp;#39;
+},
+// `type: &amp;#39;setTrialAttr&amp;#39;` merges the values from `setter` into the trial data.
+// (setter may also take a function, see documentation)
+{
+type: &amp;#39;setTrialAttr&amp;#39;,
+setter: {terminatedManual:true}
+},
+{
+type:&amp;#39;log&amp;#39;
+},
+{
+type:&amp;#39;endTrial&amp;#39;
+}
+]
+}
+]
+},
+// ##### goto
+// The `type:&amp;#39;goto&amp;#39;` action is responsible for the next trial we move on to. It is special in that it executes only after the trial ends, so you will usualy want to follow it with an endTrial action.
+// There are many types of goto destinations, refer to the documentation for a full list.
+{
+input: [
+{handle:&amp;#39;restart&amp;#39;,on:&amp;#39;space&amp;#39;},
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;esc&amp;#39;}
+],
+layout: [{media :{word:&amp;#39;[goto]: Click space to restart actions, escape to end task&amp;#39;}}],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;restart&amp;#39;}],
+actions: [
+// `destination` defines what type of goto this is, in this case go to the last trial that has all the properties in `properties`. &amp;lt;/br&amp;gt;
+// `properties` is an object to compare to the trial data. note that the properties will only compare to properties present in the raw sequence (before inheritance)! &amp;lt;/br&amp;gt;
+// In this case `previousWhere` finds the first action trial which is marked by the data object {actionStart : true}
+{
+type:&amp;#39;goto&amp;#39;,
+destination:&amp;#39;previousWhere&amp;#39;,
+properties: {actionStart:true}
+},
+{
+type:&amp;#39;endTrial&amp;#39;
+}
+]
+},
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [
+{
+type:&amp;#39;endTrial&amp;#39;
+}
+]
+}
+]
+}
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('interactions.js');
+&lt;/script></description></item><item><title>Docs: sequence</title><link>/docs/time/examples/sequence/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/sequence/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-sequence.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// ### The trial sequence
+// The heart of any miTime script is the sequence.
+// In this part of the tutorial we will see some advanced uses of the sequencer. &amp;lt;/br&amp;gt;
+API.addSequence([
+// #### Multiple trials
+// The sequence is an array of trials. you can sequentially add in as many trials as you want
+{
+// First trial
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;First trial&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+// Second trial
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Second trial&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+// #### Mixer objects
+// In order to create more complex sequences you can use mixer objects. Mixer objects allow you to repeat and randomize trials. &amp;lt;/br&amp;gt;
+// Each mixer object has a mixer property that defines what type of mixer it is, and a data property that holds a sequence array to be mixed. This means that the sequence may include any number of trials and/or mixer objects.&amp;lt;/br&amp;gt;
+// {
+// mixer: &amp;#39;mixer-type&amp;#39;,
+// data: [task1, task2]
+// }
+,
+// ##### Random
+{
+// The mixer property tells the sequence what sort of mixer object this is.
+// This mixer randomizes its sequence.
+mixer : &amp;#39;random&amp;#39;,
+// The data property holds a sequence array to be randomized. These trials will be inserted into the sequence in a random order.
+data : [
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Random 1&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Random 2&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Random 3&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]
+},
+// ##### Repeat
+{
+// This mixer repeats the trials in the data property.
+mixer : &amp;#39;repeat&amp;#39;,
+// The repeat mixer requires the times property that defines how many times to repeat the trials.
+times : 3,
+// The data property holds a sequence array to be repeated.
+data : [
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;I am repeated !!&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]
+},
+// ##### Choose
+{
+// This mixer randomly chooses one or more trials
+mixer : &amp;#39;choose&amp;#39;,
+// The number of trials to choose (by default only one)
+n : 1,
+// The data property holds a sequence array from which the mixer picks trials.
+data : [
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Choose only one (1)&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Choose only one (2)&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Choose only one (3)&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]
+},
+// ##### Weighted Random
+{
+// The weighted random mixer chooses an element from `data` with specific weights for each entry.
+mixer : &amp;#39;weightedRandom&amp;#39;,
+// The weights of the elements. The numbers in this array are the relative weights of each respective element in data.
+weights: [0.2,0.8],
+// The data property holds a sequence array to be randomized.
+data : [
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Random 1 (20%)&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Random 2 (80%)&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]
+},
+// ##### Wrapper (blocks within randomize)
+{
+// This mixer randomizes its sequence
+mixer : &amp;#39;random&amp;#39;,
+// The data property holds a sequence array to be randomized.
+data : [
+// This trial is randomized normally
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Complex - may be before or after the pair&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+// The wrapper mixer tells the sequencer to keep the data inside it together despite the randomization. It is analogous to parenthesis in math. &amp;lt;/br&amp;gt;
+// In contrast, if we has a repeat mixer here, its content would be randomized.
+{
+mixer: &amp;#39;wrapper&amp;#39;,
+data: [
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Pair 1&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Pair 2&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]
+}
+]
+},
+// ##### Wrapper (randomization within repeat)
+{
+// This mixer repeats its sequence.
+mixer : &amp;#39;repeat&amp;#39;,
+// Two times.
+times: 2,
+// The data property holds a sequence array to be repeated.
+data : [
+// The wrapper mixer tells the sequencer to deffer the randomization until after the repeat&amp;lt;/br&amp;gt;
+// In contrast, if we didn&amp;#39;t have the wrapper the randomizer would be run only once, and we would always randomize the same sequence.
+{
+mixer: &amp;#39;wrapper&amp;#39;,
+data: [
+{
+mixer:&amp;#39;random&amp;#39;,
+data: [
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;First Stim&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+},
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;Second Stim&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]
+}
+]
+}
+]
+},
+// ##### The End
+{
+input: [{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}],
+layout: [{media :{word:&amp;#39;The End&amp;#39;}}],
+interactions: [{conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],actions: [{type:&amp;#39;endTrial&amp;#39;}]}]
+}
+]);
+/* this is where we close the sequence */
+// ### Pro tip
+// *This section goes beyond the normal scope of the miTime, and is intended for use by advanced users only.* &amp;lt;/br&amp;gt;
+// The sequencer allows for many complex configurations. There are times that you want a quick easy way to test that the sequence you created really does what it is supposed to.
+// The proper way to do that is to create a mock sequence and check that it is mixed correctly. &amp;lt;/br&amp;gt;
+// Following is such an example. &amp;lt;/br&amp;gt;
+// Require the mixer function
+require([&amp;#39;utils/mixer&amp;#39;], function(mixer) {
+var sequence;
+// Create a sequence using numbers (or strings) instead of trials.
+// You may use all the regular mixer objects.
+// This sequence creates an array of four sets of numbers.
+// Each one of these begins with a `1`, ends with a `9`, and has all the digits between `2` and `8` randomized between them.
+sequence = [
+{
+mixer : &amp;#39;repeat&amp;#39;,
+times : 4,
+data : [
+// Parse the wrapper only **after** repeating.
+{
+mixer: &amp;#39;wrapper&amp;#39;,
+data: [
+{
+mixer : &amp;#39;wrapper&amp;#39;,
+data : [
+1,
+{
+mixer: &amp;#39;random&amp;#39;,
+// Note that we use numbers instead of trials here. This allows us to follow the order that this mixer follows.
+data: [
+2,3,4,5,6,7,8
+] /* end random data */
+},
+9
+] /* end repeat data */
+}
+] /* end random data */
+}
+] /* end repeat data */
+}
+];
+// We log the results of the mixer into the console (click F12 to Open Developer Tools - in Firefox requires Firebug extension.) &amp;lt;/br&amp;gt;
+// Now you can check to see if the order is what you intend.
+/* global console */
+console.log(mixer(sequence));
+});
+return API.script;
+});
+/* don&amp;#39;t forget to close the define wrapper */
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('sequence.js');
+&lt;/script></description></item><item><title>Docs: settings</title><link>/docs/time/examples/settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/settings/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-settings.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// This tutorial will show you how to use the API in order to set the global settings for the miTime. &amp;lt;/br&amp;gt;
+// The `API.addSettings()` function takes two arguments; the first is the property we want to affect (i.e. canvas), and the second is the settings object we want to set in it.
+// Adding setting is accumulative. this means that adding a specific setting twice merges it in, and does not reset it to its defaults. &amp;lt;/br&amp;gt;
+// The basic structure of the add settings object is as follows:
+// API.addSettings(&amp;#39;settingName&amp;#39;,{
+// // some settings
+// });
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// ### canvas
+// The canvas setting controls the general look that the player takes
+/* canvas */
+// ##### controling shape
+API.addSettings(&amp;#39;canvas&amp;#39;,{
+// `maxWidth` the maximum width (in pixels) that the canvas may reach. By default it is set to 500px.
+maxWidth: 800,
+// `proportions` controls the shape of the canvas (as height/width). By default it is set to 0.8.
+proportions : 0.8
+// ##### controling design
+,
+// `background` controls the background color of the whole screen
+background: &amp;#39;violet&amp;#39;,
+// `canvasBackground` controls the background color of the player canvas
+canvasBackground: &amp;#39;lightblue&amp;#39;,
+// `borderWidth` controls the width of the player canvas borders in pixels
+borderWidth: 4,
+// `borderColor` controls the color of the player canvas borders
+borderColor: &amp;#39;black&amp;#39;,
+// `css` allows you to add your custom css to the canvas element (using the jQuery css API).
+// This is an advanced way to affect the way your task looks globaly.
+css: {
+color:&amp;#39;tomato&amp;#39;
+}
+});
+// ### Logger
+// The logger section is responsible for logging options. &amp;lt;/br&amp;gt;
+// See documentation if you want to add a custom logger function to replace the default logging action of the player.
+/* Logger */
+// `url` is the url to which we send the logged data (ask your IT team what it should be). You should set this if you want to log your data...
+API.addSettings(&amp;#39;logger&amp;#39;,{
+url: &amp;#39;my.domain.org/controler.php&amp;#39;,
+// `pulse` the maximum size of each data pulse to the server (see documentation for more details).
+// In this case we post to the server every 20 logs.
+pulse: 20,
+// `fullpath` when logging media names should we use the full path, or just the name (false by default)
+fullpath: false
+});
+// ### Base url
+// The base url section is responsible for loading images and templates. it allows the user to pick a base url from which to load all images and templates. &amp;lt;/br&amp;gt;
+/* base url */
+// You can input a single url for use for both images and template.
+API.addSettings(&amp;#39;base_url&amp;#39;,&amp;#39;media&amp;#39;);
+// Or an object with seperate paths for templates and images.
+API.addSettings(&amp;#39;base_url&amp;#39;,{
+// `image`: the path to your images
+image: &amp;#39;media/images&amp;#39;,
+// `template`: the path to your templates
+template: &amp;#39;media/templates&amp;#39;
+});
+// ### Redirect
+/* Redirect */
+// The redirect setting decides where to redirect the player at the end of the task.
+// By default, the player simply refreshes the current page.
+// This option is not used if the endTask hook is set.
+API.addSettings(&amp;#39;redirect&amp;#39;,&amp;#39;my.domain.org/next/&amp;#39;);
+// ### Meta data
+/* Meta data */
+// Meta data is server side data that should be returned with every request to the server.
+// Any key value pair in the meta data is added to every post the player makes to the server.
+// In order to create a post with three keys: json, session_id and task_id - you would write something like this:
+API.addSettings(&amp;#39;metaData&amp;#39;, {
+session_id : 9872356,
+task_id : &amp;#39;43BTW78&amp;#39;
+});
+// ### sequence
+API.addSequence([
+{
+input: [{handle:&amp;#39;end&amp;#39;, on:&amp;#39;space&amp;#39;}],
+layout:[{media:{word:&amp;#39;Just a plain trial to show what we can do with settings&amp;#39;}}],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('settings.js');
+&lt;/script></description></item><item><title>Docs: stimulus</title><link>/docs/time/examples/stimulus/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/stimulus/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-stimulus.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// and the templates [here](https://github.com/minnojs/minno-time/tree/gh-pages/resources).
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+API.addSequence([
+// ### Stimuli and media
+// The stimulus object is the object that tells the miTime exactly what and how to display a stimulus.
+// Part of each stimulus is the media that it displays.
+/* The trial begins here */
+{
+input: [
+{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}
+],
+// The layout property is an array of the static stimuli in the trial
+layout:[
+/* the top right stimulus begins here */
+{
+// The **location** property of the stimulus controls where the stimulus will appear. &amp;lt;/br&amp;gt;
+// Permitted values are numbers (percentages of canvas size), &amp;#39;center&amp;#39; or &amp;#39;auto&amp;#39;. By default, location is set to center.
+location:{right:0,top:0},
+// The **css** property of the stimulus controls the styling of displayed elements
+// it uses the jquery property name standard (http://api.jquery.com/css/)
+css: {color:&amp;#39;red&amp;#39;,fontSize:&amp;#39;2em&amp;#39;},
+// The **media** property of the stimulus controls what it is that we are about to display.
+// the simplest form of media is a **word**, or string of text
+media:{word:&amp;#39;top right (word)&amp;#39;}
+},
+/* the top right stimulus ends here */
+// The media object can be a piece of **html** too.
+/* the top left stimulus begins here */
+{
+location:{left:0,top:0},
+media:{html:&amp;#39;&amp;lt;b&amp;gt;bottom left (html)&amp;lt;/b&amp;gt;&amp;#39;}
+},
+/* the top left stimulus begins here */
+// In this case the media objects uses an **external html** file.
+// (see documentation regarding how to use this as a javascript template)
+/* the bottom left stimulus begins here */
+{
+location:{left:0,bottom:0},
+media:{template:&amp;#39;../../../resources/bottom_left.html&amp;#39;}
+}
+/* the bottom left stimulus begins here */
+],
+// The stimuli property holds stimuli that are to be dynamically presented
+stimuli: [
+// Lets show an **image** this time. &amp;lt;/br&amp;gt;
+// The size property allows you to control the image size (in percentage of canvas). By default it is set to &amp;#39;auto&amp;#39;.
+{
+size: {height:75, width:&amp;#39;auto&amp;#39;},
+media :{image:&amp;#39;../../images/learning.jpg&amp;#39;},
+// `nolog` allows you to control whether this stimulus will be logged (see the interactions section)
+nolog:true
+}
+],
+interactions: [
+{
+conditions: [{type:&amp;#39;begin&amp;#39;}],
+actions: [{type:&amp;#39;showStim&amp;#39;,handle:&amp;#39;All&amp;#39;}]
+},
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+/* The trial ends here */
+]);
+/* this is where we close the sequence */
+return API.script;
+});
+/* don&amp;#39;t forget to close the require wrapper */
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('stimulus.js');
+&lt;/script></description></item><item><title>Docs: stroop-block</title><link>/docs/time/examples/stroop-block/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/stroop-block/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-stroop-block.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// The tool that controls the structure and flow of the task is called the [mixer](./API.md#mixer).
+// It allows you to duplicate and randomize trials within the sequence.
+// The way it works, is that you insert a mixer object inside the sequence and the player replaces it with the appropriate set of trials.
+// Each mixer object has a `mixer` property that holds the type of mixing that we want (more about that later),
+// and a `data` property that holds an array of trials and/or mixer objects to mix.
+// We will use two mixer types here: `repeat` and `random`.
+// ### Randomizing the sequence
+// We already know how to easily create a sequence of trials; simply drop the trials we want into the sequence. But what if we want each user to run into a different sequence? How do we tell the player to randomize the order? We will use the mixer to randomize the trial order:
+// ```javascript
+// API.addSequence([
+// {
+// mixer: &amp;#39;random&amp;#39;,
+// data: [
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;}
+// ]
+// }
+// ]);
+// ```
+// You will notice that this sequence has only one object, that has two properties; `mixer` and `data`. All the trials per se are set inside the `data` attribute. This mixer object takes all the elements inside the `data` property and randomizes their order. The player then sets the trials into the sequence instead of the mixer object. So that the result of the previous code may be equivalent to this:
+// ```javascript
+// API.addSequence([
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;},
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;}
+// ]);
+// ```
+// ### Expanding the sequence
+// Sometimes we want to repeat a trial (or trials) more than once. In our case, for example, each time you run a trial it displays a different stimulus, so it is useful to display each trial several times. This is the purpose of the `repeat` mixer. The `times` property sets the number of times that the data should be replicated. The following mixer repeats `data` three times:
+// ```javascript
+// API.addSequence([
+// {
+// mixer: &amp;#39;repeat&amp;#39;,
+// times: 2,
+// data: [
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;}
+// ]
+// }
+// ]);
+// ```
+// So that it is directly equivalent to
+// ```javascript
+// API.addSequence([
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;},
+// {inherit:&amp;#39;red&amp;#39;},
+// {inherit:&amp;#39;blue&amp;#39;},
+// {inherit:&amp;#39;green&amp;#39;}
+// ]);
+// ```
+// ### Exclusive random
+// An additional issue that comes up is the order of stimuli do be presented.
+// We used the mixer to randomize the order of trials, but the stimuli themselves are randomized when they are inherited from their respective stimulus sets.
+// By default inheritance picks a random element out of the target set.
+// But this way there is a chance that we pick the same element twice in a row, or not pick one of the elements at all.
+// The player offers [additional types](./API.md#inheriting) of inheritance as well, in this case we will want to use `exRandom` which stands for exclusive random.
+// Exclusive random makes sure to exclude each element that it picks out of the set,
+// so that as long that their are element in the set that have not already been chosen it will pick from among them and not an element that has already been used.
+// So far we have inherited the stimuli like this:
+// ```javascript
+// API.addTrialSets(&amp;#39;red&amp;#39;,[{
+// inherit:&amp;#39;base&amp;#39;,
+// data: {group:&amp;#39;red&amp;#39;},
+// stimuli: [
+// {inherit:&amp;#39;red&amp;#39;, handle:&amp;#39;target&amp;#39;}
+// ]
+// }]);
+// ```
+// In order to use `exRandom`, all we have to do is this:
+// ```javascript
+// API.addTrialSets(&amp;#39;red&amp;#39;,[{
+// inherit:&amp;#39;base&amp;#39;,
+// data: {group:&amp;#39;red&amp;#39;},
+// stimuli: [
+// {inherit:{set:&amp;#39;red&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;}
+// ]
+// }]);
+// ```
+// Instead of setting `inherit` with the set name, and inheriting randomly we set inherit an object that has two properties; `type` sets the type of inheritance to use (in this case `exRandom`), `set` defines which set should we inherit from.
+// ### The script itself
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor(&amp;#39;stroop&amp;#39;);
+API.addSettings(&amp;#39;canvas&amp;#39;,{
+textSize: 5
+});
+API.addStimulusSets(&amp;#39;red&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;red&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;blue&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;green&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;green&amp;#39;}}
+]);
+API.addTrialSets(&amp;#39;base&amp;#39;,[{
+input: [
+{handle:&amp;#39;red&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;1&amp;#39;},
+{handle:&amp;#39;blue&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;2&amp;#39;},
+{handle:&amp;#39;green&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;3&amp;#39;}
+],
+layout: [
+{media:&amp;#39;1&amp;#39;,location:{left:2,top:2},css:{background:&amp;#39;red&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;2&amp;#39;,location:{top:2},css:{background:&amp;#39;blue&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;3&amp;#39;,location:{right:2,top:2},css:{background:&amp;#39;green&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}}
+],
+interactions: [
+/* Display the target stimulus. */
+{
+conditions:[{type:&amp;#39;begin&amp;#39;}],
+actions: [{type:&amp;#39;showStim&amp;#39;, handle: &amp;#39;target&amp;#39;}]
+},
+/* Correct response actions */
+{
+conditions: [
+{type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:1}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;endTrial&amp;#39;}
+]
+},
+/* Incorrect response actions */
+{
+conditions: [
+{type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;,negate:true},
+{type:&amp;#39;inputEquals&amp;#39;,value:[&amp;#39;red&amp;#39;,&amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39;]}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:0}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;endTrial&amp;#39;}
+]
+}
+]
+}]);
+// ### Advanced inheritance
+// Here, we put `exRandom` into use.
+API.addTrialSets(&amp;#39;red&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;red&amp;#39;},
+stimuli: [
+{inherit:{set:&amp;#39;red&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;}
+]
+}]);
+API.addTrialSets(&amp;#39;blue&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;blue&amp;#39;},
+stimuli: [
+{inherit:{set:&amp;#39;blue&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;}
+]
+}]);
+API.addTrialSets(&amp;#39;green&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;green&amp;#39;},
+stimuli: [
+{inherit:{set:&amp;#39;green&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;}
+]
+}]);
+// ### Using the mixer
+// You can put mixers one inside the other in order to get richer combinations.
+// For our Stroop task, we want to repeat each trial 10 times and then randomize their order.
+// The mixer evaluates internal mixers before external ones, so we want the inner mixer to repeat our trials ten times,
+// and only then the external mixer will do the randomization.
+API.addSequence([
+/* random mixer */
+{
+mixer: &amp;#39;random&amp;#39;,
+data: [
+/* repeat mixer */
+{
+mixer: &amp;#39;repeat&amp;#39;,
+times: 20,
+data: [
+{inherit:&amp;#39;red&amp;#39;},
+{inherit:&amp;#39;blue&amp;#39;},
+{inherit:&amp;#39;green&amp;#39;}
+]
+}
+]
+}
+]);
+// Return the script
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('stroop-block.js');
+&lt;/script></description></item><item><title>Docs: stroop-inheritance</title><link>/docs/time/examples/stroop-inheritance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/stroop-inheritance/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-stroop-inheritance.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// ### Data
+// Before we dive into the actual practice of inheritance, it is important to understand the function and use of the trial&amp;#39;s `data` property.
+// The `data` property holds an object that keeps information that has to do with this trial.
+// Remember that all the properties and values of `data` are arbitrary, and you can use them in any way that is convenient to you.
+// It is useful for several things.
+// First, every time you [log](./API.md#interactions-actions) an event to the server, anything that is in you data object gets logged along with it.
+// This means that if you want to mark the type of a trial it is convenient to do it from here, and then you will have access to it from you servers database.
+// In this case we will set our trials *group* using the data object:
+// ```javascript
+// {
+// data:{group:&amp;#39;congruent&amp;#39;}
+// }
+// ```
+// Furthermore, the data object may be used by player interactions.
+// The condition `inputEqualsTrial` compares the input handle to a specified property of the trial&amp;#39;s data object.
+// This means that we can create interactions that behave a bit differently as a function of trial type as defined in the data object.
+// The following interaction fires when the input handle is equal to the *group* property of the data object:
+// ```javascript
+// {
+// conditions: [
+// {type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;}
+// ],
+// actions: [
+// /* Some cool stuff of you own design */
+// ]
+// }
+// ```
+// Finally, interactions may change the data object in real time, while the trial is running.
+// `setTrialAttr` sets data into the data object. The following interaction sets the *score* property of the data object to *1*
+// (go [here](./API.md#interactions-actions) to learn more about the `setTrialAttr` action).
+// ```javascript
+// {
+// conditions: [
+// /* The conditions of your choice */
+// ],
+// actions: [
+// {type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:1}}
+// ]
+// }
+// ```
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor(&amp;#39;stroop&amp;#39;);
+API.addSettings(&amp;#39;canvas&amp;#39;,{
+textSize: 5
+});
+// ### Evolving the stroop trial (stimuli)
+// The stroop has several types of trials: one for each color.
+// What we want to do is to create a base trial that has all the properties that they have in common and then evolve them from it.
+// There are three essential differences between stroop trials.
+// One is the stimulus set that they use, the second is the way they evaluate responses (which response is correct),
+// the third is the type of the trial as reported to the server.
+// What we will do is create separate trials that hold these differences and inherit the base trial that has the rest of the trial specifications.
+API.addStimulusSets(&amp;#39;red&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;red&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;blue&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;green&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;green&amp;#39;}}
+]);
+// ### Evolving the stroop trial (trials)
+// We create a base trial that will be the base for anything further that we do.
+// The primary change that we made is in evaluating the correct response.
+// `inputEqualsTrial` compares the input handle to the (trial&amp;#39;s) data property *group*.
+// If they are the same then the answer is correct. The incorrect response answer reflects the same principle, only negated.
+API.addTrialSets(&amp;#39;base&amp;#39;,[{
+input: [
+{handle:&amp;#39;red&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;1&amp;#39;},
+{handle:&amp;#39;blue&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;2&amp;#39;},
+{handle:&amp;#39;green&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;3&amp;#39;}
+],
+layout: [
+{media:&amp;#39;1&amp;#39;,location:{left:2,top:2},css:{background:&amp;#39;red&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;2&amp;#39;,location:{top:2},css:{background:&amp;#39;blue&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;3&amp;#39;,location:{right:2,top:2},css:{background:&amp;#39;green&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}}
+],
+interactions: [
+/* Display the target stimulus. */
+{
+conditions:[{type:&amp;#39;begin&amp;#39;}],
+actions: [{type:&amp;#39;showStim&amp;#39;, handle: &amp;#39;target&amp;#39;}]
+},
+/* Correct response actions */
+{
+conditions: [
+{type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:1}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;endTrial&amp;#39;}
+]
+},
+/* Incorrect response actions */
+{
+conditions: [
+{type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;,negate:true},
+{type:&amp;#39;inputEquals&amp;#39;,value:[&amp;#39;red&amp;#39;,&amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39;]}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:0}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;endTrial&amp;#39;}
+]
+}
+]
+}]);
+// We&amp;#39;ve created three trials here, one for each of the trial types (colors), and set them into `trialSets` so they can later be inherited themselves.
+// Note that we haven&amp;#39;t made any changes to the interactions.
+// We will change the interactions in the base trial so that they depend on the trial type (as set in data *group*).
+API.addTrialSets(&amp;#39;red&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;red&amp;#39;},
+stimuli: [
+{inherit:&amp;#39;red&amp;#39;, handle:&amp;#39;target&amp;#39;}
+]
+}]);
+API.addTrialSets(&amp;#39;blue&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;blue&amp;#39;},
+stimuli: [
+{inherit:&amp;#39;blue&amp;#39;, handle:&amp;#39;target&amp;#39;}
+]
+}]);
+API.addTrialSets(&amp;#39;green&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;green&amp;#39;},
+stimuli: [
+{inherit:&amp;#39;green&amp;#39;, handle:&amp;#39;target&amp;#39;}
+]
+}]);
+// ### Epilogue (of sorts)
+// What we have left now, is to put the task together. Here we display a congruent and incongruent trial consequently.
+API.addSequence([
+{inherit:&amp;#39;red&amp;#39;},
+{inherit:&amp;#39;blue&amp;#39;},
+{inherit:&amp;#39;green&amp;#39;}
+]);
+// We can go ahead now, and create our tasks manually by inserting trials at any order that we want, but that would be static and hard to maintain.
+// In the [next](./stroop-blockDocco.html) section we will learn how to use the sequence mixer in order to randomize and organize our task blocks.
+// In addition we will dabble a bit further into the use of inheritance for randomization.
+// Return the script object
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('stroop-inheritance.js');
+&lt;/script></description></item><item><title>Docs: stroop-interactions</title><link>/docs/time/examples/stroop-interactions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/stroop-interactions/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-stroop-interactions.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// The next step is to create interactions that will make the player interactive.
+// We will first set up the `input` and `stimuli` properties of the trial and then dig into `interactions`.
+// We will keep extending the trial we started in the setup section.
+// For now we will develop the *red* stimulus trial, later on we will show how to apply it to the other trials as well.
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor(&amp;#39;stroop&amp;#39;);
+API.addSettings(&amp;#39;canvas&amp;#39;,{
+textSize: 5
+});
+API.addStimulusSets(&amp;#39;red&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;red&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;blue&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;green&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;green&amp;#39;}}
+]);
+API.addSequence([
+{
+layout: [
+{media:&amp;#39;1&amp;#39;,location:{left:2,top:2},css:{background:&amp;#39;red&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;2&amp;#39;,location:{top:2},css:{background:&amp;#39;blue&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;3&amp;#39;,location:{right:2,top:2},css:{background:&amp;#39;green&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}}
+],
+// ### Input
+// First we want to tell the player to listen for user input.
+// The player has an internal event system that triggers each time a significant event happens.
+// We need listeners that trigger internal events each time that an appropriate key is pressed.
+// We will add a separate input listener for each color. They will use the `1`, `2` and `3` keys for red blue and green respectively.
+// These listeners are sensitive to `keypressed` events, you can change them to any of the [other types of events](./API.md#input) of course.
+// Listeners are objects that are composed of (at least) two properties; `handle` and `on`.
+// The `on` property defines what type of input we are going to listen to; in this case we listen for `keypressed` events, of specifically `e` or `i`.
+// The `handle` properties defines the name of the internal event to be triggered.
+// In this case we trigger the *red* event when `1` is pressed, the *blue* event when `2` is pressed and so on.
+input: [
+{handle:&amp;#39;red&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;1&amp;#39;},
+{handle:&amp;#39;blue&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;2&amp;#39;},
+{handle:&amp;#39;green&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;3&amp;#39;}
+],
+// **Protip**: You can use key codes instead of letters, that way you can use special keys like the left (37) and right (38) arrow keys
+// (see [here](http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes) for a full list of key codes).
+// ### Stimuli
+// The stimuli in the `layout` property are static; this means that interactions do not affect them.
+// If we want stimuli to be interactive we put them into a separate array called `stimuli`.
+// The advantage of this separation is that you never have to worry that you&amp;#39;re going to break the canvas layout when creating interactions.
+// We will very simply move the target stimulus into the `stimuli` property:
+stimuli:[
+{inherit:&amp;#39;red&amp;#39;, handle:&amp;#39;target&amp;#39;}
+],
+// Note that we extend every stimulus we inherit with the (arbitrary) handle `&amp;#39;target&amp;#39;`,
+// this is necessary so that the various actions in `interactions` can know which stimulus we are referring to.
+// ### Interactions
+// The `interaction` property controls all the interactive parts of the trial.
+// This is where you will have to carefully describe exactly what you want the player to *do*.
+// We will start with an extremely simple set of interactions and slowly build up to a full fledged trial.
+// `interactions` holds an array of interaction-objects.
+// Each of these objects has two properties: `conditions` and `actions`.
+// `conditions` are a set of propositions that have to all be true in order for respective set of `actions` to be executed. Each of them consists in an array of objects.
+// You can see the [API](./API.md#interactions) for a complete list of conditions and actions.
+// The condition system is based on an internal event system.
+// Each time a significant event happens (i.e. a [user input](#input) is detected, or a timer runs out) an event is fired internally.
+// The conditions compare different data to the event handle (we will see how this works shortly).
+// Each condition has a `type` property that defines what to compare the event handle to.
+// We will start with several basic interactions:
+// Stimuli set into `stimuli` are hidden by default.
+// The first interaction we deal with displays the target stimulus as soon as the trial starts.
+// `begin` is a special event that is fired only once; when a trial starts. In order to listen to it we use the condition object `{type:&amp;#39;begin&amp;#39;}`.
+// In this case, the associated action is `showStim`; this action tells the player to display the a stimulus that has the handle `&amp;#39;target&amp;#39;`
+// (you can recall that we extended the target stimulus with the handle `&amp;#39;target&amp;#39;`).]
+// Stimuli set into `stimuli` are hidden by default.
+// The first interaction we deal with displays the target stimulus as soon as the trial starts.
+// `begin` is a special event that is fired only once; when a trial starts. In order to listen to it we use the condition object `{type:&amp;#39;begin&amp;#39;}`.
+// In this case, the associated action is `showStim`; this action tells the player to display the a stimulus that has the handle `&amp;#39;target&amp;#39;`
+// (you can recall that we extended the target stimulus with the handle `&amp;#39;target&amp;#39;`).]
+interactions: [
+{
+conditions:[{type:&amp;#39;begin&amp;#39;}],
+actions: [{type:&amp;#39;showStim&amp;#39;, handle: &amp;#39;target&amp;#39;}]
+},
+// Next we will add interactions that deal with the response to the user interaction:
+// First we will create the interaction for correct response.
+// The `inputEquals` condition fires when the input handle (as [set](#input) in the input object) is equal to the value in the `value` property.
+// So in our trial the following action will activate once the `1` key is pressed. It activates three [actions](./API.md#interactions-actions).
+// * The `log` action logs the user response, including latency and other information about the trial.
+// * The `endTrial` action simply ends this trail and moves on to the next one.
+// * Each trial has a built in data object that can be preset when you create the trial (simply add a `data` property to the trial) and is saved each time you `log`. The `setTrialAttr` action merges the `setter` object into the trial data, adding any properties of the `setter` to the trials data object. In this case we set the trial with the score 1 that will signify for us a correct response.
+{
+conditions: [
+{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;red&amp;#39;}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:1}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;endTrial&amp;#39;}
+]
+},
+// Now, lets create the interaction for incorrect responses.
+// This interaction is similar to the previous one, with two key differences.
+// First, it fires only for non *red* responses. Second, the score set is `0` which for us signifies an error.
+{
+conditions: [
+{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;red&amp;#39;, negate:true},
+{type:&amp;#39;inputEquals&amp;#39;, value: [&amp;#39;red&amp;#39;,&amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39;]}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:0}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;endTrial&amp;#39;}
+]
+}
+// The change is to the incorrect response condition bears some more explanation.
+// The first condition here is straight forward, it is the same as the correct answer condition, with the added `negate` property.
+// `negate` causes the condition to activate only if it is incorrect. The second condition is needed in order to balance the first one.
+// `negate` will cause the condition to activate on **any** event that is not *red*, this includes the `begin` event, and any other event that we may add later on.
+// Therefore it is best practice to always limit negated conditions to specific input handles.
+// In this case the condition means: any event that is a user response (&amp;#34;red&amp;#34; , &amp;#34;blue&amp;#34; or &amp;#34;green&amp;#34;) but is not *red*.
+]
+}
+]); // end sequence
+// #### Activate the player
+return API.script;
+});
+// ### Epilogue (of sorts)
+// We&amp;#39;ve created a single congruent trial for a Stroop task.
+// The next natural step is to copy this trial and change every place where it refers to a congruent task into incongruent and presto! we have two trials ready for action.
+// You can do that, and it would definately work, but there are several disadvantages to this approach.
+// First, every change you want to make to the trial, you will have to make to every copy of the trial that you have.
+// Second, in this simple use case we have only two types of trials, what happens if you have four types? or eight? or ten?
+// The solution that the player offers for this problem is using inheritance, and we will get into it in the [next](./stroop-inheritanceDocco.html) section.
+// &lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('stroop-interactions.js');
+&lt;/script></description></item><item><title>Docs: stroop-setup</title><link>/docs/time/examples/stroop-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/stroop-setup/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-stroop-setup.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// lets start putting together a real task.
+// We will create a task that demonstrates the stroop effect:
+// When the name of a color (e.g. &amp;#34;blue&amp;#34;, &amp;#34;green,&amp;#34; or &amp;#34;red&amp;#34;) is printed in a color not denoted by the name (e.g., the word &amp;#34;red&amp;#34; printed in blue instead of red),
+// naming the color of the word takes longer and is more prone to errors than when the color of the ink matches the name of the color.
+// The effect is named after John Ridley Stroop who first published the effect in English in 1935.
+// There is no scripted way that you are supposed to create a task, but we will break down the task in one way that we&amp;#39;ve found useful.
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// ### Setup
+// The player has many many [settings](./API.html#settings) that you can tinker with, we will use only one here.
+// In order to set the default text size you can use the `canvas` [setting](./API.html#canvas) like so:
+API.addSettings(&amp;#39;canvas&amp;#39;,{
+textSize: 5
+});
+// `textSize` controls the default font size in the canvas.
+// It takes a single number that represents font size in percentage of the canvas height (similar to the CSS3 `vh` unit).
+// From now on any time we use a relative fontSize (read: every time we use `em` for fontSize), it will be relative to this size.
+// ### Stimuli
+// Lets start with the thing that we already know how to do.
+// We&amp;#39;ll create lists of the stimuli we are going to use.
+// We have three groups of stimuli; **red**, **blue** and **green**.
+// We will create a separate set of stimuli for each of these groups.
+// These sets will allow us to randomize and extend them later on.
+API.addStimulusSets(&amp;#39;red&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;red&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;blue&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;green&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;green&amp;#39;}}
+]);
+// All the stimuli in each set have the same color, each stimulus in the set has a distinct name.
+// Note also that we use the shortcut to plain text media (simply settings a string),
+// and not the full fledged media object (that would look like this: `{word:&amp;#39;Red&amp;#39;}`).
+// You can of course use any type of [media](./API.md#media) here.
+// ### Layout
+// We will start by composing the stroop trial.
+// In the stroop task we sort words by their colors.
+// First things first, lets add labels to the task canvas so that it is clear what the user is sorting the stimuli to.
+// We&amp;#39;ll add three labels, one for each of the colors we are using.
+// By default stimuli are displayed at the center of the screen, if we want to display them at other locations,
+// we use the `location` property of the [stimulus object](./API.md#stimuli).
+// The location property takes an object with distances from the border in percentages of the player canvas.
+// Where `left:20` means that the left border of the stimulus should be 20% from the left of the canvas.
+// You may define any of the `left`/`right`/`top`/`bottom` properties.
+// In this case we&amp;#39;ll define the labels to be two percent of the canvas away from the borders just so they don&amp;#39;t collide.
+// We use the `css` property to control the style of the labels.
+// We set the `background` color to the appropriate color and the `fontSize` of the labels to be 1.5 times of the default fontSize.
+// The `padding` property is used to set the size of the labels background (more about padding [here](https://developer.mozilla.org/en-US/docs/Web/CSS/box_model)).
+API.addSequence([
+{
+layout: [
+{
+media:&amp;#39;1&amp;#39;,
+location:{left:2,top:2},
+css:{background:&amp;#39;red&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}
+},
+{
+media:&amp;#39;2&amp;#39;,
+location:{top:2},
+css:{background:&amp;#39;blue&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}
+},
+{
+media:&amp;#39;3&amp;#39;,
+location:{right:2,top:2},
+css:{background:&amp;#39;green&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}
+},
+{inherit:&amp;#39;red&amp;#39;}
+],
+input: [],
+interactions: []
+}
+]);
+// #### Return the script
+return API.script;
+});
+/* don&amp;#39;t forget to close the define wrapper */
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('stroop-setup.js');
+&lt;/script></description></item><item><title>Docs: stroop-task</title><link>/docs/time/examples/stroop-task/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/stroop-task/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-stroop-task.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+API.addSettings(&amp;#39;canvas&amp;#39;,{
+textSize: 5
+});
+API.addStimulusSets(&amp;#39;red&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;red&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;red&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;blue&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;blue&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;green&amp;#39;,[
+{media:&amp;#39;Red&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Blue&amp;#39;, css:{color:&amp;#39;green&amp;#39;}},
+{media:&amp;#39;Green&amp;#39;, css:{color:&amp;#39;green&amp;#39;}}
+]);
+API.addStimulusSets(&amp;#39;error&amp;#39;,[
+{handle:&amp;#39;error&amp;#39;,media:&amp;#39;X&amp;#39;, css:{fontSize:&amp;#39;2em&amp;#39;,color:&amp;#39;#FF0000&amp;#39;}, location:{top:70}}
+]);
+API.addTrialSets(&amp;#39;base&amp;#39;,[{
+input: [
+{handle:&amp;#39;red&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;1&amp;#39;},
+{handle:&amp;#39;blue&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;2&amp;#39;},
+{handle:&amp;#39;green&amp;#39;,on:&amp;#39;keypressed&amp;#39;,key:&amp;#39;3&amp;#39;}
+],
+layout: [
+{media:&amp;#39;1&amp;#39;,location:{left:2,top:2},css:{background:&amp;#39;red&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;2&amp;#39;,location:{top:2},css:{background:&amp;#39;blue&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}},
+{media:&amp;#39;3&amp;#39;,location:{right:2,top:2},css:{background:&amp;#39;green&amp;#39;,padding:&amp;#39;2%&amp;#39;,fontSize:&amp;#39;1.5em&amp;#39;}}
+],
+interactions: [
+/* Display the target stimulus. */
+{
+conditions:[{type:&amp;#39;begin&amp;#39;}],
+actions: [{type:&amp;#39;showStim&amp;#39;, handle: &amp;#39;target&amp;#39;}]
+},
+// ### Error feedback
+// Lets add error feedback to our task.
+// Above, we created the error stimulus. This creates a stimulus that displays a red X at the bottom of the screen.
+// Now that we have the error stimulus in place we can add the instruction how to display it.
+// On incorrect responses we will display the error feedback, and trigger the end of the trial only after another 250 miliseconds.
+/* Correct response actions */
+{
+conditions: [
+{type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:1}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;trigger&amp;#39;, handle:&amp;#39;ITI&amp;#39;}
+]
+},
+/* Incorrect response actions */
+{
+conditions: [
+{type:&amp;#39;inputEqualsTrial&amp;#39;,property:&amp;#39;group&amp;#39;,negate:true},
+{type:&amp;#39;inputEquals&amp;#39;,value:[&amp;#39;red&amp;#39;,&amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39;]}
+],
+actions: [
+{type:&amp;#39;setTrialAttr&amp;#39;, setter:{score:0}},
+{type:&amp;#39;log&amp;#39;},
+{type:&amp;#39;showStim&amp;#39;, handle:&amp;#39;error&amp;#39;},
+{type:&amp;#39;removeInput&amp;#39;,handle:[&amp;#39;red&amp;#39;,&amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39;]},
+{type:&amp;#39;trigger&amp;#39;, handle:&amp;#39;ITI&amp;#39;, duration:500}
+]
+},
+// There are several changes done here to achieve this task.
+// First, all the end trial actions have move into an interaction of their own (see below), that is activated when `ITI` is triggered.
+// Second, the correct response now triggers the ITI immediately.
+// Third, The incorrect response first displays the error feedback (`showStim`) and only after 500 milliseconds triggers the ITI.
+// You should also note that the `hideStim` action within the ITI interaction uses the handle `&amp;#39;All&amp;#39;`. When you want to refer to all the stimuli in a trial you can use the handle `&amp;#39;All&amp;#39;` and all stimuli will be affected.
+// ### Inter trial interval
+// We add an inter trial interval (ITI).
+// The way we are going to do this is by adding a set interval to the end of each trial.
+// Instead of directly calling the `endTrial` action, we will trigger a timeout, and end the trial from it.
+// While waiting for the trial to end we want to prevent users from responding again.
+// Note that we only need to do this to the *base* trial, all other trials inherit everything from it...
+/* Inter trial interval */
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;, value:&amp;#39;ITI&amp;#39;}],
+actions:[
+{type:&amp;#39;hideStim&amp;#39;,handle:&amp;#39;All&amp;#39;},
+{type:&amp;#39;removeInput&amp;#39;,handle:[&amp;#39;red&amp;#39;,&amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39;]},
+{type:&amp;#39;trigger&amp;#39;, handle:&amp;#39;end&amp;#39;,duration:500}
+]
+},
+// We&amp;#39;ve added three actions to each of the responses.
+// `hideStim` hides the target stimulus so that we see a blank screen as soon as a response is made.
+// `removeInput` removes the input listeners that have the handles *red*, *blue* and *green*, this prevents users from giving any further responses.
+// `trigger` triggers an internal player event as if the user has committed an action.
+// In this case, it triggers an event with the input handle `end` after a `duration` of 500 milliseconds.
+// Furthermore, we&amp;#39;ve added an interaction that responds to the `end` event, that ends the trial.
+// Note that the users can not trigger the `end` event directly, only through the events that were exposed to them using the `keypressed` input.
+/* End trial */
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;, value:&amp;#39;end&amp;#39;}],
+actions:[
+{type:&amp;#39;endTrial&amp;#39;}
+]
+}
+]
+}]);
+// Finaly, we need to add it to each of the specific color trials.
+// We can&amp;#39;t add it to the *base* trial because the specific color trials make changes to `stimuli` and would overwrite it.
+API.addTrialSets(&amp;#39;red&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;red&amp;#39;},
+stimuli: [
+{inherit:{set:&amp;#39;red&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;},
+{inherit:&amp;#39;error&amp;#39;}
+]
+}]);
+API.addTrialSets(&amp;#39;blue&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;blue&amp;#39;},
+stimuli: [
+{inherit:{set:&amp;#39;blue&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;},
+{inherit:&amp;#39;error&amp;#39;}
+]
+}]);
+API.addTrialSets(&amp;#39;green&amp;#39;,[{
+inherit:&amp;#39;base&amp;#39;,
+data: {group:&amp;#39;green&amp;#39;},
+stimuli: [
+{inherit:{set:&amp;#39;green&amp;#39;,type:&amp;#39;exRandom&amp;#39;}, handle:&amp;#39;target&amp;#39;},
+{inherit:&amp;#39;error&amp;#39;}
+]
+}]);
+// ### Sequence
+API.addSequence([
+{
+mixer: &amp;#39;random&amp;#39;,
+data: [
+{
+mixer: &amp;#39;repeat&amp;#39;,
+times: 20,
+data: [
+{inherit:&amp;#39;red&amp;#39;},
+{inherit:&amp;#39;blue&amp;#39;},
+{inherit:&amp;#39;green&amp;#39;}
+]
+}
+]
+}
+]);
+// Return script
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('stroop-task.js');
+&lt;/script></description></item><item><title>Docs: touch</title><link>/docs/time/examples/touch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/touch/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-touch.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// There are several changes required for support of touch devices.
+// This tutorial will show you how to fully support them in you tasks.
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+API.addSequence([
+{
+// ##### touch input
+// The input objects support a meta property: `touch`.
+// If touch is undefined then this input will always be used.
+// If it is set to true then the input will be used only in touch devices.
+// If it is set to false then the input will be used only in non touch devices.
+input: [
+// This input will be available on touch devices too (mostly, it won&amp;#39;t be available for lack of keyboard though)
+{handle:&amp;#39;end&amp;#39;, on:&amp;#39;space&amp;#39;},
+// But these will be available only on touch devices.
+// There are several touch targeted input shortcuts that you can use (they work for non touch devices too though).
+// These are `rightTouch`, `leftTouch`, `topTouch` and `bottomTouch`. &amp;lt;/br&amp;gt;
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;rightTouch&amp;#39;, touch:true},
+{handle:&amp;#39;end&amp;#39;,on:&amp;#39;leftTouch&amp;#39;, touch: true}
+],
+// ##### touchMedia
+// Sometimes you want to display distinct media for touch devices.
+// For these cases, the stimulus object supports the `touchMedia` parameter
+// that accepts an alternative media object that will be displayed on touch devices instead of the regular one.
+// If a `touchMedia` parameter is not defined the regular media will be used instead.
+layout:[
+{
+location:{top:20},
+media:{word:&amp;#39;this will always be here&amp;#39;}
+},
+{
+location:{bottom:20},
+media:{word:&amp;#39;Only on regular&amp;#39;},
+touchMedia:{word:&amp;#39;Only on touch&amp;#39;}
+}
+],
+interactions: [
+{
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;end&amp;#39;}],
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('touch.js');
+&lt;/script></description></item><item><title>Docs: trial</title><link>/docs/time/examples/trial/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/trial/</guid><description>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-trial.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+// This function gives you access to the API object that we use to build the various tasks
+// If you want to know more about this, you can read up about AMD and check out http://requirejs.org/
+define([&amp;#39;timeAPI&amp;#39;], function(APIconstructor) {
+var API = new APIconstructor();
+// ### The trial sequence
+// The heart of any miTime script is the sequence.
+// Sequences are arrays of Trial objects. In this part of the tutorial we will see a simple sequence encompasing a single trial.
+API.addSequence([
+// #### Trial structure
+/* the trial begins here */
+{
+// The data property of the trial is used to keep user defined data regarding this trial.
+// It can be used to keep track of trial types, blocks, score etc.
+// It becomes incrementaly usefull with more advance features of the miTime.
+data: {
+myProperty: &amp;#39;information&amp;#39;,
+myOtherProperty: &amp;#39;more information&amp;#39;
+},
+// The input property of the trial is used to create the user interface.
+// In this case we tell the player to listen for hits on the space key.
+// Later on we will tell the player what to do when the space button is clicked.
+input: [
+{handle:&amp;#39;space&amp;#39;,on:&amp;#39;space&amp;#39;}
+],
+// The layout property of the trial is used to display statick stimuli.
+// These stimuli are automaticaly displayed at the begining of a trial, and are not affected be user interactions.
+// This property holds an array of stimuli objects, in this case the stimuli are set to display words in the top left and bottom right of the screen.
+// We will learn more about Stimuli in a later tutorial.
+layout:[
+{location:{left:0,top:0},media:{word:&amp;#39;top left&amp;#39;}},
+{location:{left:&amp;#39;auto&amp;#39;,right:0,top:&amp;#39;auto&amp;#39;,bottom:0},media:{word:&amp;#39;bottom right&amp;#39;}}
+],
+// The stimuli property of the trial holds stimuli that are dynamicaly displayed durring the trial.
+// These trials are not displayed by default, and can be affected by user interactions.
+// Like the layout property the stimuli property holds an array of stimuli objects.
+stimuli: [
+{media :{word:&amp;#39;Hello world&amp;#39;}}
+],
+// The interaction property of the trial is responsible for any interactions the user has through the trial.
+// Each interaction is composed of a propostition (a statement that is either true or false)
+// And of action to execute in case the condition is true.
+// We will learn more about this section in the condition and action tutorials.
+interactions: [
+// 1. Display Stimulus
+{
+/* when we begin the trial (condition) */
+conditions: [{type:&amp;#39;begin&amp;#39;}],
+/* show all stimuli (action) */
+actions: [{type:&amp;#39;showStim&amp;#39;,handle:&amp;#39;All&amp;#39;}]
+},
+// 2. End trial on space click
+{
+/* when space is clicked */
+conditions: [{type:&amp;#39;inputEquals&amp;#39;,value:&amp;#39;space&amp;#39;}],
+/* end the trial */
+actions: [{type:&amp;#39;endTrial&amp;#39;}]
+}
+]
+}
+/* The trial ends here */
+]);
+/* this is where we close the sequence */
+return API.script;
+});
+/* don&amp;#39;t forget to close the require wrapper */
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('trial.js');
+&lt;/script></description></item></channel></rss>

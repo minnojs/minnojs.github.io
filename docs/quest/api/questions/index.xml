@@ -1,0 +1,1377 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Questions</title><link>/docs/quest/api/questions/</link><description>Recent content in Questions on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/quest/api/questions/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: dropdown</title><link>/docs/quest/api/questions/dropdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/dropdown/</guid><description>
+&lt;p>&lt;code>dropdown&lt;/code> has the following parameters:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>property&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>dflt&lt;/td>
+&lt;td>The default &lt;em>value&lt;/em> for this question.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>autoSubmit&lt;/td>
+&lt;td>(true or false; default: false) If this property is set to true, selecting a response will submit the form.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>randomize&lt;/td>
+&lt;td>(true or false; default: false) Shuffle response options after mixing them (the mixer is activated regardless of this parameter, this serves as a shortcut)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>reverse&lt;/td>
+&lt;td>(true or false; default: false) Reverses the order of response options in this question. It is useful when you inherit a question and only wants to change the order of the response options. Or, if you want to have a between-participant condition that reverses the response scale for half of the participants.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>numericValues&lt;/td>
+&lt;td>(true or false; default: false) If &lt;code>numericValues&lt;/code> is true, default numeric values are set for each answer, they are set &lt;em>before&lt;/em> randomization, but &lt;em>after&lt;/em> the mixer is activated.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>answers&lt;/td>
+&lt;td>(Array: []) The list of possible answers for this question. There are two acceptable formats; (1) an array of strings/numbers, (2) an array of objects with &lt;code>text&lt;/code>, &lt;code>value&lt;/code> and optionally &lt;code>group&lt;/code> parameters. The &lt;code>group&lt;/code> parameter will display the values divided into groups with the same name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>(true or false; default: false) Validation: require a response.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correct&lt;/td>
+&lt;td>(true or false; default: false) Validation: require the response to be correct (set the target value using &lt;code>correctValue&lt;/code>)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correctValue&lt;/td>
+&lt;td>(*) Set the correct response value for the correct validation.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>errorMsg&lt;/td>
+&lt;td>(Object: {}) This object has a property for each validation type. Setting the appropriate type changes the validation message. For instance setting the &lt;code>correct&lt;/code> property will change the validation message for instances where the correct response was not given.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: Grid</title><link>/docs/quest/api/questions/grid/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/grid/</guid><description>
+&lt;p>The grid question itself keeps track of the sum of the row questions (excluding any questions that have non-number values).&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>columns&lt;/td>
+&lt;td>An array of column descriptions. You can use a string here or a column object as described &lt;a href="#gridcolumns">below&lt;/a>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rows&lt;/td>
+&lt;td>An array of row descriptions. You can use a string here or a row object as described &lt;a href="#gridrows">below&lt;/a>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>shuffle&lt;/td>
+&lt;td>Whether to randomize the order of the rows.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>Require the user to respond to all rows (true or false).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>columnStemCss&lt;/td>
+&lt;td>CSS object for &lt;em>all&lt;/em> the column stems.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>columnStemHide&lt;/td>
+&lt;td>Hide the column stem row.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rowStemCss&lt;/td>
+&lt;td>CSS object for the row stems.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rowStemHide&lt;/td>
+&lt;td>Hide the row stem column.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>checkboxType&lt;/td>
+&lt;td>Customize the type of checbox we use. &lt;code>checkMark&lt;/code>: the default check style. &lt;code>xMark&lt;/code>: use an X instead of the check. &lt;code>colorMark&lt;/code>: fill the checkbox with a dark background.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cellLabels&lt;/td>
+&lt;td>(true or false) Wether to show the column label within the grid cells.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h1 id="gridcolumns">grid.columns&lt;/h1>
+&lt;p>If you set a string instead of a column object it will be treated as if you set only the stem and all other values will be set by default.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>stem&lt;/td>
+&lt;td>(text) The description of this column.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>value&lt;/td>
+&lt;td>The value to set for this column. Defaults to the number of the column (starting from 1, so that the response for choosing the third column is 3).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>noReverse&lt;/td>
+&lt;td>When reversing row values, ignore this column (it will retain its normal value).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>type&lt;/td>
+&lt;td>What type of interface should this column have.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>css&lt;/td>
+&lt;td>CSS object for the whole column. This is the place that you can control the column width (using the &lt;code>width&lt;/code> property).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>stemCss&lt;/td>
+&lt;td>CSS object for the column stem.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>There are several column types at your disposal,&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>checkbox&lt;/td>
+&lt;td>The default is &amp;ldquo;checkbox&amp;rdquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>text&lt;/td>
+&lt;td>Display text of you choice (use the &lt;code>textProperty&lt;/code> property to set the row property that will be used as the text). For example &lt;code>{type: 'text', textProperty:'rightStem'}&lt;/code> will use the &lt;code>rightStem&lt;/code> property of each row as the text content.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>dropdown&lt;/td>
+&lt;td>Display a dropdown input. Use the &lt;code>answers&lt;/code> property to set the options for the dropdown. For example &lt;code>{type:'text', answers: ['Male', 'Female']}&lt;/code>. See the &lt;a href="../dropdown">dropdown&lt;/a> question for more &lt;code>answers&lt;/code> options.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input&lt;/td>
+&lt;td>Display a text input. Note that users can input responses that may be confused with other responses (if a user inputs a 1 it may be confused with a selection of a checkbox in the first column).&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h1 id="gridrows">grid.rows&lt;/h1>
+&lt;p>If you set a string instead of a row object it will be treated as if you set only the stem and all other values will be set by default.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>stem&lt;/td>
+&lt;td>(text) The description of this column.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>The name you want this row to be called within the &lt;code>questions&lt;/code> object. If this is not set the grid automatically sets it according to the grid name. So that if grid.name is &amp;ldquo;myGrid&amp;rdquo; then you&amp;rsquo;re first row will be called by default &amp;ldquo;myGrid001&amp;rdquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>reverse&lt;/td>
+&lt;td>When calculating the default value for this row, should we reverse the order of columns (high to low and vise versa).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>Require the user to respond to this row (this property is redundant if you&amp;rsquo;ve already set main questions required property to true).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>overwrite&lt;/td>
+&lt;td>An array of column deffinitions to overwrite. Each element of the array overwrites the corresponding column column (so that the first element in the array overwrites the first column definitions and so on). If you do not want to overwrite a specific column, simply set it to &lt;code>false&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Here is a simple example of using a grid:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">grid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;grid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;grid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">columns&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Strongly agree&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;agree&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;don\&amp;#39;t know&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;disagree&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Strongly disagree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">rows&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;I like grids&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;I like bananas too&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can, of course have tighter control over the way things work:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">grid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;grid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;grid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">columns&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;Strongly agree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;agree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;don\&amp;#39;t know&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;disagree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;Strongly disagree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Decline to answer&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;n/a&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">noReverse&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">rows&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;I like grids&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;likeGrids&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// This questions scores will be reversed so that the sum of scores is meaningful
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;I hate bananas&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;likeBananas&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">reverse&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// Allow only the extreme responses and declining to answer for this row only
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Only extremes&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;extremes&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;text&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;text&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;text&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">]}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-grid.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Grid questions simple&amp;#39;,
+questions: [
+{
+type: &amp;#39;grid&amp;#39;,
+stem: &amp;#39;What sort of things do you like?&amp;#39;,
+columns: [&amp;#39;Strongly agree&amp;#39; , &amp;#39;agree&amp;#39; , &amp;#39;don\&amp;#39;t know&amp;#39; , &amp;#39;disagree&amp;#39; , &amp;#39;Strongly disagree&amp;#39;],
+rows: [&amp;#39;I like grids&amp;#39;, &amp;#39;I like bannanas too&amp;#39;]
+}
+]
+}, // page ends
+{ // page begins
+header: &amp;#39;Grid questions advanced&amp;#39;,
+questions: [
+{
+type: &amp;#39;grid&amp;#39;,
+name:&amp;#39;grid&amp;#39;,
+columns: [
+&amp;#39;Strongly agree&amp;#39;,
+&amp;#39;agree&amp;#39;,
+&amp;#39;don\&amp;#39;t know&amp;#39;,
+&amp;#39;disagree&amp;#39;,
+&amp;#39;Strongly disagree&amp;#39;,
+{stem:&amp;#39;Decline to answer&amp;#39;, value:&amp;#39;n/a&amp;#39;, noReverse:true}
+],
+rows: [
+{stem:&amp;#39;I like grids&amp;#39;,name:&amp;#39;likeGrids&amp;#39;},
+// This questions scores will be reversed so that the sum of scores is meaningful
+{stem:&amp;#39;I hate bananas&amp;#39;, name:&amp;#39;likeBananas&amp;#39;, reverse:true}
+]
+}
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('grid.js');
+&lt;/script></description></item><item><title>Docs: Info</title><link>/docs/quest/api/questions/info/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/info/</guid><description>
+&lt;p>For example the following question will simply display the description without offering any additional user interface (explicit question).&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;info&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">description&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;&amp;lt;p&amp;gt;The following questions deal with emotions&amp;lt;/p&amp;gt;&amp;#39;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;&amp;lt;p&amp;gt;Please answer them as honestly as possible&amp;lt;/p&amp;gt;&amp;#39;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: multiGrid</title><link>/docs/quest/api/questions/multigrid/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/multigrid/</guid><description>
+&lt;p>The response for this question is an array of responses corresponding to the columns of the grid, so that the first item in the array corresponds to the response in the first column and so on.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>columns&lt;/td>
+&lt;td>An array of column descriptions. You can use a string here or a column object as described &lt;a href="#multigridcolumns">below&lt;/a>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rows&lt;/td>
+&lt;td>An array of row descriptions. You can use a string here or a row object as described &lt;a href="#multigridrows">below&lt;/a>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>shuffle&lt;/td>
+&lt;td>Whether to randomize the order of the rows.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>columnStemCss&lt;/td>
+&lt;td>CSS object for &lt;em>all&lt;/em> the column stems.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>columnStemHide&lt;/td>
+&lt;td>Hide the column stem row.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rowStemCss&lt;/td>
+&lt;td>CSS object for the row stems.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rowStemHide&lt;/td>
+&lt;td>Hide the row stem column.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>checkboxType&lt;/td>
+&lt;td>Customize the type of checbox we use. &lt;code>checkMark&lt;/code>: the default check style. &lt;code>xMark&lt;/code>: use an X instead of the check. &lt;code>colorMark&lt;/code>: fill the checkbox with a dark background.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cellLabels&lt;/td>
+&lt;td>Show the column label within the grid cells.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>Require all subquestions in the multigrid to be full&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="multigridcolumns">multiGrid.columns&lt;/h5>
+&lt;p>If you set a string instead of a column object it will be treated as if you set only the stem and all other values will be set by default.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>stem&lt;/td>
+&lt;td>(text) The description of this column.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>value&lt;/td>
+&lt;td>The value to set for this column checkboxes. Defaults to &lt;code>true&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>type&lt;/td>
+&lt;td>What type of interface should this column have (see below, defaults to checkbox)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>css&lt;/td>
+&lt;td>CSS object for the whole column. This is the place that you can control the column width (using the &lt;code>width&lt;/code> property).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>stemCss&lt;/td>
+&lt;td>CSS object for the column stem.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>Require all subquestions in the column to be full&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pattern&lt;/td>
+&lt;td>(text or &lt;a href="http://www.regular-expressions.info/">regular expression&lt;/a>) Require all subquestions in the column to match the pattern. This validation method only affects input type columns.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>There are several column types at your disposal,&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>checkbox&lt;/td>
+&lt;td>The default is &amp;ldquo;checkbox&amp;rdquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>text&lt;/td>
+&lt;td>Display text of you choice (use the &lt;code>textProperty&lt;/code> property to set the row property that will be used as the text). For example &lt;code>{type: 'text', textProperty:'rightStem'}&lt;/code> will use the &lt;code>rightStem&lt;/code> property of each row as the text content. You can use this option to present an empty cell by leaving the text empty.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>dropdown&lt;/td>
+&lt;td>Display a dropdown input. Use the &lt;code>answers&lt;/code> property to set the options for the dropdown. For example &lt;code>{type:'text', answers: ['Male', 'Female']}&lt;/code>. See the &lt;a href="../dropdown">dropdown&lt;/a> question for more &lt;code>answers&lt;/code> options.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input&lt;/td>
+&lt;td>Display a text input. Note that users can input responses that may be confused with other responses (if a user inputs a 1 it may be confused with a selection of a checkbox in the first column).&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="multigridrows">multiGrid.rows&lt;/h5>
+&lt;p>If you set a string instead of a row object it will be treated as if you set only the stem and all other values will be set by default.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>stem&lt;/td>
+&lt;td>(text) The description of this row.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>The name you want this row to be called within the &lt;code>questions&lt;/code> object. If this is not set the grid automatically sets it according to the grid name. So that if grid.name is &amp;ldquo;myGrid&amp;rdquo; then you&amp;rsquo;re first row will be called by default &amp;ldquo;myGrid001&amp;rdquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>overwrite&lt;/td>
+&lt;td>An array of column deffinitions to overwrite. Each element of the array overwrites the corresponding column column (so that the first element in the array overwrites the first column definitions and so on). If you do not want to overwrite a specific column, simply set it to &lt;code>false&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>Require all subquestions in the row to be full&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Here is a simple example of using a multiGrid:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">multiGrid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;multiGrid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;multiGrid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">columns&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Sunday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Monday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Tuesday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Wednesday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Thursday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Friday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Saturday&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">rows&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Days you work out&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Days you go to work&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can, of course have tighter control over the way things work:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">grid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;multiGrid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;multiGrid&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">columns&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Gender&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;dropdown&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">answers&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Male&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Female&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]},&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;Study together&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;Work together&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Description&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;input&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;span style="color:#000">rows&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Friend 1&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Friend 2&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-gridMulti.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;GridMulti questions simple&amp;#39;,
+questions: [
+{
+type: &amp;#39;multiGrid&amp;#39;,
+name:&amp;#39;multiGrid1&amp;#39;,
+columns: [&amp;#39;Sunday&amp;#39;, &amp;#39;Monday&amp;#39;, &amp;#39;Tuesday&amp;#39;, &amp;#39;Wednesday&amp;#39;, &amp;#39;Thursday&amp;#39;, &amp;#39;Friday&amp;#39;, &amp;#39;Saturday&amp;#39;],
+rows: [&amp;#39;Days you work out&amp;#39;, &amp;#39;Days you go to work&amp;#39;]
+}
+]
+}, // page ends
+{ // page begins
+header: &amp;#39;GridMulti questions advanced&amp;#39;,
+questions: [
+{
+type: &amp;#39;multiGrid&amp;#39;,
+name:&amp;#39;multiGrid2&amp;#39;,
+columns: [
+{stem:&amp;#39;Gender&amp;#39;, type:&amp;#39;dropdown&amp;#39;, answers: [&amp;#39;Male&amp;#39;, &amp;#39;Female&amp;#39;]},
+&amp;#39;Study together&amp;#39;,
+&amp;#39;Work together&amp;#39;,
+{stem:&amp;#39;Description&amp;#39;, type:&amp;#39;input&amp;#39;}
+],
+rows: [&amp;#39;Friend 1&amp;#39;, &amp;#39;Friend 2&amp;#39; ]
+}
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('gridMulti.js');
+&lt;/script></description></item><item><title>Docs: Rank</title><link>/docs/quest/api/questions/rank/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/rank/</guid><description>
+&lt;p>By default elements in the list are randomized.
+The response returned by this question is an array of numbers corresponding to the original - pre-randomized list.
+For example if you had a list &lt;code>['a','b','c']&lt;/code> and it was sorted into&lt;code>['a','c','b']&lt;/code> then the response array will be &lt;code>[1,3,2]&lt;/code> because the second and third element changed locations.&lt;/p>
+&lt;p>The syntax is fairly simple:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">quest&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;rank&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Please sort the follownig activities according to level of difficulty:&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;mart&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">correct&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">list&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Cooking&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Running&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Dancing&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Studying&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>type&lt;/td>
+&lt;td>Must be set to &lt;code>'rank'&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>list&lt;/td>
+&lt;td>(Array) An array values to be sorted (can be either strings or numbers).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>(true of false; default: false) Require the user to make a change from the original order (as defined in &lt;code>list&lt;/code>).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correct&lt;/td>
+&lt;td>(true of false; default: false) Require the user to order the list according to a preset value (as defined in &lt;code>correctValue&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correctValue&lt;/td>
+&lt;td>(Array) The order that the list should be organized for the &lt;code>correct&lt;/code> validator. This value should be a list of numbers coresponding to the target order.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>randomize&lt;/td>
+&lt;td>(true of false; default: true) If false prevents the automatic randomization of the list order.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-rank.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+questions: [
+{ // question begins
+type: &amp;#39;rank&amp;#39;,
+stem: &amp;#39;Please rank the colors of the rainbow by brighness:&amp;#39;,
+list: [
+&amp;#39;Red&amp;#39;,
+&amp;#39;Orange&amp;#39;,
+&amp;#39;Yellow&amp;#39;,
+&amp;#39;Green&amp;#39;,
+&amp;#39;Blue&amp;#39;,
+&amp;#39;Indigo&amp;#39;,
+&amp;#39;Violet&amp;#39;
+]
+} // question ends
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('rank.js');
+&lt;/script></description></item><item><title>Docs: selectOne &amp; selectMulti</title><link>/docs/quest/api/questions/select/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/select/</guid><description>
+&lt;p>They have the following parameters:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>property&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>dflt&lt;/td>
+&lt;td>The default &lt;em>value&lt;/em> for this question; Use one value for &lt;code>selectOne&lt;/code>, and an array of values for &lt;code>selectMulti&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>autoSubmit&lt;/td>
+&lt;td>(true or false; default: false) If this property is set to true, Clicking twice on the same answer will submit the form. This options is not supported for &lt;code>selectMulti&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>randomize&lt;/td>
+&lt;td>(true or false; default: false) Shuffle response options after mixing them (the mixer is activated regardless of this parameter, this serves as a shortcut)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>reverse&lt;/td>
+&lt;td>(true or false; default: false) Reverses the order of response options in this question. It is useful when you inherit a question and only wants to change the order of the response options. Or, if you want to have a between-participant condition that reverses the response scale for half of the participants.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>numericValues&lt;/td>
+&lt;td>(true or false; default: false) If &lt;code>numericValues&lt;/code> is true, default numeric values are set for each answer, they are set &lt;em>before&lt;/em> randomization, but &lt;em>after&lt;/em> the mixer is activated.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>style&lt;/td>
+&lt;td>The default style for the select questions is a vertical list (&lt;code>list&lt;/code>). You can display the individual answers as a horizontal button group using &lt;code>horizontal&lt;/code> instead, or if you have many short answers you can use &lt;code>multiButtons&lt;/code> (you might want to use &lt;code>minWidth&lt;/code> in order to fineTune the way your question looks).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>minWidth&lt;/td>
+&lt;td>(String, default:auto) The minimum width for individual answers (e.g. &amp;lsquo;30%&amp;rsquo; or &amp;lsquo;200px&amp;rsquo;). Usefull in concert with &lt;code>style&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>buttons&lt;/td>
+&lt;td>&lt;em>@DEPRECATED&lt;/em> (true or false; default: false) Do not use this property any more! use &lt;code>style&lt;/code> instead. &lt;/br> By default we use a vertical list format for this question. Set this property to true in order to use a horizontal scale (Likert style). This option does not currently support extremely narrow screens.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>answers&lt;/td>
+&lt;td>(Array: []) The list of possible answers for this question. There are two acceptable formats; (1) an array of strings/numbers, (2) an array of objects with &lt;code>text&lt;/code> and &lt;code>value&lt;/code> parameters.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>(true or false; default: false) Validation: require a response.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correct&lt;/td>
+&lt;td>(true or false; default: false) Validation: require the response to be correct (set the target value using &lt;code>correctValue&lt;/code>)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correctValue&lt;/td>
+&lt;td>(*) Set the correct response value for the correct validation (This should be an array for selectMulti).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>errorMsg&lt;/td>
+&lt;td>(Object: {}) This object has a property for each validation type. Setting the appropriate type changes the validation message. For instance setting the &lt;code>correct&lt;/code> property will change the validation message for instances where the correct response was not given.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Each answer on the list has a value associated with it. By default the value is equal to the text of the answer. If &lt;code>numericValues&lt;/code> is set, the value is set to the appropriate number. Using the object notation, you can set values of your own.&lt;/p>
+&lt;p>For example, the following question uses the plain notations, using &lt;code>numericValues&lt;/code> to abstract numbers out of the result.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">quest&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;selectOne&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Do you like bananas?&amp;#34;&lt;/span>
+&lt;span style="color:#000">numericValues&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">answers&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#39;Very much&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// ==&amp;gt; 0
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;I guess&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// ==&amp;gt; 1
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Not at all&amp;#39;&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// ==&amp;gt; 2
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>The following question uses the object notation to do the exact same thing:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">quest&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;selectOne&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Do you like bananas?&amp;#34;&lt;/span>
+&lt;span style="color:#000">numericValues&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">answers&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">text&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Very much&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// ==&amp;gt; 0
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">text&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;I guess&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// ==&amp;gt; 1
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">text&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Not at all&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">value&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// ==&amp;gt; 2
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-selectOne.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Select questions&amp;#39;,
+questions: [
+{ // question begins
+type: &amp;#39;selectOne&amp;#39;,
+stem: &amp;#39;When you say good morning, what do you mean?&amp;#39;,
+autoSubmit: true,
+answers: [
+&amp;#39;Do you wish me a good morning&amp;#39;,
+&amp;#39;Or mean that it is a good morning whether I want it or not&amp;#39;,
+&amp;#39;Or that you feel good this morning&amp;#39;,
+&amp;#39;Or that it is a morning to be good on&amp;#39;,
+&amp;#39;All of them at once&amp;#39;
+],
+help: true,
+helpText: &amp;#39;Selecting an answer once colors it blue.&amp;lt;br/&amp;gt;&amp;#39; &amp;#43;
+&amp;#39;You can change your answer by selecting another option.&amp;lt;br/&amp;gt;&amp;#39; &amp;#43;
+&amp;#39;To confirm, click the selected (blue) button a second time.&amp;#39;
+} // question ends
+],
+noSubmit: true
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('selectOne.js');
+&lt;/script>
+&lt;p>Following is an example for &lt;code>selectMulti&lt;/code>.&lt;/p>
+&lt;div class="pg-section" id="pg-selectMulti.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Select questions&amp;#39;,
+questions: [
+{ // question begins
+type: &amp;#39;selectMulti&amp;#39;,
+stem: &amp;#39;On which days last week did you have breakfast?:&amp;#39;,
+style: &amp;#39;multiButtons&amp;#39;,
+minWidth: &amp;#39;13%&amp;#39;,
+answers: [
+1,2,3,4,5,6,7
+]
+} // question ends
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('selectMulti.js');
+&lt;/script></description></item><item><title>Docs: Slider</title><link>/docs/quest/api/questions/slider/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/slider/</guid><description>
+&lt;p>It allows either the creation a continuous scale or dividing the range into steps.
+The values of the slider are always numbers.&lt;/p>
+&lt;p>These are the supported properties:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Property&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>min&lt;/td>
+&lt;td>Maximum slider value (default:0).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max&lt;/td>
+&lt;td>Minimum slider value (default:100).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>highlight&lt;/td>
+&lt;td>Show highlight to left of handle.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>highlightDirection&lt;/td>
+&lt;td>By default the slider highlight goes from left to right. If you want it to go right to left set the property to &amp;lsquo;rtl&amp;rsquo;. If you want the highlight to begin at the center, set this to &amp;lsquo;center&amp;rsquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>steps&lt;/td>
+&lt;td>How many steps the slider should be divided into. These intervals are marked with pips and the handle snaps to them.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hidePips&lt;/td>
+&lt;td>When the slider is divided into steps, do not display the step pips.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>showTicks&lt;/td>
+&lt;td>@EXPERIMENATAL: this option may change in the future. Mark three vertical lines to accent the slider visually.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>leftLabel&lt;/td>
+&lt;td>A label to display on the top left of the slider.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>leftLabelCss&lt;/td>
+&lt;td>A style object to apply to the left label.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rightLabel&lt;/td>
+&lt;td>A label to display on the top right of the slider.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rightLabelCss&lt;/td>
+&lt;td>A style object to apply to the right label.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>labels&lt;/td>
+&lt;td>An array of labels to display underneath the slider. They will be spread evenly across the slider.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>displayValue&lt;/td>
+&lt;td>Display the value of the slider, beneath the slider control.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>(true of false; default: false) Validation: require a non-empty string as a response.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>dflt&lt;/td>
+&lt;td>The default value for the slider. If no default value is defined, the handle will not be displayed until the slider is first clicked.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>autoSubmit&lt;/td>
+&lt;td>Submit automatically on click or when handle is drop.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The most common use of the slider is the creation of a visual analog scale (VAS). This is an example of using a slider to create a Likert type scale:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">quest&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;slider&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Sliders are exremely useful.&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">min&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">max&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">7&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">steps&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">7&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">labels&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;Strongly Agree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Neutral&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;Strongly Disagree&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-slider.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Slider questions&amp;#39;,
+questions: [
+{
+type: &amp;#39;slider&amp;#39;,
+stem: &amp;#39;Sliders are exremely useful.&amp;#39;,
+min:1,
+max:7,
+steps:7,
+labels: [&amp;#39;Strongly Agree&amp;#39;, &amp;#39;Neutral&amp;#39;, &amp;#39;Strongly Disagree&amp;#39;]
+}
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('slider.js');
+&lt;/script></description></item><item><title>Docs: Text &amp; Textarea</title><link>/docs/quest/api/questions/text/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/text/</guid><description>
+&lt;p>Both types of questions support the following properties.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>property&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>dflt&lt;/td>
+&lt;td>(test; default value: &amp;ldquo;&amp;quot;) The default value for this question.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>inline&lt;/td>
+&lt;td>Show the stem in the same line as the input box (this will make the input box narrower as well).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>width&lt;/td>
+&lt;td>(Number or text) The width of the input box (By default numbers are translated to pixels, but you can use text to use other units).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>autoSubmit&lt;/td>
+&lt;td>(true or false; default: false) If this property is set to true typing &lt;code>Enter&lt;/code> while this input is focused will submit the page.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>minlength&lt;/td>
+&lt;td>(Number) Validation: force at least this number of characters.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>minLength&lt;/td>
+&lt;td>@DEPRECATED see minlength. (Number) Validation: force at least this number of characters.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>maxlength&lt;/td>
+&lt;td>(Number) Validation: force at most this number of characters.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>maxlengthLimit&lt;/td>
+&lt;td>(true or false) Do not allow the user to input more characters than defined by &lt;code>maxlength&lt;/code> (if maxlength is not defined, any number of characters will be allowed).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>(true of false; default: false) Validation: require a non-empty string as a response.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pattern&lt;/td>
+&lt;td>(text [supports regex]) Validation: require the response to match the regular expression set in pattern (takes either a string &lt;code>&amp;quot;a|b&amp;quot;&lt;/code> or a regular expression &lt;code>/a|b/&lt;/code>).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correct&lt;/td>
+&lt;td>(true or false; default: false) Validation: require the response to be correct (set the target value using &lt;code>correctValue&lt;/code>)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correctValue&lt;/td>
+&lt;td>(*) Set the correct response value for the correct validation.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>errorMsg&lt;/td>
+&lt;td>(Object: {}) This object has a property for each validation type. Setting the appropriate type changes the validation message. For instance setting the &lt;code>required&lt;/code> property will change the validation message for instances where no response was given.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-text.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Text questions&amp;#39;,
+questions: [
+{ // question begins
+type: &amp;#39;text&amp;#39;,
+stem: &amp;#39;When you say good morning, what do you mean?&amp;#39;,
+required: true,
+errorMsg: {
+required: &amp;#39;This question is truly important to us, please take your time to answer.&amp;#39;
+}
+} // question ends
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('text.js');
+&lt;/script>
+&lt;p>The following properties are supported only by &lt;code>textarea&lt;/code>s:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>property&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>rows&lt;/td>
+&lt;td>The number of visible text lines.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>columns&lt;/td>
+&lt;td>The visible width of the textarea, in average character widths (this setting overrides the width setting).&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>For example, this is a text question that requires a valid email address (although there are better &lt;em>patterns&lt;/em> out there for this purpose):&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">quest&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Please type your email address&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">dflt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;my@email.com&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">required&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">pattern&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">/[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">errorMsg&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">required&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;You must enter a valid email address.&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">pattern&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;This is not a valid email address&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>An example for a textarea question.
+It allows you to input some text. In particular it is good for larger amounts of text as it allows better control of the text area size.
+In this case, we use a text area 3 rows deep and require at least 80 characters of text.&lt;/p>
+&lt;div class="pg-section" id="pg-textarea.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Text questions&amp;#39;,
+questions: [
+{ // question begins
+type: &amp;#39;textarea&amp;#39;,
+stem: &amp;#39;When you say good morning, what do you mean?&amp;#39;,
+rows: 3,
+minLength: 400
+} // question ends
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('textarea.js');
+&lt;/script></description></item><item><title>Docs: textNumber</title><link>/docs/quest/api/questions/textnumber/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quest/api/questions/textnumber/</guid><description>
+&lt;p>This type of questions have the following parameters:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>property&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>dflt&lt;/td>
+&lt;td>(Number; default: null) The default value for this question.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>inline&lt;/td>
+&lt;td>Show the stem in the same line as the input box (this will make the input box narrower as well).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>autoSubmit&lt;/td>
+&lt;td>(true or false; default: false) If this property is set to true typing &lt;code>Enter&lt;/code> while this input is focused will submit the form.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>min&lt;/td>
+&lt;td>(Number) Validation: minimum valid number.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max&lt;/td>
+&lt;td>(Number) Validation: maximum valid number.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>required&lt;/td>
+&lt;td>(true or false; default: false) Validation: require a non empty string as a response.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correct&lt;/td>
+&lt;td>(true or false; default: false) Validation: require the response to be correct (set the target value using &lt;code>correctValue&lt;/code>)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>correctValue&lt;/td>
+&lt;td>(*) Set the correct response value for the correct validation.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>errorMsg&lt;/td>
+&lt;td>(Object: {}) This object has a property for each validation type. Setting the appropriate type changes the validation message. For instance setting the &lt;code>required&lt;/code> property will change the validation message for instances where no response was given. Note that their is a special property &lt;code>number&lt;/code> that is triggered whenever the response is not a valid number.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>For example, this is a text question that asks for a number under 273:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">quest&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;textNumber&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">stem&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Please enter your height in cm&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">max&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">273&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">required&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">errorMsg&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">max&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;That is a bit too much to believe... - even Robert Wadlow wasn&amp;#39;t this tall!&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">number&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Your height has to be a number&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.css" integrity="sha256-ylWkFzi+pmuVQm80SJjUJvNjzXmRc6+naSkH2xWL5+8=" crossorigin="anonymous">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/theme/monokai.css" integrity="sha256-JGPcb9kgGaDHyiqqAdAxFrKA+nxq4BvyHffBB9m2g+g=" crossorigin="anonymous">
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/lib/codemirror.min.js">&lt;/script>
+&lt;script src="https://cdn.jsdelivr.net/npm/codemirror@5.59.2/mode/javascript/javascript.js" integrity="sha256-XxB90cNdnOuUFQjAE56w4OBTdMu5SHChSz02/Ki3oAQ=" crossorigin="anonymous">&lt;/script>
+&lt;div class="pg-section" id="pg-textNumber.js">
+&lt;p>
+&lt;a class="pg-play btn btn-warning">&lt;i class="fas fa-play">&lt;/i> Run &lt;/a>
+&lt;a class="pg-download btn btn-outline-warning">&lt;i class="fas fa-download">&lt;/i> Download &lt;/a>
+&lt;/p>
+&lt;textarea class="code-mirror" rows="40">
+define([&amp;#39;questAPI&amp;#39;], function(Quest){
+var API = new Quest();
+API.addSequence([
+{ // page begins
+header: &amp;#39;Text questions&amp;#39;,
+questions: [
+{ // question begins
+type: &amp;#39;textNumber&amp;#39;,
+stem: &amp;#39;How many cups of coffee do you drink each morning?&amp;#39;,
+min: 1,
+max: 10
+} // question ends
+]
+} // page ends
+]);
+return API.script;
+});
+&lt;/textarea>
+&lt;/div>
+&lt;script>
+(function(filename){
+var win, section;
+var section = document.getElementById('pg-' + filename);
+var el = section.querySelector('.code-mirror');
+var cm = CodeMirror.fromTextArea(el,{ theme:'monokai' });
+cm.setSize(null, 500);
+section.querySelector('.pg-download').addEventListener('click', function(){
+var blob = new Blob([cm.getValue()], { type: 'text/javascript' });
+if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveBlob(blob, filename);
+else {
+var elem = window.document.createElement('a');
+elem.href = window.URL.createObjectURL(blob);
+elem.download = filename;
+document.body.appendChild(elem);
+elem.click();
+document.body.removeChild(elem);
+}
+});
+section.querySelector('.pg-play').addEventListener('click', function(){
+var runminnoUrl = '\/runminno.html';
+if (win) win.close();
+win = window.open(runminnoUrl, 'Playground');
+win.onload = function(){
+win.addEventListener('unload', function() {
+window.focus();
+});
+win.activate(cm.getValue());
+};
+});
+})('textNumber.js');
+&lt;/script></description></item></channel></rss>

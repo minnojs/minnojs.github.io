@@ -1,0 +1,62 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Time sensitive tasks</title><link>/docs/time/</link><description>Recent content in Time sensitive tasks on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><atom:link href="/docs/time/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Data</title><link>/docs/time/data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/data/</guid><description>
+&lt;p>The player sends all the data it has gathered to the url defined in the settings &lt;a href="../api/settings#logger">logger&lt;/a>.&lt;/p>
+&lt;p>Logs are accumulated in an array (which can be found in &lt;code>current.logs&lt;/code> or &lt;code>API.getLogs&lt;/code>).
+Each log is an object including the following fields:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>log_serial&lt;/td>
+&lt;td>the serial number for this log row (starts at 1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>trial_id&lt;/td>
+&lt;td>a unique identifier for this trial&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>the name of this trial - an alias if one is set, otherwise the set the trial inherited&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>block&lt;/td>
+&lt;td>the block attribute of trial.data (it is up to the user to set this attribute, usually in the trial definitions)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>responseHandle&lt;/td>
+&lt;td>the handle for the input that triggered this log&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>score&lt;/td>
+&lt;td>the score attribute of trial.data (it is up to the user to set this attribute, usually using setTrialAttr)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>latency&lt;/td>
+&lt;td>the latency of the response from the beginning of the trial&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>stimuli&lt;/td>
+&lt;td>a json including the stimuli used in this trial (we use an alias if one is set, otherwise the stimulus set, otherwise the stimulus handle otherwise stim#)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>media&lt;/td>
+&lt;td>a json including the media used in this trial (we use an alias if one is set, otherwise the media set, otherwise media#)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>data&lt;/td>
+&lt;td>a json including the data property of this trial&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>You can control the names that the different elements get by adding an &lt;code>alias&lt;/code> property to the element itslef or to its &lt;code>data&lt;/code>.
+If the &lt;code>alias&lt;/code> isn&amp;rsquo;t set, then the player attempts to choose a meaningful name on its own (using the inherited set, or whatever is appropriate).&lt;/p></description></item><item><title>Docs: API</title><link>/docs/time/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/api/</guid><description>
+&lt;h3 id="definitions">Definitions&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Media&lt;/strong> are the objects that we display.&lt;/li>
+&lt;li>&lt;strong>Stimuli&lt;/strong> are responsible for how we display the media.&lt;/li>
+&lt;li>&lt;strong>Trials&lt;/strong> are a set of stimuli and the rules governing their display.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Examples</title><link>/docs/time/examples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/examples/</guid><description/></item><item><title>Docs: Tutorials</title><link>/docs/time/tutorials/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/time/tutorials/</guid><description/></item></channel></rss>

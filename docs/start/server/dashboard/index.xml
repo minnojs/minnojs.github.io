@@ -1,0 +1,70 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Minno Suite – Using the Dashboard</title><link>/docs/start/server/dashboard/</link><description>Recent content in Using the Dashboard on Minno Suite</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Sat, 09 Apr 2016 16:50:16 +0200</lastBuildDate><atom:link href="/docs/start/server/dashboard/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Getting started (admin account)</title><link>/docs/start/server/dashboard/admin/</link><pubDate>Sat, 09 Apr 2016 16:50:16 +0200</pubDate><guid>/docs/start/server/dashboard/admin/</guid><description>
+&lt;p>As an admin, we recommend that you first make sure the Dashboard works over https (i.e., provides secure connection to all the users).
+Please refer to the relevant help page in this website to learn how to do that.&lt;/p>
+&lt;p>Next, create user accounts for the researchers who will use the system.
+Even if you are the only user of your system, it is better if you separate between the admin account and the researcher account.
+To create a new user account, go to Admin-&amp;gt;User Management and Add a new user.&lt;/p>
+&lt;p>If you want the Dashboard to send emails to users (e.g., when creating new accounts, or when one user adds another user as a collaborator on a study),
+go to Admin-&amp;gt;Edit Configuration and Enable Gmail.
+Because the Dashboard needs the email password for sending emails, we recommend you create a new Gmail account for the Dashboard.&lt;/p></description></item><item><title>Docs: Getting started (researcher)</title><link>/docs/start/server/dashboard/researcher/</link><pubDate>Sat, 09 Apr 2016 16:50:16 +0200</pubDate><guid>/docs/start/server/dashboard/researcher/</guid><description>
+&lt;p>To get to know the system, we recommend you first duplicate a study from the bank of studies. After you log-in, click Studies, click on the dropdown menu that shows &amp;ldquo;Show all my studies&amp;rdquo; and select &amp;ldquo;Show bank studies&amp;rdquo;. You will see all the example studies in the system, and an &amp;ldquo;Actions&amp;rdquo; button next to each of thse studies. Decide which of those studies you want to duplicate (e.g., race.demo), click Actions-&amp;gt;Duplicate study, set the name of the study (e.g., &amp;ldquo;example&amp;rdquo;), and click OK.&lt;/p>
+&lt;p>Now you see a list of the study files on the left. You can click those files to see the code of each file. You can modify the code, but don&amp;rsquo;t do that yet. Let&amp;rsquo;s first see you can run the study. For that, right click on the file &amp;lsquo;mgr.js&amp;rsquo; and select &amp;ldquo;Make Experiment&amp;rdquo;. Set the name of the experiment (e.g., &amp;ldquo;example&amp;rdquo;). Now you can run the study. Right click the &amp;ldquo;mgr.js&amp;rdquo; file, select Experiment options -&amp;gt; Play this task. Run the whole study to learn how the typical study looks in MinnoPlayer.&lt;/p>
+&lt;p>Next, go to the files and try to change minor details, to see how they change the study. For instance, go to explicit.js, and change the text for some of the questions. Details on how our studies work can be found &lt;a href="../studydevelopment">here&lt;/a>.&lt;/p>
+&lt;p>After you update a file, sometimes you will not see the change in your study because the browser reads the study from the cache. You can clear the browser&amp;rsquo;s cache each time you run a study. Or, you can right click the &amp;ldquo;mgr.js&amp;rdquo; file, go to Experiment options -&amp;gt; Copy Launch URL. You can copy the link and paste it within an incognito Chrome browser window (use ctrl-shift-n to open an incognito window) or a private Firefox browser window (ctrl-shift-p). Or, you can right click on the HERE link and select &amp;ldquo;Open in incognito window&amp;rdquo; (Chrome) or &amp;ldquo;Open in Private window&amp;rdquo; (Firefox), to run the study directly in a browser window that does read files from the cache.&lt;/p>
+&lt;p>If you want to skip a task in the study, Esc+right arrow will skip to the next task. Within the IAT, Esc+Enter will skip a block.&lt;/p>
+&lt;p>After you run the study a couple of times, it is time to look at the data. In the same page (the one that shows you the study files), click on the three rows icon at the top left, to open the Study menu, and select Data. Have a look at the window that opens to learn about your options when downloading data. Then, without changing anything, click the &amp;ldquo;Download&amp;rdquo; button. Soon the data file will appear and you will be able to click the Download icon (below Actions) to download the data file. It will be a zip folder. Extract the files and open them to learn how the data look.&lt;/p></description></item><item><title>Docs: Setting up Dropbox</title><link>/docs/start/server/dashboard/dropbox/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/dashboard/dropbox/</guid><description>
+&lt;h2 id="setting-up-dropbox">Setting up Dropbox&lt;/h2>
+&lt;p>This page describes how to connect your minnoDashboard to Dropbox. Synchronization with Dropbox allows users to backup their studies on their own dropbox account. After you enable this feature, each user can request to sync their own Dashboard account with their own Dropbox account.&lt;/p>
+&lt;p>The synchronization is on one direction only: any change in the Dashboard will be updated in the user’s Dropbox account. Changing those files outside of the Dashboard, however, will not influence the Dashboard. That is, modifying the files in the Dashboard can be done only through the Dashboard.&lt;/p>
+&lt;p>&lt;u>Note&lt;/u>: Because the files are synchronized by each user separately with their own Dropbox account, enabling this feature does not mean that admins will have access to those files.&lt;/p>
+&lt;p>&lt;b>How to enable this feature:&lt;/b> To enable this feature on this Dashboard, you should create a dropbox application. To do so, you need a &lt;a href="https://help.dropbox.com/accounts-billing/create-delete/create-account">dropbox account&lt;/a>. The basic free package includes 2GB (see more information about the basic package &lt;a href="https://www.dropbox.com/basic">here&lt;/a>.&lt;/p>
+&lt;p>Once the admin has a working Dropbox account the creation of the application should be done as follows:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Login to Dropbox developers: &lt;a href="https://www.dropbox.com/developers">https://www.dropbox.com/developers&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click on Create apps.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose an API: Dropbox API.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose The type of access you need: App folder&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose any name you want to the application&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>That’s it - click on Create app to create the application&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The application will appear under the &lt;a href="https://www.dropbox.com/developers/apps">App console&lt;/a>. Click on the icon to get access to the application details.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Two important parameters should be provided to the researcher dashboard. These two parameters are located in your Dropbox application page:&lt;/p>
+&lt;ul>
+&lt;li>App key (public key that is used for the users)&lt;/li>
+&lt;li>App secret (public key that is used for the server to get access to the Dropbox - don’t share this key!!!).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>To avoid security issues, Dropbox asks developers to provide list of URIs that will be used by the application. This list is located in your Dropbox application page. The URL will be with the format [http/https]://[domain]/dropbox/set. When [http/https] depends on the certification authority of the dashboard and [domain] is the full URI of the dashboard (e.g https://mydomain/dropbox/set). Please note: the extension of /dropbox/set is mandatory. So if you dashboard is hosted at mydomain.com using https, the url you&amp;rsquo;d enter would be &lt;a href="https://mydomain.com/dropbox/set">https://mydomain.com/dropbox/set&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Log in to the dashboard with an admin account&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>From the dropdown menu&amp;rsquo;s at the top of the screen, select Admin -&amp;gt; edit configuration&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In the dropbox section, click the &amp;ldquo;Enable Dropbox Syncronization&amp;rdquo; radio button and enter in the app key and app secret key in the text boxes, and then click &amp;ldquo;save changes&amp;rdquo;.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You are now done. Users will be able to connect to dropbox now by going to their settings page by clicking on the gear icon to the right of the &amp;ldquo;Logout&amp;rdquo; button in the dashboard, and then clicking the &amp;ldquo;Syncronize with your Dropbox Account&amp;rdquo; button.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Docs: Study Development</title><link>/docs/start/server/dashboard/studydevelopment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/dashboard/studydevelopment/</guid><description>
+&lt;h2 id="heading">&lt;/h2>
+&lt;hr>
+&lt;p>You can see the current documentation of Minno’s language for developing studies at &lt;a href="https://minnojs.github.io/">https://minnojs.github.io/&lt;/a> .&lt;/p></description></item><item><title>Docs: Data</title><link>/docs/start/server/dashboard/data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/start/server/dashboard/data/</guid><description>
+&lt;p>This page will describe analysing data. It is currently under construction.&lt;/p></description></item></channel></rss>
